@@ -133,7 +133,7 @@ export default defineComponent({
   },
   computed: {
     abcdef(): string {
-      return this.abc + "hi";
+      return this.abc + " world";
     },
   },
 });
