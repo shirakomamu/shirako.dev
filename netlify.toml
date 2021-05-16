@@ -4,7 +4,7 @@
   status = 200
 
 [[redirects]]
-  from = "https://shirako-mamu.netlify.app"
-  to = "https://shirako.dev/"
+  from = "https://shirako-mamu.netlify.app/*"
+  to = "https://shirako.dev/:splat"
   status = 301
   force = true
