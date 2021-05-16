@@ -14,3 +14,41 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = '''
+      default-src 'self';
+      script-src 'self';
+      style-src 'self';
+      img-src 'self'
+    '''
+    Strict-Transport-Security = '''
+      max-age=63072000;
+      includeSubDomains;
+      preload
+    '''
+    X-Frame-Options = "deny"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Permissions-Policy = '''
+      accelerometer=(none),
+      ambient-light-sensor=(none),
+      autoplay=(none),
+      camera=(none),
+      encrypted-media=(none),
+      fullscreen=(none),
+      geolocation=(none),
+      gyroscope=(none),
+      magnetometer=(none),
+      microphone=(none),
+      midi=(none),
+      payment=(none),
+      picture-in-picture=(none),
+      speaker=(none),
+      usb=(none),
+      vibrate=(none),
+      vr=(none)
+    '''
+    Referrer-Policy = "no-referrer"
