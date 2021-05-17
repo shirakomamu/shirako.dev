@@ -1,4 +1,17 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const webpack = require("webpack");
+
 module.exports = {
+  configureWebpack: {
+    node: {
+      global: false,
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        global: "window",
+      }),
+    ],
+  },
   pwa: {
     workboxOptions: {
       exclude: [/_redirects/],
