@@ -1,17 +1,10 @@
 <template>
   <div
-    class="
-      layout-container
-      mx-auto
-      h-full
-      bg-white
-      dark:bg-gray-800
-      dark:text-gray-200
-    "
+    class="layout-container h-full bg-white dark:bg-gray-800 dark:text-gray-200"
   >
     <Nav />
     <transition name="fade">
-      <router-view />
+      <router-view class="mx-auto container px-8" />
     </transition>
   </div>
 </template>
