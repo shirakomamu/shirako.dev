@@ -1,8 +1,9 @@
 module.exports = {
   productionSourceMap: false,
   pwa: {
+    workboxPluginMode: "InjectManifest",
     workboxOptions: {
-      exclude: [/_redirects/],
+      swSrc: "public/service-worker.js",
     },
     name: "Shirako Mamu",
     themeColor: "#008aff",
