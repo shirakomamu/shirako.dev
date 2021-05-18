@@ -2,7 +2,7 @@
   <div
     class="layout-container h-full bg-white dark:bg-gray-800 dark:text-gray-200"
   >
-    <Nav />
+    <Nav class="border-b border-gray-300 dark:border-gray-600" />
     <transition name="fade">
       <div>
         <Hero v-if="$route.path === '/'" class="mb-8" />
