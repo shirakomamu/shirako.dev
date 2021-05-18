@@ -62,12 +62,20 @@ export default defineComponent({
           id: -1,
           title: "An update is available",
           text: "Please refresh the page",
-          duration: 10000,
+          duration: -1,
         });
       }
     },
   },
   mixins: [update],
+  mounted() {
+    notify({
+      id: -1,
+      title: "An update is available",
+      text: "Please refresh the page",
+      duration: -1,
+    });
+  },
   methods: {
     refresh() {
       const href = location.href;
@@ -95,6 +103,8 @@ export default defineComponent({
 }
 
 .notification {
+  position: fixed;
+  display: block;
   top: unset !important;
   width: 350px !important;
   bottom: 0px !important;
