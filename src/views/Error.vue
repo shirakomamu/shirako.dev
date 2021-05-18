@@ -1,5 +1,5 @@
 <template>
-  <div class="error space-y-8 container mx-auto">
+  <div class="error space-y-8">
     <img
       alt="Cat on keyboard"
       src="@/assets/images/shigoto_zaitaku_cat_man.png"
@@ -8,7 +8,7 @@
     <article class="space-y-4">
       <h4 class="text-4xl dark:text-white">404 - Page not found</h4>
       <p>
-        The <code>{{ $route.path }}</code> could not be found.
+        The page at <code>{{ $route.path }}</code> could not be found.
       </p>
     </article>
     <div>
