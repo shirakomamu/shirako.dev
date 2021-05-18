@@ -4,6 +4,8 @@ module.exports = {
     workboxPluginMode: "GenerateSW",
     workboxOptions: {
       importWorkboxFrom: "local",
+      skipWaiting: true,
+      clientsClaim: true,
     },
     name: "Shirako Mamu",
     themeColor: "#008aff",
