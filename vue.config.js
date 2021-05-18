@@ -1,7 +1,7 @@
 module.exports = {
   productionSourceMap: false,
   pwa: {
-    workboxPluginMode: "InjectManifest",
+    workboxPluginMode: "generateSW",
     workboxOptions: {
       importWorkboxFrom: "local",
     },
