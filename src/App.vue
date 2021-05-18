@@ -27,7 +27,7 @@
             <button
               type="button"
               class="text-xs mt-2 hover:underline"
-              @click="refresh"
+              @click="refreshApp"
             >
               Refresh now
             </button>
@@ -46,7 +46,6 @@ import { defineComponent } from "vue";
 import { notify } from "@kyvg/vue3-notification";
 import Nav from "@/views/Nav.vue";
 import Hero from "@/components/Hero.vue";
-import update from "./mixins/update";
 import IconClose from "./components/icons/IconClose.vue";
 
 export default defineComponent({
@@ -54,6 +53,13 @@ export default defineComponent({
     Nav,
     Hero,
     IconClose,
+  },
+  data() {
+    return {
+      refreshing: false,
+      registration: null as null | ServiceWorkerRegistration,
+      updateExists: false,
+    };
   },
   watch: {
     updateExists(newValue) {
@@ -67,19 +73,38 @@ export default defineComponent({
       }
     },
   },
-  mixins: [update],
-  mounted() {
-    notify({
-      id: -1,
-      title: "An update is available",
-      text: "Please refresh the page",
-      duration: -1,
+  created() {
+    // Listen for our custom event from the SW registration
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.addEventListener("swUpdated", this.updateAvailable, {
+      once: true,
+    });
+
+    // Prevent multiple refreshes
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (this.refreshing) return;
+      this.refreshing = true;
+      // Here the actual reload of the page occurs
+      window.location.reload();
     });
   },
   methods: {
-    refresh() {
-      const href = location.href;
-      window.location.href = href;
+    // Store the SW registration so we can send it a message
+    // We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
+    // To alert the user there is an update they need to refresh for
+    updateAvailable(event: { detail: ServiceWorkerRegistration }) {
+      this.registration = event.detail;
+      this.updateExists = true;
+    },
+
+    // Called when the user accepts the update
+    refreshApp() {
+      this.updateExists = false;
+      // Make sure we only send a 'skip waiting' message if the SW is waiting
+      if (!this.registration || !this.registration.waiting) return;
+      // send message to SW to skip the waiting and activate the new SW
+      this.registration.waiting.postMessage({ type: "SKIP_WAITING" });
     },
   },
 });
