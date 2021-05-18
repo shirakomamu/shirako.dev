@@ -3,7 +3,7 @@ module.exports = {
   pwa: {
     workboxPluginMode: "InjectManifest",
     workboxOptions: {
-      swSrc: "public/service-worker.js",
+      importWorkboxFrom: "local",
     },
     name: "Shirako Mamu",
     themeColor: "#008aff",
