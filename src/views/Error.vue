@@ -3,7 +3,7 @@
     <img
       alt="Cat on keyboard"
       src="@/assets/images/shigoto_zaitaku_cat_man.png"
-      class="mx-auto h-64 mt-8"
+      class="mx-auto h-64"
     />
     <article class="space-y-4">
       <h4 class="text-4xl dark:text-white">404 - Page not found</h4>

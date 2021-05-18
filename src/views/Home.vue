@@ -1,6 +1,5 @@
 <template>
   <div class="home space-y-8">
-    <Hero />
     <div class="container mx-auto">
       <article class="intro space-y-4 dark:text-gray-200">
         <h4 class="text-4xl dark:text-white">Hello.</h4>
@@ -39,11 +38,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Hero from "@/components/Hero.vue";
 
 export default defineComponent({
   name: "Home",
-  components: { Hero },
 });
 </script>
 

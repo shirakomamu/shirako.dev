@@ -4,7 +4,11 @@
   >
     <Nav />
     <transition name="fade">
-      <router-view class="mx-auto container px-8" />
+      <div>
+        <Hero v-if="$route.path === '/'" class="mb-8" />
+        <div v-else class="mb-8" />
+        <router-view class="mx-auto container px-8" />
+      </div>
     </transition>
   </div>
 </template>
@@ -12,10 +16,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Nav from "@/views/Nav.vue";
+import Hero from "@/components/Hero.vue";
 
 export default defineComponent({
   components: {
     Nav,
+    Hero,
   },
 });
 </script>
