@@ -16,15 +16,19 @@
       </router-view>
     </div>
 
-    <notifications position="bottom right">
+    <notifications class="notification space-y-8">
       <template v-slot:body="{ item, close }">
-        <div class="bg-gray-200 dark:bg-gray-600 m-8 flex flex-row p-2">
+        <div class="bg-gray-200 dark:bg-gray-600 mr-8 mb-8 flex flex-row p-2">
           <div class="flex-grow prose dark:text-white">
-            <p class="text-sm">
+            <p class="text-sm font-semibold">
               {{ item.title }}
             </p>
             <p class="text-xs">{{ item.text }}</p>
-            <button type="button" class="text-xs mt-2" @click="refresh">
+            <button
+              type="button"
+              class="text-xs mt-2 hover:underline"
+              @click="refresh"
+            >
               Refresh now
             </button>
           </div>
@@ -66,7 +70,8 @@ export default defineComponent({
   mixins: [update],
   methods: {
     refresh() {
-      window.location.reload();
+      const href = location.href;
+      window.location.href = href;
     },
   },
 });
@@ -82,12 +87,18 @@ export default defineComponent({
 .fade-enter-from {
   opacity: 0;
 }
-
 .fade-enter-active {
   transition: opacity 0.2s;
 }
-
 .fade-enter-to {
   opacity: 1;
+}
+
+.notification {
+  top: unset !important;
+  width: 350px !important;
+  bottom: 0px !important;
+  right: 0px !important;
+  transition: all 300ms ease 0s !important;
 }
 </style>
