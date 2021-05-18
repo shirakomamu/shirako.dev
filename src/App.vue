@@ -1,7 +1,18 @@
 <template>
-  <div id="container mx-auto">
+  <div
+    class="
+      layout-container
+      mx-auto
+      h-full
+      bg-white
+      dark:bg-gray-800
+      dark:text-gray-200
+    "
+  >
     <Nav />
-    <router-view />
+    <transition name="fade">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -16,4 +27,19 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave.from {
+  opacity: 1;
+}
+</style>

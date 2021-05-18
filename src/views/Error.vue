@@ -1,7 +1,25 @@
 <template>
-  <div class="error">
-    <h2 class="text-4xl">Page not found</h2>
-    <p>The requested page cannot be found.</p>
+  <div class="error space-y-8 container mx-auto">
+    <img
+      alt="Cat on keyboard"
+      src="@/assets/images/shigoto_zaitaku_cat_man.png"
+      class="mx-auto h-64 mt-8"
+    />
+    <article class="space-y-4">
+      <h4 class="text-4xl dark:text-white">404 - Page not found</h4>
+      <p>
+        The <code>{{ $route.path }}</code> could not be found.
+      </p>
+    </article>
+    <div>
+      <button
+        type="button"
+        @click="$router.push('/')"
+        class="font-semibold dark:text-white hover:underline"
+      >
+        Go back to home page
+      </button>
+    </div>
   </div>
 </template>
 
