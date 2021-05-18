@@ -4,8 +4,8 @@ if (workbox) {
 
   workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
-  self.addEventListener("message", (e) => {
-    if (e.data.action == "skipWaiting") self.skipWaiting();
+  self.addEventListener("message", (event) => {
+    self.postMessage(event.data);
   });
 } else {
   console.log(`Workbox didn't load`);
