@@ -3,7 +3,7 @@
     <div class="justify-start ml-8 flex flex-grow items-center">
       <router-link to="/" class="space-x-4 flex items-center">
         <img alt="Logo" src="@/assets/images/icon-128b.png" class="h-8 w-8" />
-        <span class="prose font-semibold show-when-wide">{{
+        <span class="font-semibold show-when-wide prose dark:text-white">{{
           appName
         }}</span></router-link
       >
@@ -13,7 +13,7 @@
         v-for="(link, index) of links"
         :to="link.to"
         :key="index"
-        class="prose prose-sm align-middle hover:underline"
+        class="prose-sm align-middle hover:underline prose dark:text-gray-100"
         :class="{ 'font-bold': isRouteMatched(link.to) }"
         >{{ link.label }}</router-link
       >
@@ -60,11 +60,5 @@ export default defineComponent({
 <style lang="less" scoped>
 .nav {
   border-bottom: 1px lightgray solid;
-  // background-image: linear-gradient(
-  //   30deg,
-  //   rgba(2, 0, 36, 1) 0%,
-  //   rgba(41, 105, 119, 1) 50%,
-  //   rgba(42, 8, 74, 1) 100%
-  // );
 }
 </style>
