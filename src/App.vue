@@ -3,13 +3,19 @@
     class="layout-container h-full bg-white dark:bg-gray-800 dark:text-gray-200"
   >
     <Nav class="border-b border-gray-300 dark:border-gray-600" />
-    <transition name="fade">
-      <div class="pb-8">
-        <Hero v-if="$route.path === '/'" class="mb-8" />
-        <div v-else class="mb-8" />
-        <router-view class="mx-auto container px-8" />
-      </div>
-    </transition>
+
+    <div class="pb-8">
+      <transition-group name="fade" tag="div">
+        <Hero v-if="$route.path === '/'" key="hero" />
+        <div class="mb-8" key="spacer" />
+      </transition-group>
+      <router-view v-slot="{ Component }" key="router-view"
+        ><transition name="fade">
+          <component :is="Component" class="mx-auto container px-8" />
+        </transition>
+      </router-view>
+    </div>
+
     <notifications position="bottom right">
       <template v-slot:body="{ item, close }">
         <div class="bg-gray-200 dark:bg-gray-600 m-8 flex flex-row p-2">
@@ -67,18 +73,21 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
+.fade-leave-from,
+.fade-leave-active,
+.fade-leave-to {
+  display: none;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-enter-from {
   opacity: 0;
 }
 
-.fade-enter-to,
-.fade-leave.from {
+.fade-enter-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter-to {
   opacity: 1;
 }
 </style>
