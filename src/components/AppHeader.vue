@@ -30,7 +30,7 @@ interface NavigationLink {
 }
 
 export default defineComponent({
-  name: "Nav",
+  name: "AppHeader",
   setup() {
     const appName: string = process.env.VUE_APP_NAME;
     const links: NavigationLink[] = [

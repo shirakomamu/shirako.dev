@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { gitDescribeSync } = require("git-describe");
+process.env.VUE_APP_GIT_HASH = gitDescribeSync().raw;
+
 module.exports = {
   productionSourceMap: false,
   pwa: {
