@@ -9,9 +9,7 @@ const state: StateTypes = {
 };
 
 const getters: GetterTree<StateTypes, StateTypes> & GetterTypes = {
-  getVersion: (state) => {
-    return state.version;
-  },
+  getVersion: (state) => state.version,
 };
 
 const mutations: MutationTree<StateTypes> & MutationTypes = {

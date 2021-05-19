@@ -18,15 +18,12 @@ const state: StateTypes = {
     { name: "PostgreSQL", skill: 0.7 },
     { name: "Docker containers", skill: 0.55 },
     { name: "CI/CD", skill: 0.6 },
-    { name: "Google Cloud", skill: 0.9 },
     { name: "Google Apps Script", skill: 1 },
-    { name: "Atlassian Jira", skill: 0.8 },
-    { name: "Git", skill: 0.75 },
     { name: "REST APIs", skill: 0.85 },
     { name: "OAuth 2.0", skill: 0.85 },
     { name: "Progressive Web Apps (PWA)", skill: 0.65 },
     { name: "JSON Web Tokens (JWT)", skill: 0.8 },
-    { name: "Visual Studio Code", skill: 0.9 },
+    { name: "Responsive Design", skill: 0.85 },
   ].sort((a, b) => b.skill - a.skill),
   labelBreakpoints: [
     {
@@ -58,12 +55,20 @@ const state: StateTypes = {
       label: "Confident",
     },
   ].sort((a, b) => b.skill - a.skill),
+  tools: [
+    "Google Cloud Platform",
+    "Jira Software",
+    "Visual Studio Code",
+    "Git (GitHub, BitBucket)",
+    "Microsoft Word, Excel, PowerPoint",
+    "Google Docs, Sheets, Slides",
+    "Adobe Photoshop",
+    "Inkscape",
+  ],
 };
 
 const getters: GetterTree<StateTypes, RootStateTypes> & GetterTypes = {
-  technologiesLoaded: (state) => {
-    return state.technologiesLoaded;
-  },
+  technologiesLoaded: (state) => state.technologiesLoaded,
   technologies: (state) => {
     return state.technologies.map((e) => {
       const breakpoint = state.labelBreakpoints.find((f) => e.skill >= f.skill);
@@ -74,6 +79,7 @@ const getters: GetterTree<StateTypes, RootStateTypes> & GetterTypes = {
       };
     });
   },
+  tools: (state) => state.tools,
 };
 
 const mutations: MutationTree<StateTypes> & MutationTypes = {

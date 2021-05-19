@@ -3,7 +3,7 @@
     class="
       layout-container
       h-full
-      bg-white
+      bg-gray-100
       dark:bg-gray-800
       dark:text-gray-200
       flex flex-col
@@ -32,7 +32,14 @@
         </transition>
       </router-view>
     </div>
-    <AppFooter class="border-t border-gray-300 dark:border-gray-600" />
+    <AppFooter
+      class="
+        border-t border-gray-300
+        dark:border-gray-600
+        bg-white
+        dark:bg-gray-800
+      "
+    />
 
     <notifications class="notification space-y-8">
       <template v-slot:body="{ item, close }">

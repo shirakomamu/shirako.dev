@@ -16,11 +16,13 @@ export interface StateTypes {
   technologiesLoaded: boolean;
   technologies: Technology[];
   labelBreakpoints: TechnologySkillBreakpointLabel[];
+  tools: string[];
 }
 
 export interface GetterTypes {
   technologiesLoaded(state: StateTypes): boolean;
   technologies(state: StateTypes): MergedTechnology[];
+  tools(state: StateTypes): string[];
 }
 
 export type MutationTypes<S = StateTypes> = {
