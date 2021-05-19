@@ -10,7 +10,7 @@
         {{ text }}
       </p>
     </article>
-    <div class="grid grid-cols-2 grid-flow-row">
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row">
       <div class="grid col-span-2 md:col-span-1 justify-items-center">
         <img
           alt="Placeholder image"
@@ -24,7 +24,7 @@
           <li
             v-for="(technology, index) of technologies"
             :key="index"
-            class="grid grid-cols-2 grid-flow-row items-center"
+            class="grid grid-cols-1 md:grid-cols-2 grid-flow-row items-center"
           >
             <div class="flex flex-row">
               <span>{{ technology.name }}</span>
@@ -32,10 +32,7 @@
                 class="ml-1 mr-1 flex-1 leader text-gray-200 dark:text-gray-600"
               />
             </div>
-            <SkillBar
-              :level="technology.skill"
-              class="w-full h-4 col-span-2 md:col-span-1"
-            />
+            <SkillBar :level="technology.skill" class="w-full h-4" />
           </li>
           <li>... and always learning more.</li>
         </ul>
