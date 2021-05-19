@@ -14,10 +14,31 @@ module.exports = {
     name: "Shirako Mamu",
     themeColor: "#008aff",
     manifestOptions: {
-      name: "Shirako Mamu",
-      shortName: "Shirako Mamu", // displayed on desktop/mobile
+      // name: "Shirako Mamu", // pwa.name by default
+      // short_name: "Shirako Mamu", // pwa.name by default // displayed on desktop/mobile
+      icons: [
+        {
+          src: "./images/icons/icon-32b.png",
+          sizes: "32x32",
+          type: "image/png",
+          purpose: "maskable",
+        },
+        {
+          src: "./images/icons/icon-128b.png",
+          sizes: "128x128",
+          type: "image/png",
+          purpose: "maskable",
+        },
+        {
+          src: "./images/icons/icon-512b.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "maskable",
+        },
+      ],
     },
     iconPaths: {
+      faviconSVG: null,
       favicon32: "images/icons/icon-32b.png",
       favicon16: null,
       appleTouchIcon: "images/icons/icon-128b.png",

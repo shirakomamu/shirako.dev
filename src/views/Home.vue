@@ -13,11 +13,11 @@
       </article>
       <div class="grid col-span-2 md:col-span-1 place-items-center">
         <blockquote class="quote">
-          <p class="italic text-center prose dark:text-gray-400 text-2xl">
+          <p class="italic text-center text-gray-400 text-2xl">
             Everybody has a testing environment. Some people are lucky enough
             enough to have a totally separate environment to run production in.
           </p>
-          <footer class="text-right text-blue-300 dark:text-blue-500">
+          <footer class="text-right text-blue-500">
             <a
               href="https://twitter.com/stahnma/status/634849376343429120"
               class="hover:underline italic font-semibold"
@@ -43,7 +43,7 @@
         <h5 class="text-2xl prose dark:text-white">Technologies I use</h5>
         <div class="flex flex-row">
           <div class="flex-grow">
-            <ul>
+            <ul class="space-y-2">
               <li
                 v-for="(technology, index) of technologies"
                 :key="index"
@@ -55,7 +55,7 @@
                 "
               >
                 <div class="flex flex-row">
-                  <span>{{ technology.name }}</span>
+                  <span class="text-sm">{{ technology.name }}</span>
                   <span
                     class="
                       ml-1
@@ -90,6 +90,25 @@
         </div>
       </article>
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row space-y-8">
+      <article class="technologies space-y-4">
+        <h5 class="text-2xl prose dark:text-white">Some tools I use</h5>
+        <ul>
+          <li v-for="(tool, index) of tools" :key="index">
+            <span>{{ tool }}</span>
+          </li>
+        </ul>
+      </article>
+
+      <div class="grid col-span-2 md:col-span-1 justify-items-center">
+        <img
+          alt="Placeholder image"
+          src="@/assets/images/icon-512t.png"
+          class="w-auto h-auto"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -114,8 +133,9 @@ export default defineComponent({
 
     const store = useStore();
     const technologies = store.getters.technologies;
+    const tools = store.getters.tools;
 
-    return { introTexts, technologies };
+    return { introTexts, technologies, tools };
   },
 });
 </script>

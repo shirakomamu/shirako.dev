@@ -1,11 +1,9 @@
 <template>
   <div ref="bar" class="w-full flex flex-row items-center">
     <div ref="barfill" class="fill h-4 flex items-center">
-      <span
-        ref="labeltext"
-        class="text text-gray-200 prose dark:text-white text-xs"
-        >{{ label }}</span
-      >
+      <span ref="labeltext" class="text prose dark:text-white text-xs">{{
+        label
+      }}</span>
     </div>
   </div>
 </template>

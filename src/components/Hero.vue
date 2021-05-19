@@ -1,5 +1,9 @@
 <template>
-  <div class="hero h-64 flex flex-col items-center justify-center">
+  <div
+    class="hero h-64 flex flex-col items-center justify-center"
+    role="img"
+    :alt="'I do... ' + currentContext"
+  >
     <div class="stars" />
     <div class="space-x-2 m-2">
       <span class="text-white text-2xl font-light print:text-black"
