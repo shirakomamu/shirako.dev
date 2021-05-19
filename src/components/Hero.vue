@@ -58,7 +58,6 @@ export default defineComponent({
     this.doWordCycle(this.wordDisplayTime);
 
     if (this.timer) {
-      console.log("Ignoring");
       return;
     }
 

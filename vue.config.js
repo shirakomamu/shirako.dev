@@ -11,7 +11,7 @@ module.exports = {
       skipWaiting: true,
       clientsClaim: true,
     },
-    name: "Shirako Mamu",
+    name: process.env.VUE_APP_NAME,
     themeColor: "#008aff",
     manifestOptions: {
       // name: "Shirako Mamu", // pwa.name by default
