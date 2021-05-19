@@ -1,8 +1,15 @@
 <template>
   <div
-    class="layout-container h-full bg-white dark:bg-gray-800 dark:text-gray-200"
+    class="
+      layout-container
+      h-full
+      bg-white
+      dark:bg-gray-800
+      dark:text-gray-200
+      flex flex-col
+    "
   >
-    <Nav
+    <AppHeader
       class="
         sticky
         top-0
@@ -14,17 +21,18 @@
       "
     />
 
-    <div class="pb-8">
+    <div class="pb-8 flex-grow">
       <transition-group name="fade" tag="div">
         <Hero v-if="$route.path === '/'" key="hero" />
         <div class="mb-8" key="spacer" />
       </transition-group>
       <router-view v-slot="{ Component }" key="router-view"
         ><transition name="fade">
-          <component :is="Component" class="mx-auto container px-8" />
+          <component :is="Component" class="h-full mx-auto container px-8" />
         </transition>
       </router-view>
     </div>
+    <AppFooter class="border-t border-gray-300 dark:border-gray-600" />
 
     <notifications class="notification space-y-8">
       <template v-slot:body="{ item, close }">
@@ -54,13 +62,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import Nav from "@/components/Nav.vue";
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
 import Hero from "@/components/Hero.vue";
 import IconClose from "./components/icons/IconClose.vue";
 
 export default defineComponent({
   components: {
-    Nav,
+    AppHeader,
+    AppFooter,
     Hero,
     IconClose,
   },

@@ -3,7 +3,7 @@
     <div class="stars" />
     <div class="space-x-2 m-2">
       <span class="text-white text-2xl font-light print:text-black"
-        >What I do:</span
+        >I do...</span
       >
       <span class="text-white font-mono text-2xl print:text-black typewriter">
         {{ currentContextResult }}
@@ -52,6 +52,11 @@ export default defineComponent({
   },
   mounted() {
     this.doWordCycle(this.wordDisplayTime);
+
+    if (this.timer) {
+      console.log("Ignoring");
+      return;
+    }
 
     this.timer = setInterval(() => {
       this.contextIndex =

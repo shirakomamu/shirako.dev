@@ -6,16 +6,21 @@ import {
 } from "vuex";
 import { StateTypes as RootStateTypes } from "@/store/modules/root/types";
 import { MutationEnums, ActionEnums } from "./enums";
-import { Technology } from "./state-types";
+import {
+  MergedTechnology,
+  Technology,
+  TechnologySkillBreakpointLabel,
+} from "./state-types";
 
 export interface StateTypes {
-  technologies: Technology[];
   technologiesLoaded: boolean;
+  technologies: Technology[];
+  labelBreakpoints: TechnologySkillBreakpointLabel[];
 }
 
 export interface GetterTypes {
-  technologies(state: StateTypes): Technology[];
   technologiesLoaded(state: StateTypes): boolean;
+  technologies(state: StateTypes): MergedTechnology[];
 }
 
 export type MutationTypes<S = StateTypes> = {

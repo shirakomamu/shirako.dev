@@ -1,7 +1,11 @@
 <template>
-  <div class="bar">
-    <div ref="barfill" class="fill">
-      <div ref="barcover" class="cover" />
+  <div ref="bar" class="w-full flex flex-row items-center">
+    <div ref="barfill" class="fill h-4 flex items-center">
+      <span
+        ref="labeltext"
+        class="text text-gray-200 prose dark:text-white text-xs"
+        >{{ label }}</span
+      >
     </div>
   </div>
 </template>
@@ -20,50 +24,58 @@ export default defineComponent({
       validator: (value: unknown) =>
         typeof value === "number" && value >= 0 && value <= 1,
     },
+    label: {
+      type: String,
+      default: () => "",
+    },
   },
   setup(props) {
     // const barcover = ref<HTMLElement | undefined>();
     const barfill = ref<HTMLElement | undefined>();
+    const labeltext = ref<HTMLElement | undefined>();
+
+    const TIMEOUT_DELAY_MS = 1000;
 
     onMounted(() => {
       const store = useStore();
+
       // const barCover = barcover.value;
-      const barFill = barfill.value;
+      const barfillRef = barfill.value;
+      const labeltextRef = labeltext.value;
 
-      // if (barCover) barCover.style.width = (1 - props.level) * 100 + "%";
-      if (barFill) {
-        if (store.getters.technologiesLoaded) {
-          barFill.style.transition = "unset";
-          barFill.style.width = props.level * 100 + "%";
-          return;
+      if (store.getters.technologiesLoaded) {
+        if (labeltextRef) {
+          labeltextRef.style.opacity = "1";
         }
-
+        if (barfillRef) {
+          barfillRef.style.transition = "unset";
+          barfillRef.style.width = props.level * 100 + "%";
+        }
+        return;
+      } else {
         setTimeout(() => {
-          barFill.style.width = props.level * 100 + "%";
-          if (!store.getters.technologiesLoaded) {
-            store.commit(MutationEnums.SET_LOADED);
-          }
-        }, 1000);
+          if (labeltextRef) labeltextRef.style.opacity = "1";
+          if (barfillRef) barfillRef.style.width = props.level * 100 + "%";
+          store.commit(MutationEnums.SET_LOADED);
+        }, TIMEOUT_DELAY_MS);
       }
     });
 
-    return { barfill };
+    return { barfill, labeltext };
   },
 });
 </script>
 
 <style lang="less" scoped>
-.bar {
-  position: relative;
-}
+// .bar {
+//   position: relative;
+// }
 
 .fill {
-  position: absolute;
+  position: relative;
   left: 0;
   width: 0%;
-  height: 100%;
-  overflow: hidden;
-  background-image: linear-gradient(
+  background: linear-gradient(
     90deg,
     rgba(131, 58, 180, 1) 0%,
     rgba(253, 29, 29, 1) 50%,
@@ -71,15 +83,25 @@ export default defineComponent({
   );
   transition: width 1s ease;
   border-radius: 8px;
-  z-index: 2;
+  z-index: 20;
 }
-.cover {
+
+.text {
   position: absolute;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  opacity: 1;
-  z-index: 3;
+  left: calc(100% + 0.5rem);
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 30;
+  white-space: nowrap;
 }
+
+// .cover {
+//   position: absolute;
+//   right: 0;
+//   height: 100%;
+//   width: 100%;
+//   overflow: hidden;
+//   opacity: 1;
+//   z-index: 3;
+// }
 </style>
