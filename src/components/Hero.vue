@@ -3,7 +3,7 @@
     <div class="stars" />
     <div class="space-x-2 m-2">
       <span class="text-white text-2xl font-light print:text-black"
-        >What I do:</span
+        >I do...</span
       >
       <span class="text-white font-mono text-2xl print:text-black typewriter">
         {{ currentContextResult }}
@@ -14,26 +14,17 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
+import useStore from "@/use/useStore";
+import shuffleArray from "@/utils/shuffleArray";
 
 export default defineComponent({
   name: "Hero",
   setup() {
-    const typewriterContexts = [
-      "Vue 2 and 3",
-      "Nuxt.js",
-      "Node.js",
-      "JavaScript ES6",
-      "Typescript",
-      "Docker",
-      "Google Cloud",
-      "REST APIs",
-      "Git",
-      "Google Apps Script",
-      "Jira",
-      "CSS",
-      "HTML5",
-      "Progressive Web Apps (PWA)",
-    ].sort(() => 0.5 - Math.random());
+    const store = useStore();
+
+    // clone so it doesn't change the order of the list
+    const techs = store.getters.technologies.map((e) => e.name);
+    const typewriterContexts = shuffleArray([...techs]);
 
     const contextIndex = ref(0);
     const timer = 0;
@@ -61,6 +52,11 @@ export default defineComponent({
   },
   mounted() {
     this.doWordCycle(this.wordDisplayTime);
+
+    if (this.timer) {
+      console.log("Ignoring");
+      return;
+    }
 
     this.timer = setInterval(() => {
       this.contextIndex =
@@ -118,7 +114,9 @@ export default defineComponent({
   background: linear-gradient(
     30deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(41, 105, 119, 1) 50%,
+    rgba(37, 95, 111, 1) 45%,
+    rgba(38, 99, 112, 1) 50%,
+    rgba(41, 95, 115, 1) 55%,
     rgba(42, 8, 74, 1) 100%
   );
 }
@@ -149,22 +147,5 @@ export default defineComponent({
   height: 100%;
   position: absolute;
   background: transparent url(~@/assets/images/stars.png) repeat top center;
-}
-
-@keyframes move-twink-back {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -10000px 5000px;
-  }
-}
-@keyframes move-clouds-back {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 10000px 0;
-  }
 }
 </style>

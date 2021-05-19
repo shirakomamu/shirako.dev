@@ -33,22 +33,26 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Permissions-Policy = '''
-      accelerometer=(none),
-      ambient-light-sensor=(none),
-      autoplay=(none),
-      camera=(none),
-      encrypted-media=(none),
-      fullscreen=(none),
-      geolocation=(none),
-      gyroscope=(none),
-      magnetometer=(none),
-      microphone=(none),
-      midi=(none),
-      payment=(none),
-      picture-in-picture=(none),
-      speaker=(none),
-      usb=(none),
-      vibrate=(none),
-      vr=(none)
+      accelerometer=(),
+      ambient-light-sensor=(),
+      autoplay=(),
+      camera=(),
+      encrypted-media=(),
+      fullscreen=(),
+      geolocation=(),
+      gyroscope=(),
+      magnetometer=(),
+      microphone=(),
+      midi=(),
+      payment=(),
+      picture-in-picture=(),
+      speaker=(),
+      usb=(),
+      vibrate=(),
+      vr=()
     '''
     Referrer-Policy = "no-referrer"
+    Expect-CT = "enforce, max-age=30"
+    Cross-Origin-Embedder-Policy = "unsafe-none|require-corp"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"

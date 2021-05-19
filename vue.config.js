@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { gitDescribeSync } = require("git-describe");
+process.env.VUE_APP_GIT_HASH = gitDescribeSync().raw;
+
 module.exports = {
   productionSourceMap: false,
   pwa: {
     workboxPluginMode: "GenerateSW",
     workboxOptions: {
       importWorkboxFrom: "local",
+      skipWaiting: true,
+      clientsClaim: true,
     },
     name: "Shirako Mamu",
     themeColor: "#008aff",
