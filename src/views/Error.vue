@@ -25,17 +25,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useMeta } from "vue-meta";
 
 export default defineComponent({
-  // props: {
-  //   requestedRoute: {
-  //     type: String,
-  //     // default: () => "",
-  //   },
-  //   mode: {
-  //     type: String,
-  //     // default: () => "404",
-  //   },
-  // },
+  setup() {
+    useMeta({
+      title: "Error | " + process.env.VUE_APP_NAME,
+    });
+  },
 });
 </script>

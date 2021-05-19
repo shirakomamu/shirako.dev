@@ -1,4 +1,8 @@
 <template>
+  <metainfo>
+    <template #title="{ content }">{{ `${content}` }}</template>
+    <template #description="{ content }">{{ `${content}` }}</template>
+  </metainfo>
   <div
     class="
       layout-container
@@ -68,11 +72,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useMeta } from "vue-meta";
 import { notify } from "@kyvg/vue3-notification";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import Hero from "@/components/Hero.vue";
-import IconClose from "./components/icons/IconClose.vue";
+import IconClose from "@/components/icons/IconClose.vue";
 
 export default defineComponent({
   components: {
@@ -81,12 +86,25 @@ export default defineComponent({
     Hero,
     IconClose,
   },
-  data() {
-    return {
-      refreshing: false,
-      registration: null as null | ServiceWorkerRegistration,
-      updateExists: false,
-    };
+  setup() {
+    useMeta({
+      title: "Home | " + process.env.VUE_APP_NAME,
+      meta: [
+        {
+          vmid: "description",
+          name: "description",
+          content: "Portfolio site for Shirako Mamu, the web developer.",
+        },
+      ],
+      htmlAttrs: { lang: "en" },
+    });
+
+    const refreshing = false;
+    const registration: null | ServiceWorkerRegistration =
+      null as null | ServiceWorkerRegistration;
+    const updateExists = false;
+
+    return { refreshing, registration, updateExists };
   },
   watch: {
     updateExists(newValue) {
@@ -131,7 +149,6 @@ export default defineComponent({
       // Make sure we only send a 'skip waiting' message if the SW is waiting
       if (!this.registration || !this.registration.waiting) return;
 
-      console.log("Skip waiting");
       // send message to SW to skip the waiting and activate the new SW
       this.registration.waiting.postMessage({ type: "SKIP_WAITING" });
     },
