@@ -1,5 +1,5 @@
 <template>
-  <div class="nav sticky h-12 flex items-center">
+  <div class="nav h-12 flex items-center">
     <div class="justify-start ml-8 flex flex-grow items-center">
       <router-link to="/" class="space-x-4 flex items-center">
         <img alt="Logo" src="@/assets/images/icon-128b.png" class="h-8 w-8" />

@@ -1,36 +1,44 @@
 <template>
   <div class="home space-y-8">
-    <div class="container mx-auto">
-      <article class="intro space-y-4 dark:text-gray-200">
-        <h4 class="text-4xl dark:text-white">Hello.</h4>
-        <p>Welcome to my portfolio.</p>
-        <p>
-          Earum alias velit in. Culpa ut quae et voluptatem quo blanditiis ad
-          ex. Sit praesentium repudiandae ipsum consequatur pariatur dolorem id
-          magnam. Nihil consequatur asperiores autem qui.
-        </p>
-        <p>
-          Explicabo sapiente mollitia dolore consequatur. Reiciendis earum
-          minima nihil similique ea qui. Quia et adipisci voluptate iste qui
-          consequatur quae ratione. Ut inventore corporis repudiandae dolorem
-          aliquid eligendi. Ad quisquam rerum harum magni hic delectus. A aut
-          culpa eos assumenda.
-        </p>
-        <p>
-          Quam aliquam eum esse dolores. Quis ab officia cum voluptatem. Error
-          cupiditate possimus ea et quasi. Laborum sit ab quis.
-        </p>
-        <p>
-          Optio nisi voluptates minima quas nihil quo non. At beatae et et
-          ratione illo aut vel. In est enim quis voluptate exercitationem
-          assumenda quidem placeat. Est in eos et voluptatibus dolores quia
-          soluta sint. Omnis alias soluta et eveniet recusandae debitis minus.
-        </p>
-        <p>
-          Ut sequi est eum nisi quo explicabo sed. Aut quis quis accusamus
-          dolores. Et repellat eos doloribus. Rerum et consequuntur consequatur
-          omnis expedita repellendus repellendus quo.
-        </p>
+    <article class="intro space-y-4">
+      <h4 class="text-4xl prose dark:text-white">Hello. 👋</h4>
+      <p
+        v-for="(text, index) of introTexts"
+        :key="index"
+        class="prose dark:text-gray-200"
+      >
+        {{ text }}
+      </p>
+    </article>
+    <div class="grid grid-cols-2 grid-flow-row">
+      <div class="grid col-span-2 md:col-span-1 justify-items-center">
+        <img
+          alt="Placeholder image"
+          src="@/assets/images/icon-512t.png"
+          class="w-auto h-auto"
+        />
+      </div>
+      <article class="technologies space-y-4">
+        <h5 class="text-2xl prose dark:text-white">Technologies I use</h5>
+        <ul>
+          <li
+            v-for="(technology, index) of technologies"
+            :key="index"
+            class="grid grid-cols-2 grid-flow-row items-center"
+          >
+            <div class="flex flex-row">
+              <span>{{ technology.name }}</span>
+              <span
+                class="ml-1 mr-1 flex-1 leader text-gray-200 dark:text-gray-600"
+              />
+            </div>
+            <SkillBar
+              :level="technology.skill"
+              class="w-full h-4 col-span-2 md:col-span-1"
+            />
+          </li>
+          <li>... and always learning more.</li>
+        </ul>
       </article>
     </div>
   </div>
@@ -38,10 +46,44 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import useStore from "@/use/useStore";
+import SkillBar from "@/components/SkillBar.vue";
 
 export default defineComponent({
   name: "Home",
+  components: {
+    SkillBar,
+  },
+  setup() {
+    const introTexts: string[] = [
+      `Welcome to my personal site.`,
+      `I am a web developer with an engineering background.
+      My education is in Aerospace Engineering (structural composites, if you're curious),
+      but I self-taught modern web technologies as both a hobby and professionally.`,
+      `I specialize in building intelligent web apps for business workflows.`,
+    ];
+
+    const store = useStore();
+    const technologies = store.getters.technologies;
+
+    return { introTexts, technologies };
+  },
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.leader {
+  display: block;
+  overflow-x: hidden;
+
+  &:before {
+    float: right;
+    text-align: right;
+    white-space: nowrap;
+    content: ". . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . "
+      ". . . . . . . . . . . . . . . . . . . . ";
+  }
+}
+</style>

@@ -2,7 +2,17 @@
   <div
     class="layout-container h-full bg-white dark:bg-gray-800 dark:text-gray-200"
   >
-    <Nav class="border-b border-gray-300 dark:border-gray-600" />
+    <Nav
+      class="
+        sticky
+        top-0
+        z-50
+        border-b border-gray-300
+        dark:border-gray-600
+        bg-white
+        dark:bg-gray-800
+      "
+    />
 
     <div class="pb-8">
       <transition-group name="fade" tag="div">
@@ -44,7 +54,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import Nav from "@/views/Nav.vue";
+import Nav from "@/components/Nav.vue";
 import Hero from "@/components/Hero.vue";
 import IconClose from "./components/icons/IconClose.vue";
 
@@ -103,6 +113,8 @@ export default defineComponent({
       this.updateExists = false;
       // Make sure we only send a 'skip waiting' message if the SW is waiting
       if (!this.registration || !this.registration.waiting) return;
+
+      console.log("Skip waiting");
       // send message to SW to skip the waiting and activate the new SW
       this.registration.waiting.postMessage({ type: "SKIP_WAITING" });
     },

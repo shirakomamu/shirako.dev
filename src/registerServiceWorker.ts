@@ -22,10 +22,12 @@ if (process.env.NODE_ENV === "production") {
     updated(registration) {
       console.log("New content is available; please refresh.");
       navigator.serviceWorker.getRegistrations().then((registrations) => {
-        registrations.map((r) => {
+        registrations.map((r, i) => {
+          console.log("Unregister", i);
           r.unregister();
         });
       });
+      console.log("Dispatching swUpdate");
       document.dispatchEvent(
         new CustomEvent("swUpdated", { detail: registration })
       );
