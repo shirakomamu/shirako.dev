@@ -24,7 +24,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              @stahnma
+              ー @stahnma
             </a>
           </footer>
         </blockquote>
@@ -32,12 +32,10 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row space-y-8">
-      <div class="grid col-span-2 md:col-span-1 justify-items-center">
-        <img
-          alt="Placeholder image"
-          src="@/assets/images/icon-512t.png"
-          class="w-auto h-auto"
-        />
+      <div
+        class="grid col-span-2 md:col-span-1 items-center justify-items-center"
+      >
+        <SpinningCircle />
       </div>
       <article class="technologies space-y-4">
         <h5 class="text-2xl prose dark:text-white">Technologies I use</h5>
@@ -116,11 +114,13 @@
 import { defineComponent } from "vue";
 import useStore from "@/use/useStore";
 import SkillBar from "@/components/SkillBar.vue";
+import SpinningCircle from "@/components/SpinningCircle.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
     SkillBar,
+    SpinningCircle,
   },
   setup() {
     const introTexts: string[] = [

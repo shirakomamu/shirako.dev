@@ -32,7 +32,7 @@ export default defineComponent({
     const barfill = ref<HTMLElement | undefined>();
     const labeltext = ref<HTMLElement | undefined>();
 
-    const TIMEOUT_DELAY_MS = 1000;
+    const TIMEOUT_DELAY_MS_MAX = 1000;
 
     onMounted(() => {
       const store = useStore();
@@ -55,7 +55,7 @@ export default defineComponent({
           if (labeltextRef) labeltextRef.style.opacity = "1";
           if (barfillRef) barfillRef.style.width = props.level * 100 + "%";
           store.commit(MutationEnums.SET_LOADED);
-        }, TIMEOUT_DELAY_MS);
+        }, (1 - props.level ** 2 / 2) * TIMEOUT_DELAY_MS_MAX);
       }
     });
 
