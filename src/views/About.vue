@@ -9,6 +9,7 @@ import { defineComponent } from "vue";
 import { useMeta } from "vue-meta";
 
 export default defineComponent({
+  name: "About",
   setup() {
     useMeta({
       title: "About me | " + process.env.VUE_APP_NAME,

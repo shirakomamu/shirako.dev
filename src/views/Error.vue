@@ -15,7 +15,7 @@
       <button
         type="button"
         @click="$router.push('/')"
-        class="font-semibold dark:text-white hover:underline"
+        class="font-semibold dark:text-white hover:underline focus:underline"
       >
         Go back to home page
       </button>
@@ -28,6 +28,7 @@ import { defineComponent } from "vue";
 import { useMeta } from "vue-meta";
 
 export default defineComponent({
+  name: "Error",
   setup() {
     useMeta({
       title: "Error | " + process.env.VUE_APP_NAME,
