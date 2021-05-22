@@ -15,6 +15,8 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+@blue: #008aff;
+
 .loader-wrapper {
   position: relative;
   width: 100%;
@@ -40,8 +42,13 @@ export default defineComponent({
     right: 14%;
     border-radius: 100%;
     border: 1.5em solid transparent;
-    border-top-color: rgba(0, 138, 255, 0.03);
-    border-left-color: rgba(0, 138, 255, 0.03);
+    @factor: 97%;
+    border-top-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-left-color: fade(darken(@blue, @factor), 100% - @factor);
+    @media (prefers-color-scheme: dark) {
+      border-top-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-left-color: fade(lighten(@blue, @factor), 100% - @factor);
+    }
     animation: spin 183s linear infinite;
   }
 
@@ -54,7 +61,13 @@ export default defineComponent({
     bottom: 23%;
     border-radius: 100%;
     border: 1.2em solid transparent;
-    border-right-color: rgba(0, 138, 255, 0.05);
+    @factor: 95%;
+    border-left-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-right-color: fade(darken(@blue, @factor), 100% - @factor);
+    @media (prefers-color-scheme: dark) {
+      border-left-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-right-color: fade(lighten(@blue, @factor), 100% - @factor);
+    }
     animation: spin 147s linear infinite;
   }
 }
@@ -68,9 +81,15 @@ export default defineComponent({
     bottom: 30%;
     border-radius: 100%;
     border: 1em solid transparent;
-    border-left-color: rgba(0, 138, 255, 0.13);
-    border-top-color: rgba(0, 138, 255, 0.13);
-    border-right-color: rgba(0, 138, 255, 0.13);
+    @factor: 87%;
+    border-top-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-left-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-right-color: fade(darken(@blue, @factor), 100% - @factor);
+    @media (prefers-color-scheme: dark) {
+      border-top-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-left-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-right-color: fade(lighten(@blue, @factor), 100% - @factor);
+    }
     animation: spin 171s linear infinite;
     opacity: 0.3;
   }
@@ -84,8 +103,13 @@ export default defineComponent({
     right: 35%;
     border-radius: 100%;
     border: 0.8em solid transparent;
-    border-left-color: rgba(0, 138, 255, 0.25);
-    border-top-color: rgba(0, 138, 255, 0.25);
+    @factor: 75%;
+    border-top-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-left-color: fade(darken(@blue, @factor), 100% - @factor);
+    @media (prefers-color-scheme: dark) {
+      border-top-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-left-color: fade(lighten(@blue, @factor), 100% - @factor);
+    }
     animation: spin 101s linear infinite;
   }
 }
@@ -100,8 +124,13 @@ export default defineComponent({
     right: 40%;
     border-radius: 100%;
     border: 0.7em solid transparent;
-    border-top-color: rgba(0, 138, 255, 0.5);
-    border-bottom-color: rgba(0, 138, 255, 0.5);
+    @factor: 50%;
+    border-top-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-bottom-color: fade(darken(@blue, @factor), 100% - @factor);
+    @media (prefers-color-scheme: dark) {
+      border-top-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-bottom-color: fade(lighten(@blue, @factor), 100% - @factor);
+    }
     animation: spin 63s linear infinite;
   }
 
@@ -114,9 +143,16 @@ export default defineComponent({
     bottom: 45%;
     border-radius: 100%;
     border: 0.6em solid transparent;
-    border-top-color: rgba(0, 138, 255, 1);
-    border-right-color: rgba(0, 138, 255, 1);
-    border-bottom-color: rgba(0, 138, 255, 1);
+
+    @factor: 0%;
+    border-top-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-right-color: fade(darken(@blue, @factor), 100% - @factor);
+    border-bottom-color: fade(darken(@blue, @factor), 100% - @factor);
+    @media (prefers-color-scheme: dark) {
+      border-top-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-right-color: fade(lighten(@blue, @factor), 100% - @factor);
+      border-bottom-color: fade(lighten(@blue, @factor), 100% - @factor);
+    }
     animation: spin 39s linear infinite;
   }
 }
