@@ -5,23 +5,21 @@
   </metainfo>
   <div
     class="
+      bg-image bg-flat
       layout-container
       h-full
-      bg-gray-100
-      dark:bg-gray-800
       dark:text-gray-200
       flex flex-col
     "
   >
     <AppHeader
       class="
+        bg-flat
         sticky
         top-0
         z-50
         border-b border-gray-300
         dark:border-gray-600
-        bg-white
-        dark:bg-gray-800
       "
     />
 
@@ -38,6 +36,7 @@
     </div>
     <AppFooter
       class="
+        bg-flat
         border-t border-gray-300
         dark:border-gray-600
         bg-white
@@ -48,14 +47,14 @@
     <notifications class="notification space-y-8">
       <template v-slot:body="{ item, close }">
         <div class="bg-gray-200 dark:bg-gray-600 mr-8 mb-8 flex flex-row p-2">
-          <div class="flex-grow prose dark:text-white">
+          <div class="flex-grow dark:text-white">
             <p class="text-sm font-semibold">
               {{ item.title }}
             </p>
             <p class="text-xs">{{ item.text }}</p>
             <button
               type="button"
-              class="text-xs mt-2 hover:underline"
+              class="text-xs mt-2 hover:underline focus:underline"
               @click="refreshApp"
             >
               Refresh now
@@ -181,5 +180,22 @@ export default defineComponent({
   bottom: 0px !important;
   right: 0px !important;
   transition: all 300ms ease 0s !important;
+}
+
+.bg-image {
+  background-image: url("~@/assets/images/bg-light.jpg");
+  @media (prefers-color-scheme: dark) {
+    background-image: url("~@/assets/images/bg-dark.jpg");
+  }
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+.bg-flat {
+  background-color: #fff;
+  @media (prefers-color-scheme: dark) {
+    background-color: #191919;
+  }
 }
 </style>
