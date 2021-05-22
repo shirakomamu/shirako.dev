@@ -10,5 +10,5 @@ module.exports = {
       cursor: ["disabled"],
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/forms")],
 };
