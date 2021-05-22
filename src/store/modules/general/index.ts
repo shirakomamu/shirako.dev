@@ -35,10 +35,6 @@ const state: StateTypes = {
       label: "Some experience",
     },
     {
-      skill: 0.6,
-      label: "Familiar",
-    },
-    {
       skill: 0.7,
       label: "Comfortable",
     },
@@ -48,11 +44,11 @@ const state: StateTypes = {
     },
     {
       skill: 0.9,
-      label: "Skilled",
+      label: "Confident",
     },
     {
       skill: 1,
-      label: "Confident",
+      label: "Skilled",
     },
   ].sort((a, b) => b.skill - a.skill),
   tools: [

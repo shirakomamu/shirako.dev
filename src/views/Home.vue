@@ -1,12 +1,12 @@
 <template>
   <div class="home space-y-8">
     <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row space-y-8">
-      <article class="intro space-y-4">
-        <h4 class="text-4xl prose dark:text-white">Hello. 👋</h4>
+      <article class="intro space-y-4 max-w-prose">
+        <h4 class="text-4xl dark:text-white">Hello. 👋</h4>
         <p
           v-for="(text, index) of introTexts"
           :key="index"
-          class="prose dark:text-gray-200"
+          class="dark:text-gray-200"
         >
           {{ text }}
         </p>
@@ -14,31 +14,36 @@
       <div class="grid col-span-2 md:col-span-1 place-items-center">
         <blockquote class="quote">
           <p class="italic text-center text-gray-400 text-2xl">
-            Everybody has a testing environment. Some people are lucky enough
-            enough to have a totally separate environment to run production in.
+            {{ quote.text }}
           </p>
-          <footer class="text-right text-blue-500">
+          <footer class="text-right">
             <a
-              href="https://twitter.com/stahnma/status/634849376343429120"
-              class="hover:underline italic font-semibold"
+              :href="quote.source"
+              class="
+                hover:underline
+                focus:underline
+                italic
+                font-semibold
+                text-blue-500
+              "
               target="_blank"
               rel="noopener noreferrer"
             >
-              ー @stahnma
+              ー {{ quote.author }}
             </a>
           </footer>
         </blockquote>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row space-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-2">
       <div
         class="grid col-span-2 md:col-span-1 items-center justify-items-center"
       >
         <SpinningCircle />
       </div>
       <article class="technologies space-y-4">
-        <h5 class="text-2xl prose dark:text-white">Technologies I use</h5>
+        <h5 class="text-2xl dark:text-white">Technologies I use</h5>
         <div class="flex flex-row">
           <div class="flex-grow">
             <ul class="space-y-2">
@@ -89,24 +94,14 @@
       </article>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row space-y-8">
-      <article class="technologies space-y-4">
-        <h5 class="text-2xl prose dark:text-white">Some tools I use</h5>
-        <ul>
-          <li v-for="(tool, index) of tools" :key="index">
-            <span>{{ tool }}</span>
-          </li>
-        </ul>
-      </article>
-
-      <div class="grid col-span-2 md:col-span-1 justify-items-center">
-        <img
-          alt="Placeholder image"
-          src="@/assets/images/icon-512t.png"
-          class="w-auto h-auto"
-        />
-      </div>
-    </div>
+    <article class="tools space-y-4 max-w-prose">
+      <h5 class="text-2xl dark:text-white">Tools I use</h5>
+      <ul>
+        <li v-for="(tool, index) of tools" :key="index">
+          <span>{{ tool }}</span>
+        </li>
+      </ul>
+    </article>
   </div>
 </template>
 
@@ -130,12 +125,18 @@ export default defineComponent({
       but I self-taught modern web technologies both as a hobby and professionally.`,
       `I specialize in building intelligent web apps for business workflows.`,
     ];
+    const quote = {
+      text: `Everybody has a testing environment. Some people are lucky
+            enough to have a totally separate environment to run production in.`,
+      source: "https://twitter.com/stahnma/status/634849376343429120",
+      author: "stahnma",
+    };
 
     const store = useStore();
     const technologies = store.getters.technologies;
     const tools = store.getters.tools;
 
-    return { introTexts, technologies, tools };
+    return { introTexts, technologies, tools, quote };
   },
 });
 </script>
@@ -164,15 +165,16 @@ export default defineComponent({
       display: inline;
       height: 0;
       line-height: 0;
-      left: -10px;
       position: relative;
-      top: 30px;
       font-size: 3em;
+      top: 1.5rem;
     }
     &:before {
+      left: -1rem;
       content: open-quote;
     }
     &:after {
+      left: 0rem;
       content: close-quote;
     }
   }
