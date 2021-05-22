@@ -3,11 +3,29 @@
     <div class="justify-start ml-8 flex flex-grow items-center">
       <span class="text-gray-500 text-sm"
         >© {{ new Date().getFullYear() }} 白子マム |
+        <button
+          v-if="!isEmailShown"
+          @mouseover="showEmail"
+          @focus="showEmail"
+          type="button"
+          class="text-blue-500 hover:underline focus:underline"
+        >
+          say hello
+        </button>
         <a
+          v-else
+          @mouseout="hideEmail"
+          @blur="hideEmail"
           ref="emailLink"
           :href="emailMailto"
-          class="email-link text-blue-500 hover:underline"
+          class="text-blue-500 hover:underline focus:underline"
           >{{ email }}</a
+        >
+        |
+        <router-link
+          to="/privacy"
+          class="text-blue-500 hover:underline focus:underline"
+          >privacy policy</router-link
         ></span
       >
     </div>
@@ -18,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "AppFooter",
@@ -29,31 +47,32 @@ export default defineComponent({
     let email = ref("");
     const emailLink = ref<HTMLElement | undefined>();
 
-    onMounted(() => {
-      setTimeout(() => {
-        const emailLinkRef = emailLink.value;
+    const isEmailShown = ref(false);
 
-        const name = "hello";
-        const domain = "shirako";
-        const tld = "dev";
-        const emailAddress = name + "@" + domain + "." + tld;
-        email.value = emailAddress;
-        emailMailto.value = "mailto" + ":" + emailAddress;
+    const showEmail = () => {
+      isEmailShown.value = true;
 
-        if (emailLinkRef) {
-          emailLinkRef.style.opacity = "1";
-        }
-      }, 3000);
-    });
+      const name = "hello";
+      const domain = "shirako";
+      const tld = "dev";
+      const emailAddress = name + "@" + domain + "." + tld;
+      email.value = emailAddress;
+      emailMailto.value = "mailto" + ":" + emailAddress;
+    };
 
-    return { hash, email, emailMailto, emailLink };
+    const hideEmail = () => (isEmailShown.value = false);
+
+    return {
+      hash,
+      email,
+      isEmailShown,
+      emailMailto,
+      emailLink,
+      showEmail,
+      hideEmail,
+    };
   },
 });
 </script>
 
-<style lang="less" scoped>
-.email-link {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-</style>
+<style lang="less" scoped></style>
