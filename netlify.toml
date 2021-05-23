@@ -52,7 +52,7 @@
       vr=()
     '''
     Referrer-Policy = "no-referrer"
-    Expect-CT = "enforce, max-age=30"
+    Expect-CT = "enforce, max-age=300"
     Cross-Origin-Embedder-Policy = "unsafe-none|require-corp"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "same-origin"
