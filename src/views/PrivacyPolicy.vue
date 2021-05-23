@@ -1,6 +1,6 @@
 <template>
-  <div class="home space-y-8 dark:text-white max-w-prose">
-    <h5 class="text-4xl">Privacy policy</h5>
+  <div class="home space-y-8 max-w-prose">
+    <h5 class="text-4xl dark:text-white">Privacy policy</h5>
 
     <p>
       This site does not collect your data for analytics nor store any cookies,

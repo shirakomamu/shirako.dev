@@ -16,7 +16,7 @@ const state: StateTypes = {
     { name: "Express", skill: 0.9 },
     { name: "MySQL", skill: 0.85 },
     { name: "PostgreSQL", skill: 0.7 },
-    { name: "Docker containers", skill: 0.55 },
+    { name: "Docker", skill: 0.55 },
     { name: "CI/CD", skill: 0.6 },
     { name: "Google Apps Script", skill: 1 },
     { name: "REST APIs", skill: 0.85 },
@@ -25,6 +25,7 @@ const state: StateTypes = {
     { name: "JSON Web Tokens (JWT)", skill: 0.8 },
     { name: "Responsive Design", skill: 0.85 },
     { name: "Google Cloud Platform", skill: 0.85 },
+    { name: "Git", skill: 0.8 },
   ].sort((a, b) => b.skill - a.skill),
   labelBreakpoints: [
     {
@@ -76,7 +77,7 @@ const state: StateTypes = {
         readable, and adheres to best practices.`,
     },
     {
-      name: "Git",
+      name: "Github & BitBucket",
       description: `I use Git on a daily basis, both personally and professionally.
         It allows me to ensure that my code only gets deployed when it's ready,
         and it enables me to collaborate with other developers smoothly. I have
@@ -92,7 +93,7 @@ const state: StateTypes = {
         other developers, but also Systems Administrators who support the systems.`,
     },
     {
-      name: "Insomnia (OpenAPI)",
+      name: "Insomnia (OpenAPI 3)",
       description: `I document my REST API endpoints in a manner conformant to the
         OpenAPI standard, ensuring reusability and clarity for both front-end and
         back-end developers. Well-documented APIs reduce the potential for error, serve

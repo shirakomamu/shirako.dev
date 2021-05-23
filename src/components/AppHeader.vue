@@ -3,7 +3,7 @@
     <div class="justify-start ml-8 mr-4 items-center flex-grow">
       <router-link to="/" class="space-x-4 flex items-center">
         <img
-          alt="Logo"
+          alt="shirako.dev logo"
           src="@/assets/images/icon-128b.png"
           width="32"
           height="32"
