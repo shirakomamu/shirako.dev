@@ -46,7 +46,7 @@
       "
     />
 
-    <notifications class="notification space-y-8">
+    <!-- <notifications class="notification space-y-8">
       <template v-slot:body="{ item, close }">
         <div class="bg-gray-200 dark:bg-gray-600 mr-8 mb-8 flex flex-row p-2">
           <div class="flex-grow dark:text-white">
@@ -67,14 +67,14 @@
           </div>
         </div>
       </template>
-    </notifications>
+    </notifications> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useMeta } from "vue-meta";
-import { notify } from "@kyvg/vue3-notification";
+// import { notify } from "@kyvg/vue3-notification";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import Hero from "@/components/Hero.vue";
@@ -107,18 +107,18 @@ export default defineComponent({
 
     return { refreshing, registration, updateExists };
   },
-  watch: {
-    updateExists(newValue) {
-      if (newValue) {
-        notify({
-          id: -1,
-          title: "An update is available",
-          text: "Please refresh the page",
-          duration: -1,
-        });
-      }
-    },
-  },
+  // watch: {
+  //   updateExists(newValue) {
+  //     if (newValue) {
+  //       notify({
+  //         id: -1,
+  //         title: "An update is available",
+  //         text: "Please refresh the page",
+  //         duration: -1,
+  //       });
+  //     }
+  //   },
+  // },
   created() {
     // Listen for our custom event from the SW registration
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -174,15 +174,15 @@ export default defineComponent({
   opacity: 1;
 }
 
-.notification {
-  position: fixed;
-  display: block;
-  top: unset !important;
-  width: 350px !important;
-  bottom: 0px !important;
-  right: 0px !important;
-  transition: all 300ms ease 0s !important;
-}
+// .notification {
+//   position: fixed;
+//   display: block;
+//   top: unset !important;
+//   width: 350px !important;
+//   bottom: 0px !important;
+//   right: 0px !important;
+//   transition: all 300ms ease 0s !important;
+// }
 
 .bg-image {
   background-image: url("~@/assets/images/bg-light.jpg");
