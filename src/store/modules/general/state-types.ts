@@ -12,3 +12,8 @@ export interface TechnologySkillBreakpointLabel {
 export interface MergedTechnology extends Technology {
   label: string;
 }
+
+export interface Tool {
+  name: string;
+  description: string;
+}

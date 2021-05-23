@@ -10,19 +10,20 @@ import {
   MergedTechnology,
   Technology,
   TechnologySkillBreakpointLabel,
+  Tool,
 } from "./state-types";
 
 export interface StateTypes {
   technologiesLoaded: boolean;
   technologies: Technology[];
   labelBreakpoints: TechnologySkillBreakpointLabel[];
-  tools: string[];
+  tools: Tool[];
 }
 
 export interface GetterTypes {
   technologiesLoaded(state: StateTypes): boolean;
   technologies(state: StateTypes): MergedTechnology[];
-  tools(state: StateTypes): string[];
+  tools(state: StateTypes): Tool[];
 }
 
 export type MutationTypes<S = StateTypes> = {

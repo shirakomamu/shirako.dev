@@ -61,11 +61,12 @@ export default defineComponent({
       return;
     }
 
-    this.timer = setInterval(() => {
+    this.timer = setInterval(async () => {
       this.contextIndex =
         (this.contextIndex + 1) % this.typewriterContexts.length;
 
-      this.$nextTick(() => this.doWordCycle(this.wordDisplayTime));
+      await this.$nextTick();
+      this.doWordCycle(this.wordDisplayTime);
     }, this.wordDisplayTime + this.wordBlankTime);
   },
   unmounted() {
@@ -150,5 +151,6 @@ export default defineComponent({
   height: 100%;
   position: absolute;
   background: transparent url(~@/assets/images/stars.png) repeat top center;
+  background-size: contain;
 }
 </style>

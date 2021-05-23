@@ -52,14 +52,63 @@ const state: StateTypes = {
     },
   ].sort((a, b) => b.skill - a.skill),
   tools: [
-    "Google Cloud Platform",
-    "Jira Software",
-    "Visual Studio Code",
-    "Git (GitHub, BitBucket)",
-    "Microsoft Word, Excel, PowerPoint",
-    "Google Docs, Sheets, Slides",
-    "Adobe Photoshop",
-    "Inkscape",
+    {
+      name: "Google Cloud Platform",
+      description: `I have deployed and used Cloud SQL, App Engine, Cloud Run,
+        Cloud VPC, Secrets Manager, and Compute Engine. Using these technologies,
+        I deployed stateless web applications that scaled up and down according
+        to traffic.`,
+    },
+    {
+      name: "Jira Software",
+      description: `I used, created, and administered projects for both software
+        and business projects. I architected workflows to meet business and
+        operational needs and to ensure operational efficiency. I also developed
+        automation rules and systems integrations to connect the platform with
+        custom web applications.`,
+    },
+    {
+      name: "Visual Studio Code",
+      description: `My code editor of choice. Its powerful integration with
+        numerous plugins ensures that I work quickly, efficiently, and effectively.
+        Built-in code formatters also ensure that my code style is consistent,
+        readable, and adheres to best practices.`,
+    },
+    {
+      name: "Git (GitHub, BitBucket)",
+      description: `I use Git on a daily basis, both personally and professionally.
+        It allows me to ensure that my code only gets deployed when it's ready,
+        and it enables me to collaborate with other developers smoothly. I have
+        used both GitHub and BitBucket to host my repositories and am familiar with
+        the various workflows for both platforms.`,
+    },
+    {
+      name: "Confluence",
+      description: `I have extensively used Confluence to document my code
+        professionally. Its powerful features and deep integration with Jira
+        ensured that my applications were always easy to understand and easy to work
+        on. Accurate documentation ensured smooth coordination not only with the
+        other developers, but also Systems Administrators who support the systems.`,
+    },
+    {
+      name: "Microsoft Word, Excel, PowerPoint",
+      description: `Of course, I also am extremely familiar with traditional office
+        productivity software. I can use this software to create or compile reports
+        whenever necessary.`,
+    },
+    {
+      name: "Google Docs, Sheets, Slides",
+      description: `Lately, Google's offerings of productivity software has been on
+        the rise due to its cloud-first approach, allowing it to integrate with
+        other web services easily and securely. Building spreadsheets that contain
+        scripted functionality ensures maximum business productivity and efficiency.`,
+    },
+    {
+      name: "Adobe Photoshop",
+      description: `I have been using Adobe Photoshop for over 15 years, and I can
+        use it to supplement gaps in web design quickly and when necessary. For
+        example, the background on this site was made in Adobe Photoshop!`,
+    },
   ],
 };
 

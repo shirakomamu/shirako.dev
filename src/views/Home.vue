@@ -1,6 +1,6 @@
 <template>
   <div class="home space-y-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row space-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-4">
       <article class="intro space-y-4 max-w-prose">
         <h4 class="text-4xl dark:text-white">Hello. 👋</h4>
         <p
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div
         class="grid col-span-2 md:col-span-1 items-center justify-items-center"
       >
@@ -46,19 +46,14 @@
         <h5 class="text-2xl dark:text-white">Technologies I use</h5>
         <div class="flex flex-row">
           <div class="flex-grow">
-            <ul class="space-y-2">
+            <ul class="space-y-4">
               <li
                 v-for="(technology, index) of technologies"
                 :key="index"
-                class="
-                  grid grid-cols-1
-                  md:grid-cols-2
-                  grid-flow-row
-                  items-center
-                "
+                class="grid grid-cols-1 md:grid-cols-2 items-center"
               >
                 <div class="flex flex-row">
-                  <span class="text-sm">{{ technology.name }}</span>
+                  <span>{{ technology.name }}</span>
                   <span
                     class="
                       ml-1
@@ -94,14 +89,31 @@
       </article>
     </div>
 
-    <article class="tools space-y-4 max-w-prose">
+    <article class="tools space-y-4">
       <h5 class="text-2xl dark:text-white">Tools I use</h5>
-      <ul>
-        <li v-for="(tool, index) of tools" :key="index">
-          <span>{{ tool }}</span>
-        </li>
-      </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <article
+          v-for="(tool, index) of tools"
+          :key="index"
+          class="max-w-prose space-y-4"
+        >
+          <p class="font-bold dark:text-white">{{ tool.name }}</p>
+          <p>{{ tool.description }}</p>
+        </article>
+      </div>
     </article>
+
+    <!-- <div class="col-span-2 md:col-span-1">
+        <article class="tools space-y-4 max-w-prose">
+          <h5 class="text-2xl dark:text-white">My interests</h5>
+          <p>
+            For the sake of brevity, I represent my interests here with emojis.
+          </p>
+          <div class="grid items-center justify-items-center">
+            <EmojiPool />
+          </div>
+        </article>
+      </div> -->
   </div>
 </template>
 
@@ -118,7 +130,7 @@ export default defineComponent({
     SpinningCircle,
   },
   setup() {
-    const introTexts: string[] = [
+    const introTexts = [
       `Welcome to my personal site.`,
       `I am a web developer with an engineering background.
       My education is in Aerospace Engineering (structural composites and optimization),
@@ -126,10 +138,10 @@ export default defineComponent({
       `I specialize in building intelligent web apps for business workflows.`,
     ];
     const quote = {
-      text: `Everybody has a testing environment. Some people are lucky
-            enough to have a totally separate environment to run production in.`,
+      text: `Everybody has a testing environment.
+      Some people are lucky enough to have a totally separate environment to run production in.`,
       source: "https://twitter.com/stahnma/status/634849376343429120",
-      author: "stahnma",
+      author: "@stahnma",
     };
 
     const store = useStore();
