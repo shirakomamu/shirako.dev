@@ -1,14 +1,19 @@
 <template>
-  <div class="nav h-12 flex items-center">
-    <div class="justify-start ml-8 flex flex-grow items-center">
+  <div class="nav flex items-center">
+    <div class="justify-start ml-8 mr-4 items-center flex-grow">
       <router-link to="/" class="space-x-4 flex items-center">
-        <img alt="Logo" src="@/assets/images/icon-128b.png" class="h-8 w-8" />
+        <img
+          alt="Logo"
+          src="@/assets/images/icon-128b.png"
+          width="32"
+          height="32"
+        />
         <span class="font-semibold show-when-wide dark:text-white">{{
           appName
         }}</span></router-link
       >
     </div>
-    <div class="justify-end space-x-8 mr-8 flex items-center">
+    <div class="flex-shrink space-x-8 ml-4 mr-8 flex items-center">
       <router-link
         v-for="(link, index) of links"
         :to="link.to"

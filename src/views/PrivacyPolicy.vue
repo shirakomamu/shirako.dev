@@ -8,23 +8,23 @@
     </p>
 
     <p>
-      Certain files may be stored in your browser's cache to enable this site to
-      be visible, even when you do not have internet connectivity.
+      Some files may be stored in your browser's cache to allow this site to
+      function even when you do not have internet connectivity.
     </p>
 
     <p>
-      Certain facilities provided by this site may ask you for necessary
-      information to facilitate communication, such as your name or email
-      address. By using such facilities, you agree that you voluntarily provide
-      this information. We will take reasonable precautions to safeguard your
+      Some functions provided by this site may ask you for necessary information
+      to facilitate communication, such as your name or email address. By using
+      such facilities, you agree that you voluntarily provide this information.
+      We will take reasonable precautions to safeguard your personal
       information, and we will never transfer or disclose it to a third-party
       without your explicit consent.
     </p>
 
     <p>
       This site's hosting provider, Netlify, may log data necessary for the
-      functioning of this site. Such data may include your browser or IP
-      address. Please see their privacy policy at
+      functioning of this site. Such data may include your browser metadata or
+      IP address. Please see their privacy policy at
       <a
         href="https://www.netlify.com/privacy/"
         class="hover:underline focus:underline text-blue-500"

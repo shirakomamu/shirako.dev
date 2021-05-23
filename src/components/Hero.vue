@@ -61,11 +61,12 @@ export default defineComponent({
       return;
     }
 
-    this.timer = setInterval(() => {
+    this.timer = setInterval(async () => {
       this.contextIndex =
         (this.contextIndex + 1) % this.typewriterContexts.length;
 
-      this.$nextTick(() => this.doWordCycle(this.wordDisplayTime));
+      await this.$nextTick();
+      this.doWordCycle(this.wordDisplayTime);
     }, this.wordDisplayTime + this.wordBlankTime);
   },
   unmounted() {

@@ -3,29 +3,21 @@
     <div class="justify-start ml-8 flex flex-grow items-center">
       <span class="text-gray-500 text-sm"
         >© {{ new Date().getFullYear() }} 白子マム |
-        <button
-          v-if="!isEmailShown"
+        <a
           @mouseover="showEmail"
           @focus="showEmail"
-          type="button"
-          class="text-blue-500 hover:underline focus:underline"
-        >
-          say hello
-        </button>
-        <a
-          v-else
           @mouseout="hideEmail"
           @blur="hideEmail"
-          ref="emailLink"
           :href="emailMailto"
           class="text-blue-500 hover:underline focus:underline"
-          >{{ email }}</a
         >
+          {{ emailText }}
+        </a>
         |
         <router-link
           to="/privacy"
           class="text-blue-500 hover:underline focus:underline"
-          >privacy policy</router-link
+          >privacy</router-link
         ></span
       >
     </div>
@@ -36,40 +28,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "AppFooter",
   setup() {
     const hash = process.env.VUE_APP_GIT_HASH || "n/a";
 
-    let emailMailto = ref("");
-    let email = ref("");
-    const emailLink = ref<HTMLElement | undefined>();
-
     const isEmailShown = ref(false);
 
-    const showEmail = () => {
-      isEmailShown.value = true;
+    const name = "hello";
+    const domain = "shirako";
+    const tld = "dev";
+    const emailAddress = name + "@" + domain + "." + tld;
+    const emailLink = "mailto" + ":" + emailAddress;
 
-      const name = "hello";
-      const domain = "shirako";
-      const tld = "dev";
-      const emailAddress = name + "@" + domain + "." + tld;
-      email.value = emailAddress;
-      emailMailto.value = "mailto" + ":" + emailAddress;
-    };
+    const emailText = computed(() => {
+      return isEmailShown.value ? emailAddress : "📧 say hello";
+    });
+    const emailMailto = computed(() => {
+      return isEmailShown.value ? emailLink : "";
+    });
 
+    const showEmail = () => (isEmailShown.value = true);
     const hideEmail = () => (isEmailShown.value = false);
 
     return {
       hash,
-      email,
       isEmailShown,
-      emailMailto,
-      emailLink,
       showEmail,
       hideEmail,
+      emailMailto,
+      emailText,
     };
   },
 });

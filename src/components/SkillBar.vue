@@ -28,9 +28,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    // const barcover = ref<HTMLElement | undefined>();
-    const barfill = ref<HTMLElement | undefined>();
-    const labeltext = ref<HTMLElement | undefined>();
+    // const barcover = ref<HTMLElement | null>(null);
+    const barfill = ref<HTMLElement | null>(null);
+    const labeltext = ref<HTMLElement | null>(null);
 
     const TIMEOUT_DELAY_MS_MAX = 1000;
 
