@@ -14,7 +14,7 @@
   >
     <AppHeader
       class="
-        app-header
+        sticky
         bg-flat
         top-0
         h-12
@@ -25,7 +25,7 @@
       "
     />
 
-    <div class="mt-12 pb-8 flex-grow">
+    <div class="pb-8 flex-grow">
       <transition-group name="fade" tag="div">
         <Hero v-if="$route.path === '/'" key="hero" />
         <div class="mb-8" key="spacer" />
@@ -172,10 +172,6 @@ export default defineComponent({
 }
 .fade-enter-to {
   opacity: 1;
-}
-
-.app-header {
-  position: fixed;
 }
 
 .notification {

@@ -24,6 +24,7 @@ const state: StateTypes = {
     { name: "Progressive Web Apps (PWA)", skill: 0.65 },
     { name: "JSON Web Tokens (JWT)", skill: 0.8 },
     { name: "Responsive Design", skill: 0.85 },
+    { name: "Google Cloud Platform", skill: 0.85 },
   ].sort((a, b) => b.skill - a.skill),
   labelBreakpoints: [
     {
@@ -52,15 +53,15 @@ const state: StateTypes = {
     },
   ].sort((a, b) => b.skill - a.skill),
   tools: [
+    // {
+    //   name: "Google Cloud Platform",
+    //   description: `I have deployed and used Cloud SQL, App Engine, Cloud Run,
+    //     Cloud VPC, Secrets Manager, and Compute Engine. Using these technologies,
+    //     I deployed stateless web applications that scaled up and down according
+    //     to traffic.`,
+    // },
     {
-      name: "Google Cloud Platform",
-      description: `I have deployed and used Cloud SQL, App Engine, Cloud Run,
-        Cloud VPC, Secrets Manager, and Compute Engine. Using these technologies,
-        I deployed stateless web applications that scaled up and down according
-        to traffic.`,
-    },
-    {
-      name: "Jira Software",
+      name: "Jira",
       description: `I used, created, and administered projects for both software
         and business projects. I architected workflows to meet business and
         operational needs and to ensure operational efficiency. I also developed
@@ -75,7 +76,7 @@ const state: StateTypes = {
         readable, and adheres to best practices.`,
     },
     {
-      name: "Git (GitHub, BitBucket)",
+      name: "Git",
       description: `I use Git on a daily basis, both personally and professionally.
         It allows me to ensure that my code only gets deployed when it's ready,
         and it enables me to collaborate with other developers smoothly. I have
@@ -84,11 +85,19 @@ const state: StateTypes = {
     },
     {
       name: "Confluence",
-      description: `I have extensively used Confluence to document my code
+      description: `I have extensively used Confluence to document apps' architectures
         professionally. Its powerful features and deep integration with Jira
         ensured that my applications were always easy to understand and easy to work
         on. Accurate documentation ensured smooth coordination not only with the
         other developers, but also Systems Administrators who support the systems.`,
+    },
+    {
+      name: "Insomnia (OpenAPI)",
+      description: `I document my REST API endpoints in a manner conformant to the
+        OpenAPI standard, ensuring reusability and clarity for both front-end and
+        back-end developers. Well-documented APIs reduce the potential for error, serve
+        as a contract for efficient collaboration between developers, and ensures that
+        applications are easily maintainable and extensible for the future.`,
     },
     {
       name: "Microsoft Word, Excel, PowerPoint",
