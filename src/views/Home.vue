@@ -12,7 +12,7 @@
         </p>
       </article>
       <div class="grid col-span-2 md:col-span-1 place-items-center">
-        <blockquote class="quote">
+        <blockquote class="quote mt-4 mb-4">
           <p class="italic text-center text-gray-400 text-2xl">
             {{ quote.text }}
           </p>
