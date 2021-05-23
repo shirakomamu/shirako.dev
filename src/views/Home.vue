@@ -1,6 +1,6 @@
 <template>
   <div class="home space-y-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row">
       <article class="intro space-y-4 max-w-prose">
         <h4 class="text-4xl dark:text-white">Hello. 👋</h4>
         <p
@@ -12,8 +12,10 @@
         </p>
       </article>
       <div class="grid col-span-2 md:col-span-1 place-items-center">
-        <blockquote class="quote mt-4 mb-4">
-          <p class="italic text-center text-gray-400 text-2xl">
+        <blockquote class="quote mt-8">
+          <p
+            class="italic text-center text-gray-600 dark:text-gray-400 text-2xl"
+          >
             {{ quote.text }}
           </p>
           <footer class="text-right">
@@ -36,98 +38,55 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 xl:grid-cols-2">
       <div
-        class="grid col-span-2 md:col-span-1 items-center justify-items-center"
+        class="grid col-span-2 xl:col-span-1 items-center justify-items-center"
       >
-        <SpinningCircle />
+        <img
+          alt="Mola-mola"
+          src="@/assets/images/animal_chara_computer_neko.png"
+          class="mx-auto h-64"
+        />
       </div>
       <article class="technologies space-y-4">
         <h5 class="text-2xl dark:text-white">Technologies I use</h5>
-        <div class="flex flex-row">
-          <div class="flex-grow">
-            <ul class="space-y-4">
-              <li
-                v-for="(technology, index) of technologies"
-                :key="index"
-                class="grid grid-cols-1 md:grid-cols-2 items-center"
-              >
-                <div class="flex flex-row">
-                  <span>{{ technology.name }}</span>
-                  <span
-                    class="
-                      ml-1
-                      mr-1
-                      flex-1
-                      leader
-                      text-gray-200
-                      dark:text-gray-600
-                    "
-                  />
-                </div>
-                <div class="flex flex-initial flex-row items-center">
-                  <SkillBar
-                    :level="technology.skill"
-                    :label="technology.label"
-                  />
-                </div>
-              </li>
-              <li>... and always learning more.</li>
-            </ul>
-          </div>
-          <div>
-            <!-- for proper margin spacing, show the longest string -->
-            <div class="ml-2 opacity-0">
-              {{
-                technologies
-                  .map((e) => e.label)
-                  .sort((a, b) => b.length - a.length)[0]
-              }}
-            </div>
-          </div>
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+          <SkillBox
+            v-for="(technology, index) of technologies"
+            :key="index"
+            :name="technology.name"
+            :label="technology.label"
+          />
         </div>
       </article>
     </div>
 
     <article class="tools space-y-4">
       <h5 class="text-2xl dark:text-white">Tools I use</h5>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <article
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <ToolBox
           v-for="(tool, index) of tools"
           :key="index"
-          class="max-w-prose space-y-4"
+          :name="tool.name"
+          :description="tool.description"
         >
-          <p class="font-bold dark:text-white">{{ tool.name }}</p>
-          <p>{{ tool.description }}</p>
-        </article>
+        </ToolBox>
       </div>
     </article>
-
-    <!-- <div class="col-span-2 md:col-span-1">
-        <article class="tools space-y-4 max-w-prose">
-          <h5 class="text-2xl dark:text-white">My interests</h5>
-          <p>
-            For the sake of brevity, I represent my interests here with emojis.
-          </p>
-          <div class="grid items-center justify-items-center">
-            <EmojiPool />
-          </div>
-        </article>
-      </div> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import useStore from "@/use/useStore";
-import SkillBar from "@/components/SkillBar.vue";
-import SpinningCircle from "@/components/SpinningCircle.vue";
+import SkillBox from "@/components/SkillBox.vue";
+import ToolBox from "@/components/ToolBox.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
-    SkillBar,
-    SpinningCircle,
+    SkillBox,
+    ToolBox,
   },
   setup() {
     const introTexts = [
@@ -135,7 +94,7 @@ export default defineComponent({
       `I am a web developer with an engineering background.
       My education is in Aerospace Engineering (structural composites and optimization),
       but I self-taught modern web technologies both as a hobby and professionally.`,
-      `I specialize in building intelligent web apps for business workflows.`,
+      `I am based out of California, USA, and I specialize in building intelligent web apps for business workflows.`,
     ];
     const quote = {
       text: `Everybody has a testing environment.
@@ -148,7 +107,9 @@ export default defineComponent({
     const technologies = store.getters.technologies;
     const tools = store.getters.tools;
 
-    return { introTexts, technologies, tools, quote };
+    const toggleTool = () => null;
+
+    return { introTexts, technologies, tools, quote, toggleTool };
   },
 });
 </script>

@@ -94,7 +94,7 @@ export default defineComponent({
         {
           vmid: "description",
           name: "description",
-          content: "Portfolio site for Shirako Mamu, the web developer.",
+          content: "Portfolio site for Shirako, the web developer.",
         },
       ],
       htmlAttrs: { lang: "en" },
