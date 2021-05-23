@@ -151,5 +151,6 @@ export default defineComponent({
   height: 100%;
   position: absolute;
   background: transparent url(~@/assets/images/stars.png) repeat top center;
+  background-size: contain;
 }
 </style>
