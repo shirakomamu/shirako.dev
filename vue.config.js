@@ -14,8 +14,6 @@ module.exports = {
     name: process.env.VUE_APP_NAME,
     themeColor: "#008aff",
     manifestOptions: {
-      // name: "Shirako Mamu", // pwa.name by default
-      // short_name: "Shirako Mamu", // pwa.name by default // displayed on desktop/mobile
       icons: [
         {
           src: "./images/icons/icon-32b.png",
