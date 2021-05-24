@@ -18,36 +18,54 @@ export interface StateTypes {
   technologies: Technology[];
   labelBreakpoints: TechnologySkillBreakpointLabel[];
   tools: Tool[];
+  // uniqueId: number;
 }
 
 export interface GetterTypes {
   technologiesLoaded(state: StateTypes): boolean;
   technologies(state: StateTypes): MergedTechnology[];
   tools(state: StateTypes): Tool[];
+  // uniqueId(state: StateTypes): number;
 }
 
 export type MutationTypes<S = StateTypes> = {
   [MutationEnums.SET_LOADED](state: S): void;
+  // [MutationEnums.INCREMENT_ID](state: S): void;
 };
 
-type AugmentedActionContext = {
+type AugmentedActionContext = Omit<
+  ActionContext<StateTypes, RootStateTypes>,
+  "getters" | "commit" | "dispatch"
+> & {
+  getters: {
+    [K in keyof GetterTypes]: ReturnType<GetterTypes[K]>;
+  };
   commit<K extends keyof MutationTypes>(
     key: K,
     payload?: Parameters<MutationTypes[K]>[1]
   ): ReturnType<MutationTypes[K]>;
-} & Omit<ActionContext<StateTypes, RootStateTypes>, "commit">;
+  dispatch<K extends keyof ActionTypes>(
+    key: K,
+    payload?: Parameters<ActionTypes[K]>[1],
+    options?: DispatchOptions
+  ): Promise<ReturnType<ActionTypes[K]>>;
+};
 
 export interface ActionTypes {
   [ActionEnums.COMMIT_PUSH](
     { commit }: AugmentedActionContext,
     payload: Technology
   ): void;
+  // [ActionEnums.GET_NEXT_UNIQUE_ID]({ commit }: AugmentedActionContext): number;
 }
 
 export type StoreModuleTypes<S = StateTypes> = Omit<
   VuexStore<S>,
-  "commit" | "getters" | "dispatch"
+  "getters" | "commit" | "dispatch"
 > & {
+  getters: {
+    [K in keyof GetterTypes]: ReturnType<GetterTypes[K]>;
+  };
   commit<
     K extends keyof MutationTypes,
     P extends Parameters<MutationTypes[K]>[1]
@@ -56,14 +74,9 @@ export type StoreModuleTypes<S = StateTypes> = Omit<
     payload?: P,
     options?: CommitOptions
   ): ReturnType<MutationTypes[K]>;
-} & {
-  getters: {
-    [K in keyof GetterTypes]: ReturnType<GetterTypes[K]>;
-  };
-} & {
   dispatch<K extends keyof ActionTypes>(
     key: K,
     payload?: Parameters<ActionTypes[K]>[1],
     options?: DispatchOptions
-  ): ReturnType<ActionTypes[K]>;
+  ): Promise<ReturnType<ActionTypes[K]>>;
 };
