@@ -1,7 +1,7 @@
 <template>
   <div class="about space-y-8">
     <article class="space-y-4">
-      <h4 class="text-4xl dark:text-white">About me</h4>
+      <h4 class="text-4xl dark:text-white">About</h4>
       <p>This is an about page.</p>
     </article>
 
@@ -87,7 +87,7 @@ export default defineComponent({
   },
   setup() {
     useMeta({
-      title: "About me | " + process.env.VUE_APP_NAME,
+      title: "About | " + process.env.VUE_APP_NAME,
     });
 
     const emailText = "view email address";

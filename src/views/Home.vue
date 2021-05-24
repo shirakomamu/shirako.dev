@@ -31,7 +31,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              ー {{ quote.author }}
+              ― {{ quote.author }}
             </a>
           </footer>
         </blockquote>
@@ -43,9 +43,9 @@
         class="grid col-span-2 xl:col-span-1 items-center justify-items-center"
       >
         <img
-          alt="Mola-mola"
-          src="@/assets/images/animal_chara_computer_neko.png"
-          class="mx-auto h-64"
+          alt="Cat using laptop"
+          src="@/assets/images/irasutoya/animal_chara_computer_neko.png"
+          class="mx-auto h-64 m-4"
         />
       </div>
       <article class="technologies space-y-4">
@@ -69,10 +69,23 @@
           :key="index"
           :name="tool.name"
           :description="tool.description"
-        >
-        </ToolBox>
+          :logo-src="tool.logoSrc"
+          :logo-alt="tool.logoAlt"
+        />
       </div>
     </article>
+
+    <div
+      class="
+        tools-disclaimers
+        text-xs text-gray-600
+        dark:text-gray-400
+        overflow-hidden overflow-ellipsis
+        opacity-50
+      "
+    >
+      <p v-for="(tool, index) of tools" :key="index">{{ tool.disclaimer }}</p>
+    </div>
   </div>
 </template>
 

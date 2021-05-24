@@ -21,6 +21,10 @@ export default defineComponent({
       type: String,
       default: () => "say hello",
     },
+    showEmailAsText: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   setup(props) {
     const isEmailShown = ref(false);
@@ -32,7 +36,9 @@ export default defineComponent({
     const emailLink = "mailto" + ":" + emailAddress;
 
     const emailText = computed(() => {
-      return isEmailShown.value ? emailAddress : props.text;
+      return isEmailShown.value && props.showEmailAsText
+        ? emailAddress
+        : props.text;
     });
     const emailMailto = computed(() => {
       return isEmailShown.value ? emailLink : "";

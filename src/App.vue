@@ -3,15 +3,7 @@
     <template #title="{ content }">{{ `${content}` }}</template>
     <template #description="{ content }">{{ `${content}` }}</template>
   </metainfo>
-  <div
-    class="
-      bg-image bg-flat
-      layout-container
-      h-full
-      dark:text-gray-200
-      flex flex-col
-    "
-  >
+  <div class="bg-flat layout-container h-full dark:text-gray-200 flex flex-col">
     <AppHeader
       class="
         sticky
@@ -32,7 +24,10 @@
       </transition-group>
       <router-view v-slot="{ Component }" key="router-view"
         ><transition name="fade">
-          <component :is="Component" class="h-full mx-auto container px-8" />
+          <component
+            :is="Component"
+            class="h-full mx-auto px-8 max-w-screen-2xl"
+          />
         </transition>
       </router-view>
     </div>
@@ -184,16 +179,17 @@ export default defineComponent({
 //   transition: all 300ms ease 0s !important;
 // }
 
-.bg-image {
-  background-image: url("~@/assets/images/bg-light.jpg");
-  @media (prefers-color-scheme: dark) {
-    background-image: url("~@/assets/images/bg-dark.jpg");
-  }
+// .bg-image {
+//   background-image: url("~@/assets/images/bg-light.jpg");
+//   @media (prefers-color-scheme: dark) {
+//     background-image: url("~@/assets/images/bg-dark.jpg");
+//   }
 
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-}
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-attachment: fixed;
+// }
+
 .bg-flat {
   background-color: #fff;
   @media (prefers-color-scheme: dark) {

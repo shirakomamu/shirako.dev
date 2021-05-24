@@ -2,7 +2,7 @@
   <div class="error space-y-8">
     <img
       alt="Cat on keyboard"
-      src="@/assets/images/shigoto_zaitaku_cat_man.png"
+      src="@/assets/images/irasutoya/shigoto_zaitaku_cat_man.png"
       class="mx-auto h-64"
     />
     <article class="space-y-4">

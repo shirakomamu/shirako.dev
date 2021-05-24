@@ -1,15 +1,13 @@
 <template>
   <div
-    class="hero h-64 flex flex-col items-center justify-center"
+    class="hero h-32 md:h-64 flex flex-col items-center justify-center"
     role="img"
     :alt="'I do... ' + currentContext"
   >
     <div class="stars" />
-    <div class="space-x-2 m-2">
-      <span class="text-white text-2xl font-light print:text-black"
-        >I do...</span
-      >
-      <span class="text-white font-mono text-2xl print:text-black typewriter">
+    <div class="space-x-2 m-2 text-xl md:text-2xl text-white text-center">
+      <span class="font-light">I do...</span>
+      <span class="font-mono typewriter">
         {{ currentContextResult }}
       </span>
     </div>
@@ -125,7 +123,7 @@ export default defineComponent({
   );
 }
 .typewriter {
-  white-space: nowrap; /* Keeps the content on a single line */
+  // white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
 
   &::after {
