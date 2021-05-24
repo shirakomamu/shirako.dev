@@ -103,9 +103,9 @@ export default defineComponent({
     transition: opacity 0.4s;
     background: linear-gradient(
       90deg,
-      rgba(131, 58, 180, 0.2) 0%,
-      rgba(253, 29, 29, 0.2) 50%,
-      rgba(252, 176, 69, 0.2) 100%
+      rgba(131, 58, 180, 0.15) 0%,
+      rgba(253, 29, 29, 0.15) 50%,
+      rgba(252, 176, 69, 0.15) 100%
     );
   }
 
@@ -144,7 +144,7 @@ export default defineComponent({
   }
 
   50% {
-    opacity: 0.5;
+    opacity: 0.2;
   }
 
   100% {
@@ -160,7 +160,7 @@ export default defineComponent({
     }
 
     50% {
-      opacity: 0.05;
+      opacity: 0.02;
     }
 
     100% {
