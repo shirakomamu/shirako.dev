@@ -5,7 +5,7 @@
       <p>This is an about page.</p>
     </article>
 
-    <article class="space-y-4">
+    <div class="space-y-4">
       <h6 class="text-2xl dark:text-white">Find me at</h6>
       <p>Email: <EmailHider :text="emailText" /></p>
       <p>
@@ -19,7 +19,57 @@
           https://github.com/shirakomamu
         </a>
       </p>
-    </article>
+    </div>
+
+    <div class="space-y-4">
+      <h6 class="text-2xl dark:text-white">Contact me</h6>
+      <form
+        name="contact"
+        netlify
+        class="grid grid-form gap-4 w-full max-w-prose"
+      >
+        <div>
+          <label :for="nameUid">Name</label>
+        </div>
+        <div>
+          <input
+            :id="nameUid"
+            type="text"
+            name="name"
+            class="w-full"
+            required
+          />
+        </div>
+        <div>
+          <label :for="emailUid">Email address</label>
+        </div>
+        <div>
+          <input
+            :id="emailUid"
+            type="email"
+            name="email"
+            class="w-full"
+            required
+          />
+        </div>
+        <div>
+          <label :for="bodyUid">Message</label>
+        </div>
+        <div>
+          <textarea
+            :id="bodyUid"
+            name="body"
+            class="w-full"
+            rows="6"
+            required
+          />
+        </div>
+
+        <div>
+          <button type="submit">Send</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -27,6 +77,7 @@
 import { defineComponent } from "vue";
 import { useMeta } from "vue-meta";
 import EmailHider from "@/components/EmailHider.vue";
+import uniqueId from "@/utils/uniqueId";
 
 export default defineComponent({
   name: "About",
@@ -40,9 +91,28 @@ export default defineComponent({
 
     const emailText = "view email address";
 
+    const uid = uniqueId();
+
+    const nameUid = `name-${uid}`;
+    const emailUid = `email-${uid}`;
+    const bodyUid = `body-${uid}`;
+
     return {
       emailText,
+      nameUid,
+      emailUid,
+      bodyUid,
     };
   },
 });
 </script>
+
+<style lang="less" scoped>
+textarea {
+  resize: none;
+}
+
+.grid-form {
+  grid-template-columns: 0.25fr 0.75fr;
+}
+</style>

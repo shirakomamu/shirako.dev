@@ -25,18 +25,23 @@ export type MutationTypes<S = StateTypes> = {
   [MutationEnums.SET_VERSION](state: S, payload: string): void;
 };
 
-type AugmentedActionContext = {
+type AugmentedActionContext = Omit<
+  ActionContext<StateTypes, StateTypes>,
+  "getters" | "commit" | "dispatch"
+> & {
+  getters: {
+    [K in keyof GetterTypes]: ReturnType<GetterTypes[K]>;
+  };
   commit<K extends keyof MutationTypes>(
     key: K,
     payload?: Parameters<MutationTypes[K]>[1]
   ): ReturnType<MutationTypes[K]>;
-} & Omit<ActionContext<StateTypes, StateTypes>, "commit"> & {
-    dispatch<K extends keyof StoreActions>(
-      key: K,
-      payload?: Parameters<StoreActions[K]>[1],
-      options?: DispatchOptions
-    ): ReturnType<StoreActions[K]>;
-  };
+  dispatch<K extends keyof StoreActions>(
+    key: K,
+    payload?: Parameters<StoreActions[K]>[1],
+    options?: DispatchOptions
+  ): Promise<ReturnType<StoreActions[K]>>;
+};
 
 export interface ActionTypes {
   [ActionEnums.COMMIT_VERSION](
@@ -47,8 +52,11 @@ export interface ActionTypes {
 
 export type StoreModuleTypes<S = StateTypes> = Omit<
   VuexStore<S>,
-  "commit" | "getters" | "dispatch"
+  "getters" | "commit" | "dispatch"
 > & {
+  getters: {
+    [K in keyof GetterTypes]: ReturnType<GetterTypes[K]>;
+  };
   commit<
     K extends keyof MutationTypes,
     P extends Parameters<MutationTypes[K]>[1]
@@ -57,14 +65,9 @@ export type StoreModuleTypes<S = StateTypes> = Omit<
     payload?: P,
     options?: CommitOptions
   ): ReturnType<MutationTypes[K]>;
-} & {
-  getters: {
-    [K in keyof GetterTypes]: ReturnType<GetterTypes[K]>;
-  };
-} & {
   dispatch<K extends keyof ActionTypes>(
     key: K,
     payload?: Parameters<ActionTypes[K]>[1],
     options?: DispatchOptions
-  ): ReturnType<ActionTypes[K]>;
+  ): Promise<ReturnType<ActionTypes[K]>>;
 };

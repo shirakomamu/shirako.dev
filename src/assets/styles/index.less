@@ -25,3 +25,25 @@ body,
     display: none;
   }
 }
+
+// dark mode for @tailwindcss/forms
+@media (prefers-color-scheme: dark) {
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    border-color: rgb(55, 65, 81);
+    background-color: rgb(25, 25, 25);
+  }
+}
