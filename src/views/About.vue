@@ -21,7 +21,7 @@
       </p>
     </div>
 
-    <div class="space-y-4">
+    <!-- <div class="space-y-4">
       <h6 class="text-2xl dark:text-white">Contact me</h6>
       <form
         name="contact"
@@ -70,7 +70,7 @@
           <button type="submit">Send</button>
         </div>
       </form>
-    </div>
+    </div> -->
   </div>
 </template>
 
