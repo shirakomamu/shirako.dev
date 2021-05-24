@@ -16,4 +16,7 @@ export interface MergedTechnology extends Technology {
 export interface Tool {
   name: string;
   description: string;
+  disclaimer?: string;
+  logoSrc?: string;
+  logoAlt?: string;
 }

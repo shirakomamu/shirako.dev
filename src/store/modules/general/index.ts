@@ -55,12 +55,26 @@ const state: StateTypes = {
   ].sort((a, b) => b.skill - a.skill),
   tools: [
     {
-      name: "Jira",
+      name: "Jira®",
       description: `I used, created, and administered projects for both software
         and business projects. I architected workflows to meet business and
         operational needs and to ensure operational efficiency. I also developed
         automation rules and systems integrations to connect the platform with
         custom web applications.`,
+      disclaimer: "* Jira is a registered trademark of Atlassian.",
+      logoSrc: "./vendor-icons/jira.svg",
+      logoAlt: "Jira logo",
+    },
+    {
+      name: "Confluence®",
+      description: `I have extensively used Confluence to document apps' architectures
+        professionally. Its powerful features and deep integration with Jira
+        ensured that my applications were always easy to understand and easy to work
+        on. Accurate documentation ensured smooth coordination not only with the
+        other developers, but also Systems Administrators who support the systems.`,
+      disclaimer: "* Confluence is a registered trademark of Atlassian.",
+      logoSrc: "./vendor-icons/confluence.svg",
+      logoAlt: "Confluence logo",
     },
     {
       name: "Visual Studio Code",
@@ -68,49 +82,58 @@ const state: StateTypes = {
         numerous plugins ensures that I work quickly, efficiently, and effectively.
         Built-in code formatters also ensure that my code style is consistent,
         readable, and adheres to best practices.`,
+      disclaimer: "* Visual Studio Code is copyrighted by Microsoft.",
+      logoSrc: "./vendor-icons/vscode.svg",
+      logoAlt: "Visual Studio Code logo",
     },
     {
-      name: "Github & BitBucket",
+      name: "GitHub®",
       description: `I use Git on a daily basis, both personally and professionally.
         It allows me to ensure that my code only gets deployed when it's ready,
         and it enables me to collaborate with other developers smoothly. I have
-        used both GitHub and BitBucket to host my repositories and am familiar with
-        the various workflows for both platforms.`,
+        used both GitHub (and BitBucket) to host my repositories and am familiar with
+        the various workflows available on the platform.`,
+      disclaimer: "* GitHub is a registered trademark of GitHub, Inc.",
+      logoSrc: "./vendor-icons/github.svg",
+      logoAlt: "GitHub logo",
     },
     {
-      name: "Confluence",
-      description: `I have extensively used Confluence to document apps' architectures
-        professionally. Its powerful features and deep integration with Jira
-        ensured that my applications were always easy to understand and easy to work
-        on. Accurate documentation ensured smooth coordination not only with the
-        other developers, but also Systems Administrators who support the systems.`,
-    },
-    {
-      name: "Insomnia (OpenAPI 3)",
+      name: "Insomnia",
       description: `I document my REST API endpoints in a manner conformant to the
-        OpenAPI standard, ensuring reusability and clarity for both front-end and
+        OpenAPI 3 standard, ensuring reusability and clarity for both front-end and
         back-end developers. Well-documented APIs reduce the potential for error, serve
         as a contract for efficient collaboration between developers, and ensures that
         applications are easily maintainable and extensible for the future.`,
+      disclaimer: "* Insomnia is copyrighted by Kong Inc.",
+      logoSrc: "./vendor-icons/insomnia.svg",
+      logoAlt: "Insomnia logo",
     },
     {
-      name: "Microsoft Word, Excel, PowerPoint",
+      name: "Microsoft® Office®",
       description: `Of course, I also am extremely familiar with traditional office
-        productivity software. I can use this software to create or compile reports
-        whenever necessary.`,
+        productivity software like Word, Excel, and Powerpoint. I can use this software
+        to create or compile reports whenever necessary.`,
+      disclaimer: "* Microsoft Office is a trademark of Microsoft.",
+      logoSrc: "./vendor-icons/ms-office.svg",
+      logoAlt: "Microsoft Office logo",
     },
     {
-      name: "Google Docs, Sheets, Slides",
-      description: `Lately, Google's offerings of productivity software has been on
-        the rise due to its cloud-first approach, allowing it to integrate with
-        other web services easily and securely. Building spreadsheets that contain
-        scripted functionality ensures maximum business productivity and efficiency.`,
+      name: "Google Workspace™ productivity and collaboration tools",
+      description: `I am also extremely familiar with Google's productivity suite, which
+        has been becoming more popular due to its cloud-first approach, allowing it to
+        integrate with other web services easily and securely.`,
+      disclaimer: "* Google Workspace is a registered trademark of Google.",
+      logoSrc: "./vendor-icons/google-drive.png",
+      logoAlt: "Google Drive logo",
     },
     {
-      name: "Adobe Photoshop",
+      name: "Adobe® Photoshop®",
       description: `I have been using Adobe Photoshop for over 15 years, and I can
-        use it to supplement gaps in web design quickly and when necessary. For
-        example, the background on this site was made in Adobe Photoshop!`,
+        use it to supplement gaps in web design quickly. For example, I can rapidly create
+        prototype designs, logos, and images to supplement the web design when needed.`,
+      disclaimer: "* Adobe and Photoshop are registered trademarks of Adobe.",
+      logoSrc: "./vendor-icons/photoshop.svg",
+      logoAlt: "Adobe Photoshop logo",
     },
   ],
   // uniqueId: 0,

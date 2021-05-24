@@ -8,11 +8,10 @@
       justify-center
       rounded-lg
       cursor-default
-      transition
       bg-gray-200
       dark:bg-gray-600
       bg-opacity-50
-      hover:bg-opacity-60
+      hover:bg-opacity-0
     "
   >
     <div class="block whitespace-normal w-full">
@@ -52,6 +51,7 @@ export default defineComponent({
     onMounted(() => {
       const elems = document.querySelectorAll<HTMLElement>(".box");
 
+      const animationDuration = 1.5; // seconds
       elems.forEach((e) => {
         e.addEventListener("mouseenter", () => {
           e.classList.add("focus");
@@ -71,7 +71,7 @@ export default defineComponent({
               e.classList.remove("animated");
               clearInterval(x);
             }
-          }, 2000);
+          }, animationDuration * 1000);
         });
       });
     });
@@ -83,35 +83,64 @@ export default defineComponent({
 .box {
   position: relative;
   overflow: hidden;
+  transition-property: background-color opacity;
+  transition-duration: 0.4s;
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 0.1) 0%,
+    rgba(253, 29, 29, 0.1) 50%,
+    rgba(252, 176, 69, 0.1) 100%
+  );
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: linear-gradient(
+      90deg,
+      rgba(131, 58, 180, 0.2) 0%,
+      rgba(253, 29, 29, 0.2) 50%,
+      rgba(252, 176, 69, 0.2) 100%
+    );
+  }
+
+  &:hover:before {
+    opacity: 1;
+  }
 
   &:after {
     content: "";
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    top: -50%;
+    left: -200%;
+    width: 200%;
+    height: 150%;
+    opacity: 0;
     background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.5) 40%,
+      -30deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.5) 30%,
+      rgba(255, 255, 255, 0.9) 35%,
+      rgba(255, 255, 255, 1) 40%,
       rgba(255, 255, 255, 0.9) 45%,
-      rgba(255, 255, 255, 1) 50%,
-      rgba(255, 255, 255, 0.9) 55%,
-      rgba(255, 255, 255, 0.5) 60%,
-      rgba(255, 255, 255, 0) 100%
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 60%
     );
   }
 
   &.animated:after {
-    animation: shine 2s infinite ease;
+    animation: shine 1.5s infinite cubic-bezier(0.52, 0.36, 0.48, 0.9);
   }
 }
 
 @keyframes shine {
   0% {
     opacity: 0;
-    transform: translate(0, 0);
   }
 
   50% {
@@ -120,7 +149,7 @@ export default defineComponent({
 
   100% {
     opacity: 0;
-    transform: translate(300%, 0);
+    left: 100%;
   }
 }
 
@@ -128,16 +157,15 @@ export default defineComponent({
   @keyframes shine {
     0% {
       opacity: 0;
-      transform: translate(0, 0);
     }
 
     50% {
-      opacity: 0.1;
+      opacity: 0.05;
     }
 
     100% {
       opacity: 0;
-      transform: translate(300%, 0);
+      left: 100%;
     }
   }
 }

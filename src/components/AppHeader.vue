@@ -55,7 +55,7 @@ export default defineComponent({
       },
       {
         to: "/about",
-        label: "About me",
+        label: "About",
       },
     ];
     return { links, appName };

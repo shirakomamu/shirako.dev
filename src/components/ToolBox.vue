@@ -13,10 +13,18 @@
       hover:bg-opacity-60
     "
   >
-    <div class="block whitespace-normal w-full space-y-4">
-      <p class="font-semibold overflow-hidden overflow-ellipsis">
-        {{ name }}
-      </p>
+    <div class="whitespace-normal h-full w-full flex flex-col gap-4">
+      <div class="flex gap-4 items-center">
+        <div v-if="logoSrc">
+          <img :src="logoSrc" :alt="logoAlt" height="32" width="32" />
+        </div>
+        <div>
+          <p class="font-semibold overflow-hidden overflow-ellipsis">
+            {{ name }}
+          </p>
+        </div>
+      </div>
+
       <p
         v-if="description"
         class="
@@ -27,6 +35,19 @@
       >
         {{ description }}
       </p>
+
+      <div v-if="disclaimer" class="flex flex-grow items-end">
+        <p
+          class="
+            text-xs text-gray-600
+            dark:text-gray-400
+            overflow-hidden overflow-ellipsis
+            opacity-50
+          "
+        >
+          {{ disclaimer }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +63,18 @@ export default defineComponent({
       default: () => "",
     },
     description: {
+      type: String,
+      default: () => "",
+    },
+    disclaimer: {
+      type: String,
+      default: () => "",
+    },
+    logoSrc: {
+      type: String,
+      default: () => "",
+    },
+    logoAlt: {
       type: String,
       default: () => "",
     },
