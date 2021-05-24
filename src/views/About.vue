@@ -25,7 +25,8 @@
       <h6 class="text-2xl dark:text-white">Contact me</h6>
       <form
         name="contact"
-        netlify
+        method="POST"
+        data-netlify="true"
         class="grid grid-form gap-4 w-full max-w-prose"
       >
         <div>
