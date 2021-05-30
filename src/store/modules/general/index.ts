@@ -91,7 +91,7 @@ const state: StateTypes = {
       description: `I use Git on a daily basis, both personally and professionally.
         It allows me to ensure that my code only gets deployed when it's ready,
         and it enables me to collaborate with other developers smoothly. I have
-        used both GitHub (and BitBucket) to host my repositories and am familiar with
+        used both GitHub (and Bitbucket) to host my repositories and am familiar with
         the various workflows available on the platform.`,
       disclaimer: "* GitHub is a registered trademark of GitHub, Inc.",
       logoSrc: "./vendor-icons/github.svg",
