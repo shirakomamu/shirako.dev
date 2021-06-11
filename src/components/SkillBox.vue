@@ -1,22 +1,34 @@
 <template>
-  <div
+  <component
+    :is="link ? 'a' : 'div'"
+    v-bind:href="link"
+    v-bind:target="link ? '_blank' : null"
+    v-bind:rel="link ? 'noopener noreferrer' : null"
     class="
       box
+      cursor-default
       p-4
       flex flex-col
       items-center
       justify-center
       rounded-lg
-      cursor-default
       bg-gray-200
       dark:bg-gray-600
       bg-opacity-50
       hover:bg-opacity-0
     "
+    :class="{ pointer: link }"
   >
-    <div class="block whitespace-normal w-full">
-      <p class="text-center font-semibold overflow-hidden overflow-ellipsis">
+    <div class="block w-full">
+      <p
+        class="
+          text-center text-sm
+          font-semibold
+          overflow-hidden overflow-ellipsis
+        "
+      >
         {{ name }}
+        <OpenInNew v-if="link" class="icon" />
       </p>
       <p
         v-if="label"
@@ -29,13 +41,15 @@
         {{ label }}
       </p>
     </div>
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
+import OpenInNew from "./icons/OpenInNew.vue";
 
 export default defineComponent({
+  components: { OpenInNew },
   name: "SkillBox",
   props: {
     name: {
@@ -46,41 +60,48 @@ export default defineComponent({
       type: String,
       default: () => "",
     },
+    link: {
+      type: String,
+      default: () => null,
+    },
   },
-  setup() {
-    onMounted(() => {
-      const elems = document.querySelectorAll<HTMLElement>(".box");
+  // setup() {
+  //   onMounted(() => {
+  //     const elems = document.querySelectorAll<HTMLElement>(".box");
 
-      const animationDuration = 1.5; // seconds
-      elems.forEach((e) => {
-        e.addEventListener("mouseenter", () => {
-          e.classList.add("focus");
-        });
-        e.addEventListener("mouseleave", () => {
-          e.classList.remove("focus");
-        });
+  //     const animationDuration = 1.5; // seconds
+  //     elems.forEach((e) => {
+  //       e.addEventListener("mouseenter", () => {
+  //         e.classList.add("focus");
+  //       });
+  //       e.addEventListener("mouseleave", () => {
+  //         e.classList.remove("focus");
+  //       });
 
-        e.addEventListener("mouseover", () => {
-          if (e.classList.contains("animated")) {
-            return;
-          }
-          e.classList.add("animated");
+  //       e.addEventListener("mouseover", () => {
+  //         if (e.classList.contains("animated")) {
+  //           return;
+  //         }
+  //         e.classList.add("animated");
 
-          const x = setInterval(() => {
-            if (!e.classList.contains("focus")) {
-              e.classList.remove("animated");
-              clearInterval(x);
-            }
-          }, animationDuration * 1000);
-        });
-      });
-    });
-  },
+  //         const x = setInterval(() => {
+  //           if (!e.classList.contains("focus")) {
+  //             e.classList.remove("animated");
+  //             clearInterval(x);
+  //           }
+  //         }, animationDuration * 1000);
+  //       });
+  //     });
+  //   });
+  // },
 });
 </script>
 
 <style lang="less" scoped>
 .box {
+  &.pointer {
+    cursor: pointer;
+  }
   position: relative;
   overflow: hidden;
   transition-property: background-color opacity;
@@ -121,6 +142,9 @@ export default defineComponent({
     width: 200%;
     height: 150%;
     opacity: 0;
+    animation: shine 1.5s infinite cubic-bezier(0.52, 0.36, 0.48, 0.9);
+    transition-property: opacity;
+    transition-duration: 1.5s;
     background: linear-gradient(
       -30deg,
       rgba(255, 255, 255, 0) 20%,
@@ -133,40 +157,32 @@ export default defineComponent({
     );
   }
 
-  &.animated:after {
-    animation: shine 1.5s infinite cubic-bezier(0.52, 0.36, 0.48, 0.9);
+  &:hover:after {
+    opacity: 0.2;
+    @media (prefers-color-scheme: dark) {
+      opacity: 0.02;
+    }
   }
 }
 
 @keyframes shine {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.2;
-  }
-
   100% {
-    opacity: 0;
     left: 100%;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  @keyframes shine {
-    0% {
-      opacity: 0;
-    }
+.block {
+  z-index: 2;
+}
 
-    50% {
-      opacity: 0.02;
-    }
+.icon {
+  display: inline;
+  width: 0.9rem;
+  opacity: 0.54;
+  fill: black;
 
-    100% {
-      opacity: 0;
-      left: 100%;
-    }
+  @media (prefers-color-scheme: dark) {
+    fill: white;
   }
 }
 </style>

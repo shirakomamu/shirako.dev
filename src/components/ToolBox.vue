@@ -15,9 +15,13 @@
   >
     <div class="whitespace-normal h-full w-full flex flex-col gap-4">
       <div class="flex gap-4 items-center">
-        <div v-if="logoSrc">
-          <img :src="logoSrc" :alt="logoAlt" height="32" width="32" />
-        </div>
+        <img
+          v-if="logoSrc"
+          :src="logoSrc"
+          :alt="logoAlt"
+          height="32"
+          width="32"
+        />
         <div>
           <p class="font-semibold overflow-hidden overflow-ellipsis">
             {{ name }}
