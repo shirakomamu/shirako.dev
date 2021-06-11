@@ -56,6 +56,7 @@
             :key="index"
             :name="technology.name"
             :label="technology.label"
+            :link="technology.link"
           />
         </div>
       </article>

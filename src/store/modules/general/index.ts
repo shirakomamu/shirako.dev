@@ -6,26 +6,50 @@ import { StateTypes, GetterTypes, MutationTypes, ActionTypes } from "./types";
 const state: StateTypes = {
   technologiesLoaded: false,
   technologies: [
-    { name: "HTML5", skill: 0.85 },
-    { name: "CSS", skill: 0.8 },
-    { name: "ES6 JavaScript", skill: 1 },
-    { name: "TypeScript", skill: 0.85 },
-    { name: "Vue.js 2 & 3", skill: 0.9 },
-    { name: "Nuxt.js", skill: 0.95 },
-    { name: "Node.js", skill: 0.85 },
-    { name: "Express", skill: 0.9 },
-    { name: "MySQL", skill: 0.85 },
-    { name: "PostgreSQL", skill: 0.7 },
-    { name: "Docker", skill: 0.55 },
+    {
+      name: "HTML5",
+      skill: 0.85,
+      link: "https://html.com/html5/#What_is_HTML5",
+    },
+    {
+      name: "CSS",
+      skill: 0.8,
+      link: "https://www.w3.org/Style/CSS/Overview.en.html",
+    },
+    {
+      name: "ES2020 JavaScript",
+      skill: 1,
+      link: "https://www.ecma-international.org/publications-and-standards/standards/ecma-262/",
+    },
+    {
+      name: "TypeScript",
+      skill: 0.85,
+      link: "https://www.typescriptlang.org/",
+    },
+    { name: "Vue.js 2 & 3", skill: 0.9, link: "https://vuejs.org/" },
+    { name: "Nuxt.js", skill: 0.95, link: "https://nuxtjs.org/" },
+    { name: "Node.js", skill: 0.85, link: "https://nodejs.org/en/" },
+    { name: "Express", skill: 0.9, link: "https://expressjs.com/" },
+    { name: "MySQL", skill: 0.85, link: "https://www.mysql.com/" },
+    { name: "PostgreSQL", skill: 0.7, link: "https://www.postgresql.org/" },
+    { name: "Docker", skill: 0.55, link: "https://www.docker.com/" },
     { name: "CI/CD", skill: 0.6 },
-    { name: "Google Apps Script", skill: 1 },
+    {
+      name: "Google Apps Script",
+      skill: 1,
+      link: "https://developers.google.com/apps-script/",
+    },
     { name: "REST APIs", skill: 0.85 },
-    { name: "OAuth 2.0", skill: 0.85 },
+    { name: "OAuth 2.0", skill: 0.85, link: "https://oauth.net/2/" },
     { name: "Progressive Web Apps (PWA)", skill: 0.65 },
     { name: "JSON Web Tokens (JWT)", skill: 0.8 },
     { name: "Responsive Design", skill: 0.85 },
-    { name: "Google Cloud Platform", skill: 0.85 },
-    { name: "Git", skill: 0.8 },
+    {
+      name: "Google Cloud Platform",
+      skill: 0.85,
+      link: "https://cloud.google.com/",
+    },
+    { name: "Git", skill: 0.8, link: "https://git-scm.com/" },
   ].sort((a, b) => b.skill - a.skill),
   labelBreakpoints: [
     {
@@ -91,7 +115,7 @@ const state: StateTypes = {
       description: `I use Git on a daily basis, both personally and professionally.
         It allows me to ensure that my code only gets deployed when it's ready,
         and it enables me to collaborate with other developers smoothly. I have
-        used both GitHub (and BitBucket) to host my repositories and am familiar with
+        used both GitHub (and Bitbucket) to host my repositories and am familiar with
         the various workflows available on the platform.`,
       disclaimer: "* GitHub is a registered trademark of GitHub, Inc.",
       logoSrc: "./vendor-icons/github.svg",

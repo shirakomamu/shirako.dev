@@ -3,7 +3,16 @@
     <template #title="{ content }">{{ `${content}` }}</template>
     <template #description="{ content }">{{ `${content}` }}</template>
   </metainfo>
-  <div class="bg-flat layout-container h-full dark:text-gray-200 flex flex-col">
+  <div
+    class="
+      bg-flat
+      layout-container
+      h-full
+      text-black
+      dark:text-gray-200
+      flex flex-col
+    "
+  >
     <AppHeader
       class="
         sticky
