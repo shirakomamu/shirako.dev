@@ -50,6 +50,8 @@ const state: StateTypes = {
       link: "https://cloud.google.com/",
     },
     { name: "Git", skill: 0.8, link: "https://git-scm.com/" },
+    { name: "MikroORM", skill: 0.65, link: "https://mikro-orm.io/" },
+    { name: "Redis", skill: 0.65, link: "https://redis.io/" },
   ].sort((a, b) => b.skill - a.skill),
   labelBreakpoints: [
     {
