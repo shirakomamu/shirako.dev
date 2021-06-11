@@ -7,7 +7,7 @@ module.exports = {
   pwa: {
     workboxPluginMode: "GenerateSW",
     workboxOptions: {
-      importWorkboxFrom: "local",
+      // importWorkboxFrom: "local",
       skipWaiting: true,
       clientsClaim: true,
     },
