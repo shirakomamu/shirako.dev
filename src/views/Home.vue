@@ -121,9 +121,7 @@ export default defineComponent({
     const technologies = store.getters.technologies;
     const tools = store.getters.tools;
 
-    const toggleTool = () => null;
-
-    return { introTexts, technologies, tools, quote, toggleTool };
+    return { introTexts, technologies, tools, quote };
   },
 });
 </script>

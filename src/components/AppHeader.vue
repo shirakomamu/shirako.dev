@@ -1,10 +1,10 @@
 <template>
   <div class="nav flex items-center">
-    <div class="justify-start ml-8 mr-4 items-center flex-grow">
+    <div class="justify-start ml-8 mr-4 items-center">
       <router-link to="/" class="space-x-4 flex items-center">
         <img
           alt="shirako.dev logo"
-          src="@/assets/images/icon-128b.png"
+          src="images/icons/icon-128b.png"
           width="32"
           height="32"
         />
@@ -13,7 +13,8 @@
         }}</span></router-link
       >
     </div>
-    <div class="flex-shrink space-x-8 ml-4 mr-8 flex items-center">
+    <div class="flex-grow" />
+    <div class="space-x-8 ml-4 mr-8 flex items-center">
       <router-link
         v-for="(link, index) of links"
         :to="link.to"
