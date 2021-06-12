@@ -1,5 +1,5 @@
 <template>
-  <div class="home space-y-8 max-w-prose">
+  <div class="privacy-policy space-y-8 max-w-prose">
     <h5 class="text-4xl dark:text-white">Privacy policy</h5>
 
     <p>

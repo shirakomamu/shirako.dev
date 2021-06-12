@@ -27,19 +27,19 @@
     />
 
     <div class="pb-8 flex-grow">
-      <transition-group name="fade" tag="div">
+      <transition-group name="fade" tag="div" mode="out-in">
         <Hero v-if="$route.path === '/'" key="hero" />
-        <div class="mb-8" key="spacer" />
       </transition-group>
       <router-view v-slot="{ Component }" key="router-view"
-        ><transition name="fade">
+        ><transition name="fade" mode="out-in">
           <component
             :is="Component"
-            class="h-full mx-auto px-8 max-w-screen-2xl"
+            class="h-full mx-auto mt-8 px-8 max-w-screen-2xl"
           />
         </transition>
       </router-view>
     </div>
+
     <AppFooter
       class="
         bg-flat
