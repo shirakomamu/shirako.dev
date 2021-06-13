@@ -2,7 +2,7 @@
   <div class="nav h-12 flex items-center">
     <div class="justify-start ml-8 flex flex-grow items-center">
       <div class="text-gray-500 text-sm">
-        <span>© {{ new Date().getFullYear() }} 白子マム</span> |
+        <span>© 2021 白子マム</span> |
         <span><EmailHider :text="emailText" :showEmailAsText="false" /></span> |
         <router-link
           to="/privacy"
