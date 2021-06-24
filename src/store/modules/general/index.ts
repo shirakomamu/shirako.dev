@@ -162,7 +162,6 @@ const state: StateTypes = {
       logoAlt: "Adobe Photoshop logo",
     },
   ],
-  // uniqueId: 0,
 };
 
 const getters: GetterTree<StateTypes, RootStateTypes> & GetterTypes = {
@@ -178,28 +177,17 @@ const getters: GetterTree<StateTypes, RootStateTypes> & GetterTypes = {
     });
   },
   tools: (state) => state.tools,
-  // uniqueId: (state) => state.uniqueId,
 };
 
 const mutations: MutationTree<StateTypes> & MutationTypes = {
   [MutationEnums.SET_LOADED](state) {
     state.technologiesLoaded = true;
   },
-  // [MutationEnums.INCREMENT_ID](state) {
-  //   state.uniqueId = state.uniqueId + 1;
-  // },
 };
 
 const actions: ActionTree<StateTypes, RootStateTypes> & ActionTypes = {
   [ActionEnums.COMMIT_PUSH]({ commit }) {
     commit(MutationEnums.SET_LOADED);
-  },
-  [ActionEnums.GET_NEXT_UNIQUE_ID]({ getters, commit }) {
-    const thisId = getters.uniqueId;
-
-    commit(MutationEnums.INCREMENT_ID);
-
-    return thisId;
   },
 };
 

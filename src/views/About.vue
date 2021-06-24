@@ -1,5 +1,5 @@
 <template>
-  <div class="about space-y-8">
+  <div class="space-y-8">
     <article class="space-y-4">
       <h4 class="text-4xl dark:text-white">About</h4>
       <p>This is an about page.</p>
@@ -12,7 +12,7 @@
         GitHub:
         <a
           href="https://github.com/shirakomamu"
-          class="hover:underline focus:underline text-blue-500"
+          class="hover:underline focus:underline text-blue-srk"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -78,7 +78,7 @@
 import { defineComponent } from "vue";
 import { useMeta } from "vue-meta";
 import EmailHider from "@/components/EmailHider.vue";
-import uniqueId from "@/utils/uniqueId";
+// import uniqueId from "@/utils/uniqueId";
 
 export default defineComponent({
   name: "About",
@@ -92,17 +92,17 @@ export default defineComponent({
 
     const emailText = "view email address";
 
-    const uid = uniqueId();
+    // const uid = uniqueId();
 
-    const nameUid = `name-${uid}`;
-    const emailUid = `email-${uid}`;
-    const bodyUid = `body-${uid}`;
+    // const nameUid = `name-${uid}`;
+    // const emailUid = `email-${uid}`;
+    // const bodyUid = `body-${uid}`;
 
     return {
       emailText,
-      nameUid,
-      emailUid,
-      bodyUid,
+      // nameUid,
+      // emailUid,
+      // bodyUid,
     };
   },
 });

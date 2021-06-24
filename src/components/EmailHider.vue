@@ -5,7 +5,7 @@
     @mouseout="hideEmail"
     @blur="hideEmail"
     :href="emailMailto"
-    class="text-blue-500 hover:underline focus:underline"
+    class="text-blue-srk hover:underline focus:underline"
   >
     {{ emailText }}
   </a>

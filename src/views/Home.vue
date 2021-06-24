@@ -1,5 +1,5 @@
 <template>
-  <div class="home space-y-8">
+  <div class="space-y-8">
     <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row">
       <article class="intro space-y-4 max-w-prose">
         <h4 class="text-4xl dark:text-white">Hello. 👋</h4>
@@ -26,7 +26,7 @@
                 focus:underline
                 italic
                 font-semibold
-                text-blue-500
+                text-blue-srk
               "
               target="_blank"
               rel="noopener noreferrer"

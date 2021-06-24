@@ -18,19 +18,16 @@ export interface StateTypes {
   technologies: Technology[];
   labelBreakpoints: TechnologySkillBreakpointLabel[];
   tools: Tool[];
-  // uniqueId: number;
 }
 
 export interface GetterTypes {
   technologiesLoaded(state: StateTypes): boolean;
   technologies(state: StateTypes): MergedTechnology[];
   tools(state: StateTypes): Tool[];
-  // uniqueId(state: StateTypes): number;
 }
 
 export type MutationTypes<S = StateTypes> = {
   [MutationEnums.SET_LOADED](state: S): void;
-  // [MutationEnums.INCREMENT_ID](state: S): void;
 };
 
 type AugmentedActionContext = Omit<
@@ -56,7 +53,6 @@ export interface ActionTypes {
     { commit }: AugmentedActionContext,
     payload: Technology
   ): void;
-  // [ActionEnums.GET_NEXT_UNIQUE_ID]({ commit }: AugmentedActionContext): number;
 }
 
 export type StoreModuleTypes<S = StateTypes> = Omit<
