@@ -22,11 +22,11 @@
       functioning of this site. Such data may include your browser metadata or
       IP address. Please see their privacy policy at
       <a
-        href="https://www.netlify.com/privacy/"
+        href="https://www.netlify.com/privacy"
         class="hover:underline focus:underline text-blue-srk"
         target="_blank"
         rel="noopener noreferrer"
-        >https://www.netlify.com/privacy/</a
+        >https://www.netlify.com/privacy</a
       >
       for more information.
     </p>
