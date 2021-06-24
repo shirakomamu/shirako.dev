@@ -26,15 +26,18 @@
       "
     />
 
-    <div class="pb-8 flex-grow">
+    <div
+      class="pb-8 flex flex-col flex-grow justify-center"
+      :class="{ 'pt-8': $route.path !== '/' }"
+    >
       <transition-group name="fade" tag="div" mode="out-in">
-        <Hero v-if="$route.path === '/'" key="hero" />
+        <Hero v-if="$route.path === '/'" key="hero" class="mb-8" />
       </transition-group>
       <router-view v-slot="{ Component }" key="router-view"
         ><transition name="fade" mode="out-in">
           <component
             :is="Component"
-            class="h-full mx-auto mt-8 px-8 max-w-screen-2xl"
+            class="flex-1 w-full mx-auto px-8 max-w-screen-2xl"
           />
         </transition>
       </router-view>

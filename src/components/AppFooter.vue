@@ -6,7 +6,7 @@
         <span><EmailHider :text="emailText" :showEmailAsText="false" /></span> |
         <router-link
           to="/privacy"
-          class="text-blue-500 hover:underline focus:underline"
+          class="text-blue-srk hover:underline focus:underline"
           >privacy</router-link
         >
       </div>

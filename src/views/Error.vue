@@ -1,5 +1,5 @@
 <template>
-  <div class="error space-y-8">
+  <div class="space-y-8">
     <img
       alt="Cat on keyboard"
       src="@/assets/images/irasutoya/shigoto_zaitaku_cat_man.png"

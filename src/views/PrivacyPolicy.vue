@@ -1,5 +1,5 @@
 <template>
-  <div class="privacy-policy space-y-8 max-w-prose">
+  <div class="space-y-8">
     <h5 class="text-4xl dark:text-white">Privacy policy</h5>
     <p>
       This site does not collect your data for analytics nor store any cookies,
@@ -22,11 +22,11 @@
       functioning of this site. Such data may include your browser metadata or
       IP address. Please see their privacy policy at
       <a
-        href="https://www.netlify.com/privacy/"
-        class="hover:underline focus:underline text-blue-500"
+        href="https://www.netlify.com/privacy"
+        class="hover:underline focus:underline text-blue-srk"
         target="_blank"
         rel="noopener noreferrer"
-        >https://www.netlify.com/privacy/</a
+        >https://www.netlify.com/privacy</a
       >
       for more information.
     </p>
