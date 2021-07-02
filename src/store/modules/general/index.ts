@@ -88,7 +88,7 @@ const state: StateTypes = {
         automation rules and systems integrations to connect the platform with
         custom web applications.`,
       disclaimer: "* Jira is a registered trademark of Atlassian.",
-      logoSrc: "./vendor-icons/jira.svg",
+      logoSrc: "/vendor-icons/jira.svg",
       logoAlt: "Jira logo",
     },
     {
@@ -99,7 +99,7 @@ const state: StateTypes = {
         on. Accurate documentation ensured smooth coordination not only with the
         other developers, but also Systems Administrators who support the systems.`,
       disclaimer: "* Confluence is a registered trademark of Atlassian.",
-      logoSrc: "./vendor-icons/confluence.svg",
+      logoSrc: "/vendor-icons/confluence.svg",
       logoAlt: "Confluence logo",
     },
     {
@@ -109,7 +109,7 @@ const state: StateTypes = {
         Built-in code formatters also ensure that my code style is consistent,
         readable, and adheres to best practices.`,
       disclaimer: "* Visual Studio Code is copyrighted by Microsoft.",
-      logoSrc: "./vendor-icons/vscode.svg",
+      logoSrc: "/vendor-icons/vscode.svg",
       logoAlt: "Visual Studio Code logo",
     },
     {
@@ -120,7 +120,7 @@ const state: StateTypes = {
         used both GitHub (and Bitbucket) to host my repositories and am familiar with
         the various workflows available on the platform.`,
       disclaimer: "* GitHub is a registered trademark of GitHub, Inc.",
-      logoSrc: "./vendor-icons/github.svg",
+      logoSrc: "/vendor-icons/github.svg",
       logoAlt: "GitHub logo",
     },
     {
@@ -131,25 +131,25 @@ const state: StateTypes = {
         as a contract for efficient collaboration between developers, and ensures that
         applications are easily maintainable and extensible for the future.`,
       disclaimer: "* Insomnia is copyrighted by Kong Inc.",
-      logoSrc: "./vendor-icons/insomnia.svg",
+      logoSrc: "/vendor-icons/insomnia.svg",
       logoAlt: "Insomnia logo",
     },
     {
       name: "Microsoft® Office®",
-      description: `Of course, I also am extremely familiar with traditional office
-        productivity software like Word, Excel, and Powerpoint. I can use this software
-        to create or compile reports whenever necessary.`,
+      description: `Of course, I am an excellent user of with traditional office
+        productivity software like Word, Excel, and Powerpoint. I use such software
+        to create or compile reports whenever necessary and with ease.`,
       disclaimer: "* Microsoft Office is a trademark of Microsoft.",
-      logoSrc: "./vendor-icons/ms-office.svg",
+      logoSrc: "/vendor-icons/ms-office.svg",
       logoAlt: "Microsoft Office logo",
     },
     {
       name: "Google Workspace™ productivity and collaboration tools",
-      description: `I am also extremely familiar with Google's productivity suite, which
+      description: `I am well-versed with Google's productivity suite, which
         has been becoming more popular due to its cloud-first approach, allowing it to
         integrate with other web services easily and securely.`,
       disclaimer: "* Google Workspace is a registered trademark of Google.",
-      logoSrc: "./vendor-icons/google-drive.png",
+      logoSrc: "/vendor-icons/google-drive.png",
       logoAlt: "Google Drive logo",
     },
     {
@@ -158,7 +158,7 @@ const state: StateTypes = {
         use it to supplement gaps in web design quickly. For example, I can rapidly create
         prototype designs, logos, and images to supplement the web design when needed.`,
       disclaimer: "* Adobe and Photoshop are registered trademarks of Adobe.",
-      logoSrc: "./vendor-icons/photoshop.svg",
+      logoSrc: "/vendor-icons/photoshop.svg",
       logoAlt: "Adobe Photoshop logo",
     },
   ],

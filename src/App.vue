@@ -50,6 +50,7 @@
         dark:border-gray-600
         bg-white
         dark:bg-gray-800
+        h-12
       "
     />
 
@@ -79,7 +80,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useMeta } from "vue-meta";
 // import { notify } from "@kyvg/vue3-notification";
 import AppHeader from "@/components/AppHeader.vue";
@@ -107,10 +108,9 @@ export default defineComponent({
       htmlAttrs: { lang: "en" },
     });
 
-    const refreshing = false;
-    const registration: null | ServiceWorkerRegistration =
-      null as null | ServiceWorkerRegistration;
-    const updateExists = false;
+    const refreshing = ref<boolean>(false);
+    const registration = ref<null | ServiceWorkerRegistration>(null);
+    const updateExists = ref<boolean>(false);
 
     return { refreshing, registration, updateExists };
   },
