@@ -11,7 +11,7 @@
           {{ text }}
         </p>
       </article>
-      <div class="grid col-span-2 md:col-span-1 place-items-center">
+      <div class="grid grid-cols-1 col-span-2 md:col-span-1 place-items-center">
         <blockquote class="quote mt-8">
           <p
             class="italic text-center text-gray-600 dark:text-gray-400 text-2xl"
@@ -40,7 +40,13 @@
 
     <div class="grid grid-cols-1 xl:grid-cols-2">
       <div
-        class="grid col-span-2 xl:col-span-1 items-center justify-items-center"
+        class="
+          grid grid-cols-1
+          col-span-2
+          xl:col-span-1
+          items-center
+          justify-items-center
+        "
       >
         <img
           alt="Cat using laptop"
@@ -104,10 +110,9 @@ export default defineComponent({
   },
   setup() {
     const introTexts = [
-      `Welcome to my personal site.`,
       `I am a web developer with an engineering background.
-      My education is in Aerospace Engineering (structural composites and optimization),
-      but I self-taught modern web technologies both as a hobby and professionally.`,
+      My education is in Aerospace Engineering (structural composites and optimization).
+      I self-taught modern web technologies both as a hobby and professionally.`,
       `I am based out of California, USA, and I specialize in building intelligent web apps for business workflows.`,
     ];
     const quote = {

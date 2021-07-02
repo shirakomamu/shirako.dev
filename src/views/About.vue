@@ -7,18 +7,24 @@
 
     <div class="space-y-4">
       <h6 class="text-2xl dark:text-white">Find me at</h6>
-      <p>Email: <EmailHider :text="emailText" /></p>
-      <p>
-        GitHub:
+      <div>Email: <EmailHider :text="emailText" /></div>
+      <div class="flex flex-row gap-4 items-center">
         <a
           href="https://github.com/shirakomamu"
-          class="hover:underline focus:underline text-blue-srk"
+          class="text-blue-srk space-x-2"
           target="_blank"
           rel="noopener noreferrer"
         >
-          https://github.com/shirakomamu
+          <img
+            class="svg-icon"
+            src="/vendor-icons/github.svg"
+            alt="GitHub"
+            height="32"
+            width="32"
+          />
+          <span class="hover:underline focus:underline">shirakomamu</span>
         </a>
-      </p>
+      </div>
     </div>
 
     <!-- <div class="space-y-4">
@@ -27,7 +33,7 @@
         name="contact"
         method="POST"
         data-netlify="true"
-        class="grid grid-form gap-4 w-full max-w-prose"
+        class="grid grid-cols-1 grid-form gap-4 w-full max-w-prose"
       >
         <div>
           <label :for="nameUid">Name</label>
@@ -109,11 +115,19 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-textarea {
-  resize: none;
+.svg-icon {
+  display: inline;
+  @media (prefers-color-scheme: dark) {
+    // https://codepen.io/sosuke/pen/Pjoqqp
+    filter: brightness(0) saturate(100%) invert(94%) sepia(6%) saturate(120%)
+      hue-rotate(182deg) brightness(101%) contrast(89%);
+  }
 }
+// textarea {
+//   resize: none;
+// }
 
-.grid-form {
-  grid-template-columns: 0.25fr 0.75fr;
-}
+// .grid-form {
+//   grid-template-columns: 0.25fr 0.75fr;
+// }
 </style>

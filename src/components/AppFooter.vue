@@ -1,8 +1,8 @@
 <template>
-  <div class="nav h-12 flex items-center">
-    <div class="justify-start ml-8 flex flex-grow items-center">
+  <div class="nav flex items-center px-8">
+    <div class="justify-start flex flex-grow items-center">
       <div class="text-gray-500 text-sm">
-        <span>© 2021 白子マム</span> |
+        <span>© 2021 白狐マム</span> |
         <span><EmailHider :text="emailText" :showEmailAsText="false" /></span> |
         <router-link
           to="/privacy"
@@ -11,7 +11,7 @@
         >
       </div>
     </div>
-    <div class="justify-end space-x-8 mr-8 flex items-center">
+    <div class="justify-end space-x-8 flex items-center">
       <span class="text-gray-500 text-sm">build {{ hash }}</span>
     </div>
   </div>
