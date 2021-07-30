@@ -124,6 +124,7 @@
 import { defineComponent } from "vue";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/Email.vue";
+import { useRoute } from "vue-router";
 
 interface NavigationLink {
   to: string;
@@ -148,12 +149,14 @@ export default defineComponent({
         label: "Projects",
       },
     ];
-    return { links, appName };
-  },
-  methods: {
-    isRouteMatched(to: string) {
-      return this.$route.matched.some(({ path }) => path === to);
-    },
+
+    const route = useRoute();
+
+    const isRouteMatched = (to: string) => {
+      return route.matched.some(({ path }) => path === to);
+    };
+
+    return { links, appName, isRouteMatched };
   },
 });
 </script>
