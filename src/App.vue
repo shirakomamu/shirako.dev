@@ -86,6 +86,11 @@ export default defineComponent({
           rel: "canonical",
           href: "https://shirako.dev" + route.path,
         },
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/icons/32-bl_rc-fc.png",
+        },
       ],
       htmlAttrs: { lang: "en" },
     }));

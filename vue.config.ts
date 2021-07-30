@@ -16,25 +16,25 @@ module.exports = {
     manifestOptions: {
       icons: [
         {
-          src: "./icons/32-bl_rc-fc.png",
+          src: "/icons/32-bl_rc-fc.png",
           sizes: "32x32",
           type: "image/png",
           purpose: "maskable",
         },
         {
-          src: "./icons/128-bl_rc-fc.png",
+          src: "/icons/128-bl_rc-fc.png",
           sizes: "128x128",
           type: "image/png",
           purpose: "maskable",
         },
         {
-          src: "./icons/192-bl_rc-fc.png",
+          src: "/icons/192-bl_rc-fc.png",
           sizes: "192x192",
           type: "image/png",
           purpose: "maskable",
         },
         {
-          src: "./icons/512-bl_rc-fc.png",
+          src: "/icons/512-bl_rc-fc.png",
           sizes: "512x512",
           type: "image/png",
           purpose: "maskable",
@@ -43,11 +43,11 @@ module.exports = {
     },
     iconPaths: {
       faviconSVG: null,
-      favicon32: "icons/32-bl_rc-fc.png",
+      favicon32: "/icons/32-bl_rc-fc.png",
       favicon16: null,
-      appleTouchIcon: "icons/192-bl_rc-fc.png",
+      appleTouchIcon: "/icons/192-bl_rc-fc.png",
       maskIcon: null,
-      msTileImage: "icons/192-bl_rc-fc.png",
+      msTileImage: "/icons/192-bl_rc-fc.png",
     },
   },
   pluginOptions: {

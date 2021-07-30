@@ -4,7 +4,7 @@
       <router-link to="/" class="flex flex-row gap-4 items-center">
         <img
           alt="shirako.dev logo"
-          src="icons/512-bl_rc-fc.png"
+          src="/icons/512-bl_rc-fc.png"
           width="32"
           height="32"
         />
