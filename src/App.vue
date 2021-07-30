@@ -96,58 +96,51 @@ export default defineComponent({
     }));
     useMeta(meta);
 
+    // Prevent multiple refreshes
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing.value) return;
+      refreshing.value = true;
+      // Here the actual reload of the page occurs
+      window.location.reload();
+    });
+
     const refreshing = ref<boolean>(false);
     const registration = ref<null | ServiceWorkerRegistration>(null);
     const updateExists = ref<boolean>(false);
 
-    return { refreshing, registration, updateExists };
-  },
-  // watch: {
-  //   updateExists(newValue) {
-  //     if (newValue) {
-  //       notify({
-  //         id: -1,
-  //         title: "An update is available",
-  //         text: "Please refresh the page",
-  //         duration: -1,
-  //       });
-  //     }
-  //   },
-  // },
-  created() {
-    // Listen for our custom event from the SW registration
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    document.addEventListener("swUpdated", this.updateAvailable, {
-      once: true,
-    });
-
-    // Prevent multiple refreshes
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (this.refreshing) return;
-      this.refreshing = true;
-      // Here the actual reload of the page occurs
-      window.location.reload();
-    });
-  },
-  methods: {
     // Store the SW registration so we can send it a message
     // We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
     // To alert the user there is an update they need to refresh for
-    updateAvailable(event: { detail: ServiceWorkerRegistration }) {
-      this.registration = event.detail;
-      this.updateExists = true;
-    },
+
+    const updateAvailable = (event: { detail: ServiceWorkerRegistration }) => {
+      registration.value = event.detail;
+      updateExists.value = true;
+    };
+
+    // Listen for our custom event from the SW registration
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.addEventListener("swUpdated", updateAvailable, {
+      once: true,
+    });
 
     // Called when the user accepts the update
-    refreshApp() {
-      this.updateExists = false;
+    const refreshApp = () => {
+      updateExists.value = false;
       // Make sure we only send a 'skip waiting' message if the SW is waiting
-      if (!this.registration || !this.registration.waiting) return;
+      if (!registration.value || !registration.value.waiting) return;
 
       // send message to SW to skip the waiting and activate the new SW
-      this.registration.waiting.postMessage({ type: "SKIP_WAITING" });
-    },
+      registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
+    };
+
+    return {
+      refreshing,
+      registration,
+      updateExists,
+      updateAvailable,
+      refreshApp,
+    };
   },
 });
 </script>

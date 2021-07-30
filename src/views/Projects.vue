@@ -21,7 +21,7 @@
           width="32"
           height="32"
           alt="Shirako Eats logo"
-          class="icon-inline mr-2"
+          class="icon-inline mr-2 rounded-lg"
         />Shirako Eats <OpenInNew class="icon-inline opacity-50 text-lg" />
       </a>
       <p>

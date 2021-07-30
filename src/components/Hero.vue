@@ -15,7 +15,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import {
+  defineComponent,
+  ref,
+  computed,
+  onMounted,
+  onUnmounted,
+  nextTick,
+} from "vue";
 import useStore from "@/use/useStore";
 import shuffleArray from "@/utils/shuffleArray";
 
@@ -29,7 +36,7 @@ export default defineComponent({
     const typewriterContexts = shuffleArray([...techs]);
 
     const contextIndex = ref(0);
-    const timer = 0;
+    const timer = ref(0);
     const currentContext = computed(
       () => typewriterContexts[contextIndex.value]
     );
@@ -39,6 +46,60 @@ export default defineComponent({
     const wordDisplayTime = 5000;
     const wordBlankTime = 1000;
     const wordTypeDelay = 30;
+
+    const doWordCycle = (delay: number) => {
+      typeWord(currentContext.value, wordTypeDelay);
+      setTimeout(() => {
+        eraseWord(wordTypeDelay);
+      }, delay);
+    };
+    const typeWord = (word: string, delay: number) => {
+      if (typingState.value !== 0) {
+        return;
+      }
+      typingState.value = 1;
+      currentContextResult.value = "";
+      let timer: number = setInterval(() => {
+        const contextLength = currentContextResult.value.length;
+        if (contextLength === word.length) {
+          typingState.value = 0;
+          clearInterval(timer);
+        }
+        currentContextResult.value = word.slice(0, contextLength + 1);
+      }, delay);
+    };
+    const eraseWord = (delay: number) => {
+      if (typingState.value !== 0) {
+        return;
+      }
+      typingState.value = -1;
+      let timer: number = setInterval(() => {
+        const contextLength = currentContextResult.value.length;
+        if (contextLength === 0) {
+          typingState.value = 0;
+          clearInterval(timer);
+        }
+        currentContextResult.value = currentContextResult.value.slice(0, -1);
+      }, delay);
+    };
+
+    onMounted(() => {
+      doWordCycle(wordDisplayTime);
+
+      if (timer.value) {
+        return;
+      }
+
+      timer.value = setInterval(async () => {
+        contextIndex.value =
+          (contextIndex.value + 1) % typewriterContexts.length;
+
+        await nextTick();
+        doWordCycle(wordDisplayTime);
+      }, wordDisplayTime + wordBlankTime);
+    });
+
+    onUnmounted(() => (timer.value = 0));
 
     return {
       typewriterContexts,
@@ -51,61 +112,6 @@ export default defineComponent({
       wordBlankTime,
       wordTypeDelay,
     };
-  },
-  mounted() {
-    this.doWordCycle(this.wordDisplayTime);
-
-    if (this.timer) {
-      return;
-    }
-
-    this.timer = setInterval(async () => {
-      this.contextIndex =
-        (this.contextIndex + 1) % this.typewriterContexts.length;
-
-      await this.$nextTick();
-      this.doWordCycle(this.wordDisplayTime);
-    }, this.wordDisplayTime + this.wordBlankTime);
-  },
-  unmounted() {
-    this.timer = 0;
-  },
-  methods: {
-    doWordCycle(delay: number) {
-      this.typeWord(this.currentContext, this.wordTypeDelay);
-      setTimeout(() => {
-        this.eraseWord(this.wordTypeDelay);
-      }, delay);
-    },
-    typeWord(word: string, delay: number) {
-      if (this.typingState !== 0) {
-        return;
-      }
-      this.typingState = 1;
-      this.currentContextResult = "";
-      let timer: number = setInterval(() => {
-        const contextLength = this.currentContextResult.length;
-        if (contextLength === word.length) {
-          this.typingState = 0;
-          clearInterval(timer);
-        }
-        this.currentContextResult = word.slice(0, contextLength + 1);
-      }, delay);
-    },
-    eraseWord(delay: number) {
-      if (this.typingState !== 0) {
-        return;
-      }
-      this.typingState = -1;
-      let timer: number = setInterval(() => {
-        const contextLength = this.currentContextResult.length;
-        if (contextLength === 0) {
-          this.typingState = 0;
-          clearInterval(timer);
-        }
-        this.currentContextResult = this.currentContextResult.slice(0, -1);
-      }, delay);
-    },
   },
 });
 </script>
