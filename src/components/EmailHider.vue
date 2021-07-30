@@ -5,9 +5,8 @@
     @mouseout="hideEmail"
     @blur="hideEmail"
     :href="emailMailto"
-    class="text-blue-srk hover:underline focus:underline"
   >
-    {{ emailText }}
+    <slot />
   </a>
 </template>
 
@@ -19,11 +18,11 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      default: () => "say hello",
+      default: "say hello",
     },
     showEmailAsText: {
       type: Boolean,
-      default: () => true,
+      default: true,
     },
   },
   setup(props) {

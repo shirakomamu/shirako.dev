@@ -2,6 +2,9 @@ export interface Technology {
   name: string;
   skill: number; // out of 1
   link?: string;
+  logoSrc?: string;
+  logoSrcWhenDark?: string;
+  logoAlt?: string;
 }
 
 export interface TechnologySkillBreakpointLabel {
@@ -15,8 +18,9 @@ export interface MergedTechnology extends Technology {
 
 export interface Tool {
   name: string;
-  description: string;
+  description?: string;
   disclaimer?: string;
   logoSrc?: string;
+  logoSrcWhenDark?: string;
   logoAlt?: string;
 }

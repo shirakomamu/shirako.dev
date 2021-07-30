@@ -1,10 +1,10 @@
 <template>
-  <div class="nav flex items-center px-8">
+  <div class="nav flex flex-row items-center px-8">
     <div class="justify-start items-center">
-      <router-link to="/" class="space-x-4 flex items-center">
+      <router-link to="/" class="flex flex-row gap-4 items-center">
         <img
           alt="shirako.dev logo"
-          src="images/icons/icon-128b.png"
+          src="icons/512-bl_rc-fc.png"
           width="32"
           height="32"
         />
@@ -14,21 +14,116 @@
       >
     </div>
     <div class="flex-grow" />
-    <div class="space-x-8 flex items-center">
+    <div class="flex flex-row gap-4 items-center">
       <router-link
         v-for="(link, index) of links"
         :to="link.to"
         :key="index"
-        class="align-middle dark:text-gray-100 text-sm link-underline-animate"
-        :class="{ 'font-bold': isRouteMatched(link.to) }"
+        class="
+          align-middle
+          dark:text-gray-100
+          text-sm
+          link-underline-animate
+          transition
+          opacity-50
+        "
+        :class="{ 'opacity-100': isRouteMatched(link.to) }"
         >{{ link.label }}</router-link
       >
+      <div class="flex flex-row gap-3 items-center">
+        <EmailHider
+          class="transition opacity-50 hover:opacity-100 focus:opacity-100"
+          ><Email width="24" height="24"
+        /></EmailHider>
+
+        <a
+          href="https://github.com/shirakomamu"
+          class="
+            dark:hidden
+            transition
+            opacity-50
+            hover:opacity-100
+            focus:opacity-100
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/vendor-icons/github-black.svg"
+            alt="GitHub"
+            height="24"
+            width="24"
+          />
+        </a>
+        <a
+          href="https://github.com/shirakomamu"
+          class="
+            hidden
+            dark:block
+            transition
+            opacity-50
+            hover:opacity-100
+            focus:opacity-100
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/vendor-icons/github-white.svg"
+            alt="GitHub"
+            height="24"
+            width="24"
+          />
+        </a>
+
+        <a
+          href="https://twitter.com/shirakomamu"
+          class="
+            dark:hidden
+            transition
+            opacity-50
+            hover:opacity-100
+            focus:opacity-100
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/vendor-icons/twitter-blue.svg"
+            alt="Twitter"
+            height="24"
+            width="24"
+          />
+        </a>
+        <a
+          href="https://twitter.com/shirakomamu"
+          class="
+            hidden
+            dark:block
+            transition
+            opacity-50
+            hover:opacity-100
+            focus:opacity-100
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/vendor-icons/twitter-white.svg"
+            alt="Twitter"
+            height="24"
+            width="24"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import EmailHider from "@/components/EmailHider.vue";
+import Email from "@/components/icons/Email.vue";
 
 interface NavigationLink {
   to: string;
@@ -37,6 +132,10 @@ interface NavigationLink {
 
 export default defineComponent({
   name: "AppHeader",
+  components: {
+    EmailHider,
+    Email,
+  },
   setup() {
     const appName: string = process.env.VUE_APP_NAME;
     const links: NavigationLink[] = [
@@ -47,10 +146,6 @@ export default defineComponent({
       {
         to: "/projects",
         label: "Projects",
-      },
-      {
-        to: "/about",
-        label: "About",
       },
     ];
     return { links, appName };

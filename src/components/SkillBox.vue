@@ -12,14 +12,31 @@
       items-center
       justify-center
       rounded-lg
-      bg-gray-200
-      dark:bg-gray-600
-      bg-opacity-50
-      hover:bg-opacity-0
+      bg-gray-200/50
+      dark:bg-gray-600/50
     "
     :class="{ pointer: link }"
   >
     <div class="block w-full">
+      <OpenInNew
+        v-if="link"
+        class="open-in-new-icon icon-inline opacity-50 text-sm"
+      />
+      <img
+        v-if="logoSrc"
+        :src="logoSrc"
+        :alt="logoAlt"
+        class="mx-auto my-2 skill-icon"
+        :class="{
+          'dark:hidden': logoSrcWhenDark,
+        }"
+      />
+      <img
+        v-if="logoSrcWhenDark"
+        :src="logoSrcWhenDark"
+        :alt="logoAlt"
+        class="hidden dark:block mx-auto my-2 skill-icon"
+      />
       <p
         class="
           text-center text-sm
@@ -28,7 +45,6 @@
         "
       >
         {{ name }}
-        <OpenInNew v-if="link" class="icon" />
       </p>
       <p
         v-if="label"
@@ -54,15 +70,27 @@ export default defineComponent({
   props: {
     name: {
       type: String,
-      default: () => "",
+      default: "",
     },
     label: {
       type: String,
-      default: () => "",
+      default: "",
     },
     link: {
       type: String,
-      default: () => null,
+      default: null,
+    },
+    logoSrc: {
+      type: String,
+      default: "",
+    },
+    logoSrcWhenDark: {
+      type: String,
+      default: "",
+    },
+    logoAlt: {
+      type: String,
+      default: "",
     },
   },
   // setup() {
@@ -106,15 +134,16 @@ export default defineComponent({
   overflow: hidden;
   transition-property: background-color opacity;
   transition-duration: 0.4s;
-  background: linear-gradient(
-    90deg,
-    rgba(131, 58, 180, 0.1) 0%,
-    rgba(253, 29, 29, 0.1) 50%,
-    rgba(252, 176, 69, 0.1) 100%
-  );
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(131, 58, 180, 0.1) 0%,
+  //   rgba(253, 29, 29, 0.1) 50%,
+  //   rgba(252, 176, 69, 0.1) 100%
+  // );
 
   &:before {
     content: "";
+    z-index: 1;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -124,11 +153,11 @@ export default defineComponent({
     transition: opacity 0.4s;
     background: linear-gradient(
       90deg,
-      rgba(131, 58, 180, 0.15) 0%,
-      rgba(253, 29, 29, 0.15) 50%,
+      rgba(253, 29, 29, 0.15) 0%,
       rgba(252, 176, 69, 0.15) 100%
     );
   }
+  // rgba(131, 58, 180, 0.15) 0%,
 
   &:hover:before {
     opacity: 1;
@@ -165,24 +194,25 @@ export default defineComponent({
   }
 }
 
+.block {
+  z-index: 2;
+}
+
 @keyframes shine {
   100% {
     left: 100%;
   }
 }
 
-.block {
-  z-index: 2;
+.open-in-new-icon {
+  position: absolute;
+  right: 0.25rem;
+  top: 0.5rem;
 }
 
-.icon {
-  display: inline;
-  width: 0.9rem;
-  opacity: 0.54;
-  fill: black;
-
-  @media (prefers-color-scheme: dark) {
-    fill: white;
-  }
+.skill-icon {
+  height: 2rem;
+  width: auto;
+  object-fit: scale-down;
 }
 </style>
