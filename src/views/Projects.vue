@@ -17,7 +17,7 @@
         rel="noopener noreferrer"
       >
         <img
-          src="@/assets/images/icons/192-or-w.png"
+          src="/icons/192-or-w.png"
           width="32"
           height="32"
           alt="Shirako Eats logo"
