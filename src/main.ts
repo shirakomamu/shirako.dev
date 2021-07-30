@@ -5,7 +5,8 @@ import router from "./router";
 import { store } from "./store";
 // import Notifications from "@kyvg/vue3-notification";
 import "./registerServiceWorker";
-import "tailwindcss/tailwind.css";
+// import "tailwindcss/tailwind.css";
+import "windi.css";
 import "@/assets/styles/index.less";
 
 const app = createApp(App);

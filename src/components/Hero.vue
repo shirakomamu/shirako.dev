@@ -2,11 +2,11 @@
   <div
     class="hero h-32 md:h-64 flex flex-col items-center justify-center"
     role="img"
-    :alt="'I do... ' + currentContext"
+    :alt="'' + currentContext"
   >
     <div class="stars" />
-    <div class="space-x-2 m-2 text-xl md:text-2xl text-white text-center">
-      <span class="font-light">I do...</span>
+    <div class="space-x-2 m-2 text-xl md:text-4xl text-center dark:text-white">
+      <!-- <span class="font-light"></span> -->
       <span class="font-mono typewriter">
         {{ currentContextResult }}
       </span>
@@ -113,14 +113,14 @@ export default defineComponent({
 <style scoped lang="less">
 .hero {
   position: relative;
-  background: linear-gradient(
-    30deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(37, 95, 111, 1) 45%,
-    rgba(38, 99, 112, 1) 50%,
-    rgba(41, 95, 115, 1) 55%,
-    rgba(42, 8, 74, 1) 100%
-  );
+  // background: linear-gradient(
+  //   30deg,
+  //   rgba(2, 0, 36, 0.05) 0%,
+  //   rgba(37, 95, 111, 0.05) 45%,
+  //   rgba(38, 99, 112, 0.05) 50%,
+  //   rgba(41, 95, 115, 0.05) 55%,
+  //   rgba(42, 8, 74, 0.05) 100%
+  // );
 }
 .typewriter {
   // white-space: nowrap; /* Keeps the content on a single line */
@@ -128,13 +128,26 @@ export default defineComponent({
 
   &::after {
     content: "";
-    border-right: 0.1em solid rgba(255, 255, 255, 0.8); /* The typewriter cursor */
+    border-right: 0.1em solid;
     animation: blink-caret 1s step-end infinite;
+    @media (prefers-color-scheme: dark) {
+      animation: blink-caret-dark 1s step-end infinite;
+    }
   }
 }
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+@keyframes blink-caret-dark {
   from,
   to {
     border-color: transparent;
@@ -148,7 +161,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   position: absolute;
-  background: transparent url(~@/assets/images/stars.png) repeat top center;
-  background-size: contain;
+  // background: transparent url(~@/assets/images/stars.png) repeat top center;
+  // background-size: contain;
 }
 </style>

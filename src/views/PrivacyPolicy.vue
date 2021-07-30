@@ -18,15 +18,15 @@
       without your explicit consent.
     </p>
     <p>
-      This site's hosting provider, Netlify, may log data necessary for the
+      This site's hosting provider, Cloudflare, may log data necessary for the
       functioning of this site. Such data may include your browser metadata or
       IP address. Please see their privacy policy at
       <a
-        href="https://www.netlify.com/privacy"
+        href="https://www.cloudflare.com/privacypolicy"
         class="hover:underline focus:underline text-blue-srk"
         target="_blank"
         rel="noopener noreferrer"
-        >https://www.netlify.com/privacy</a
+        >https://www.cloudflare.com/privacypolicy</a
       >
       for more information.
     </p>

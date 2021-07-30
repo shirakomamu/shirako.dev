@@ -2,19 +2,25 @@
   <div class="space-y-8">
     <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row">
       <article class="intro space-y-4 max-w-prose">
-        <h4 class="text-4xl dark:text-white">Hello. 👋</h4>
-        <p
-          v-for="(text, index) of introTexts"
-          :key="index"
-          class="dark:text-gray-200"
-        >
-          {{ text }}
+        <h4 class="text-4xl dark:text-white">
+          <span class="opacity-50">Hello, I'm </span
+          ><ruby>白狐<rt>しらこ</rt>マム</ruby><span class="opacity-50">,</span>
+        </h4>
+        <h4 class="text-2xl">
+          <span class="opacity-50">but you can call me </span
+          ><span class="font-semibold">Mamu</span
+          ><span class="opacity-50">.</span>
+        </h4>
+        <p class="dark:text-gray-200">
+          I'm a web developer specializing in Vue and Node, and I'm based in
+          California. Although my education is in Aerospace Engineering, I now
+          specialize in developing web apps using modern web technologies.
         </p>
       </article>
       <div class="grid grid-cols-1 col-span-2 md:col-span-1 place-items-center">
         <blockquote class="quote mt-8">
           <p
-            class="italic text-center text-gray-600 dark:text-gray-400 text-2xl"
+            class="italic text-center text-gray-600 dark:text-gray-400 text-xl"
           >
             {{ quote.text }}
           </p>
@@ -38,7 +44,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-2">
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
       <div
         class="
           grid grid-cols-1
@@ -54,35 +60,36 @@
           class="mx-auto h-64 m-4"
         />
       </div>
-      <article class="technologies space-y-4">
-        <h5 class="text-2xl dark:text-white">Technologies I use</h5>
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+      <div>
+        <!-- <h5 class="text-2xl dark:text-white">Technologies I use</h5> -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <SkillBox
             v-for="(technology, index) of technologies"
             :key="index"
             :name="technology.name"
-            :label="technology.label"
             :link="technology.link"
+            :logo-src="technology.logoSrc"
+            :logo-src-when-dark="technology.logoSrcWhenDark"
+            :logo-alt="technology.logoAlt"
           />
         </div>
-      </article>
+      </div>
     </div>
 
-    <article class="tools space-y-4">
-      <h5 class="text-2xl dark:text-white">Tools I use</h5>
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <ToolBox
-          v-for="(tool, index) of tools"
-          :key="index"
-          :name="tool.name"
-          :description="tool.description"
-          :logo-src="tool.logoSrc"
-          :logo-alt="tool.logoAlt"
-        />
-      </div>
-    </article>
+    <h5 class="text-2xl dark:text-white">Productivity tools</h5>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <ToolBox
+        v-for="(tool, index) of tools"
+        :key="index"
+        :name="tool.name"
+        :description="tool.description"
+        :logo-src="tool.logoSrc"
+        :logo-src-when-dark="tool.logoSrcWhenDark"
+        :logo-alt="tool.logoAlt"
+      />
+    </div>
 
-    <div
+    <!-- <div
       class="
         tools-disclaimers
         text-xs text-gray-600
@@ -92,7 +99,7 @@
       "
     >
       <p v-for="(tool, index) of tools" :key="index">{{ tool.disclaimer }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -109,12 +116,6 @@ export default defineComponent({
     ToolBox,
   },
   setup() {
-    const introTexts = [
-      `I am a web developer with an engineering background.
-      My education is in Aerospace Engineering (structural composites and optimization).
-      I self-taught modern web technologies both as a hobby and professionally.`,
-      `I am based out of California, USA, and I specialize in building intelligent web apps for business workflows.`,
-    ];
     const quote = {
       text: `Everybody has a testing environment.
       Some people are lucky enough to have a totally separate environment to run production in.`,
@@ -126,7 +127,7 @@ export default defineComponent({
     const technologies = store.getters.technologies;
     const tools = store.getters.tools;
 
-    return { introTexts, technologies, tools, quote };
+    return { technologies, tools, quote };
   },
 });
 </script>
@@ -156,15 +157,15 @@ export default defineComponent({
       height: 0;
       line-height: 0;
       position: relative;
-      font-size: 3em;
-      top: 1.5rem;
+      font-size: 2em;
+      top: 0.3em;
     }
     &:before {
-      left: -1rem;
+      right: 0.2em;
       content: open-quote;
     }
     &:after {
-      left: 0rem;
+      right: -0em;
       content: close-quote;
     }
   }

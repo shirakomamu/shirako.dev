@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { gitDescribeSync } = require("git-describe");
 process.env.VUE_APP_GIT_HASH = gitDescribeSync().hash;
 
@@ -12,23 +12,29 @@ module.exports = {
       clientsClaim: true,
     },
     name: process.env.VUE_APP_NAME,
-    themeColor: "#008aff",
+    themeColor: "#0089ff",
     manifestOptions: {
       icons: [
         {
-          src: "./images/icons/icon-32b.png",
+          src: "/icons/32-bl_rc-fc.png",
           sizes: "32x32",
           type: "image/png",
           purpose: "maskable",
         },
         {
-          src: "./images/icons/icon-128b.png",
+          src: "/icons/128-bl_rc-fc.png",
           sizes: "128x128",
           type: "image/png",
           purpose: "maskable",
         },
         {
-          src: "./images/icons/icon-512b.png",
+          src: "/icons/192-bl_rc-fc.png",
+          sizes: "192x192",
+          type: "image/png",
+          purpose: "maskable",
+        },
+        {
+          src: "/icons/512-bl_rc-fc.png",
           sizes: "512x512",
           type: "image/png",
           purpose: "maskable",
@@ -37,11 +43,20 @@ module.exports = {
     },
     iconPaths: {
       faviconSVG: null,
-      favicon32: "images/icons/icon-32b.png",
+      favicon32: "/icons/32-bl_rc-fc.png",
       favicon16: null,
-      appleTouchIcon: "images/icons/icon-128b.png",
+      appleTouchIcon: "/icons/192-bl_rc-fc.png",
       maskIcon: null,
-      msTileImage: "images/icons/icon-128b.png",
+      msTileImage: "/icons/192-bl_rc-fc.png",
+    },
+  },
+  pluginOptions: {
+    windicss: {
+      scan: {
+        dirs: ["src", "public"],
+        exclude: ["node_modules", ".git"],
+        include: [],
+      },
     },
   },
 };

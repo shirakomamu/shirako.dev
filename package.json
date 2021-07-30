@@ -28,16 +28,16 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "autoprefixer": "^10.2.6",
+    "@windicss/plugin-scrollbar": "^1.2.3",
     "eslint": "^7.28.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
     "git-describe": "^4.0.4",
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
-    "postcss": "^8.3.2",
     "prettier": "^2.2.1",
-    "tailwindcss": "^2.1.4",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.2",
+    "vue-cli-plugin-windicss": "~1.0.2",
+    "windicss": "^3.1.6"
   }
 }

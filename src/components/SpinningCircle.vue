@@ -15,7 +15,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@blue: #008aff;
+@blue: #0089ff;
 
 .loader-wrapper {
   position: relative;

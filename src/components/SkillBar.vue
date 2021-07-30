@@ -18,13 +18,13 @@ export default defineComponent({
   props: {
     level: {
       type: Number,
-      default: () => 0,
+      default: 0,
       validator: (value: unknown) =>
         typeof value === "number" && value >= 0 && value <= 1,
     },
     label: {
       type: String,
-      default: () => "",
+      default: "",
     },
   },
   setup(props) {

@@ -3,16 +3,11 @@
     <template #title="{ content }">{{ `${content}` }}</template>
     <template #description="{ content }">{{ `${content}` }}</template>
   </metainfo>
+
   <div
-    class="
-      bg-flat
-      layout-container
-      h-full
-      text-black
-      dark:text-gray-200
-      flex flex-col
-    "
+    class="layout-container h-full text-black dark:text-gray-200 flex flex-col"
   >
+    <BgStars />
     <AppHeader
       class="
         sticky
@@ -53,50 +48,31 @@
         h-12
       "
     />
-
-    <!-- <notifications class="notification space-y-8">
-      <template v-slot:body="{ item, close }">
-        <div class="bg-gray-200 dark:bg-gray-600 mr-8 mb-8 flex flex-row p-2">
-          <div class="flex-grow dark:text-white">
-            <p class="text-sm font-semibold">
-              {{ item.title }}
-            </p>
-            <p class="text-xs">{{ item.text }}</p>
-            <button
-              type="button"
-              class="text-xs mt-2 hover:underline focus:underline"
-              @click="refreshApp"
-            >
-              Refresh now
-            </button>
-          </div>
-          <div>
-            <button type="button" @click="close"><IconClose /></button>
-          </div>
-        </div>
-      </template>
-    </notifications> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useMeta } from "vue-meta";
 // import { notify } from "@kyvg/vue3-notification";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import Hero from "@/components/Hero.vue";
-import IconClose from "@/components/icons/IconClose.vue";
+import Close from "@/components/icons/Close.vue";
+import { useRoute } from "vue-router";
+import BgStars from "./components/BgStars.vue";
 
 export default defineComponent({
   components: {
     AppHeader,
     AppFooter,
     Hero,
-    IconClose,
+    Close,
+    BgStars,
   },
   setup() {
-    useMeta({
+    const route = useRoute();
+    const meta = computed(() => ({
       title: "Home | " + process.env.VUE_APP_NAME,
       meta: [
         {
@@ -105,8 +81,20 @@ export default defineComponent({
           content: "Portfolio site for Shirako, the web developer.",
         },
       ],
+      link: [
+        {
+          rel: "canonical",
+          href: "https://shirako.dev" + route.path,
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/icons/32-bl_rc-fc.png",
+        },
+      ],
       htmlAttrs: { lang: "en" },
-    });
+    }));
+    useMeta(meta);
 
     const refreshing = ref<boolean>(false);
     const registration = ref<null | ServiceWorkerRegistration>(null);
@@ -179,33 +167,5 @@ export default defineComponent({
 }
 .fade-enter-to {
   opacity: 1;
-}
-
-// .notification {
-//   position: fixed;
-//   display: block;
-//   top: unset !important;
-//   width: 350px !important;
-//   bottom: 0px !important;
-//   right: 0px !important;
-//   transition: all 300ms ease 0s !important;
-// }
-
-// .bg-image {
-//   background-image: url("~@/assets/images/bg-light.jpg");
-//   @media (prefers-color-scheme: dark) {
-//     background-image: url("~@/assets/images/bg-dark.jpg");
-//   }
-
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-attachment: fixed;
-// }
-
-.bg-flat {
-  background-color: #fff;
-  @media (prefers-color-scheme: dark) {
-    background-color: #191919;
-  }
 }
 </style>

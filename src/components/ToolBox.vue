@@ -7,18 +7,30 @@
       items-center
       rounded-lg
       transition
-      bg-gray-200
-      dark:bg-gray-600
-      bg-opacity-50
-      hover:bg-opacity-60
+      bg-gray-200/50
+      dark:bg-gray-600/50
     "
   >
-    <div class="whitespace-normal h-full w-full flex flex-col gap-4">
+    <div
+      class="whitespace-normal h-full w-full flex flex-col gap-4"
+      :class="{ 'justify-center': !description }"
+    >
       <div class="flex gap-4 items-center">
         <img
           v-if="logoSrc"
           :src="logoSrc"
           :alt="logoAlt"
+          height="32"
+          width="32"
+          :class="{
+            'dark:hidden': logoSrcWhenDark,
+          }"
+        />
+        <img
+          v-if="logoSrcWhenDark"
+          :src="logoSrcWhenDark"
+          :alt="logoAlt"
+          class="hidden dark:block"
           height="32"
           width="32"
         />
@@ -64,23 +76,27 @@ export default defineComponent({
   props: {
     name: {
       type: String,
-      default: () => "",
+      default: "",
     },
     description: {
       type: String,
-      default: () => "",
+      default: "",
     },
     disclaimer: {
       type: String,
-      default: () => "",
+      default: "",
     },
     logoSrc: {
       type: String,
-      default: () => "",
+      default: "",
+    },
+    logoSrcWhenDark: {
+      type: String,
+      default: "",
     },
     logoAlt: {
       type: String,
-      default: () => "",
+      default: "",
     },
   },
 });
