@@ -74,7 +74,7 @@ const state: StateTypes = {
     },
     {
       name: "PostgreSQL",
-      skill: 0.7,
+      skill: 0.75,
       link: "https://www.postgresql.org/",
       logoSrc: "/vendor-icons/postgresql.svg",
       logoAlt: "PostgreSQL logo",
@@ -86,7 +86,7 @@ const state: StateTypes = {
       logoSrc: "/vendor-icons/docker.svg",
       logoAlt: "Docker logo",
     },
-    { name: "CI/CD", skill: 0.6 },
+    // { name: "CI/CD", skill: 0.6 },
     {
       name: "Google Apps Script",
       skill: 1,
@@ -116,7 +116,7 @@ const state: StateTypes = {
     },
     {
       name: "MikroORM",
-      skill: 0.65,
+      skill: 0.75,
       link: "https://mikro-orm.io/",
       logoSrc: "/vendor-icons/mikroorm.svg",
       logoSrcWhenDark: "/vendor-icons/mikroorm-white.svg",
@@ -124,7 +124,7 @@ const state: StateTypes = {
     },
     {
       name: "Redis",
-      skill: 0.65,
+      skill: 0.75,
       link: "https://redis.io/",
       logoSrc: "/vendor-icons/redis.svg",
       logoAlt: "Redis logo",
@@ -242,7 +242,7 @@ const state: StateTypes = {
       logoAlt: "Google Drive logo",
     },
     {
-      name: "Adobe® Photoshop",
+      name: "Adobe Photoshop",
       // description: `I have been using Adobe Photoshop for over 15 years, and I can
       //   use it to supplement gaps in web design quickly. For example, I can rapidly create
       //   prototype designs, logos, and images to supplement the web design when needed.`,

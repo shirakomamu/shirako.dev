@@ -4,7 +4,7 @@
     role="img"
     :alt="'' + currentContext"
   >
-    <div class="stars" />
+    <!-- <div class="stars" /> -->
     <div class="space-x-2 m-2 text-xl md:text-4xl text-center dark:text-white">
       <!-- <span class="font-light"></span> -->
       <span class="font-mono typewriter">

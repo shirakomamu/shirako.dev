@@ -1,4 +1,4 @@
-export default function shuffleArray<T>(array: T[]): T[] {
+export default <T>(array: T[]): T[] => {
   let m = array.length;
 
   // While there remain elements to shuffle...
@@ -13,4 +13,4 @@ export default function shuffleArray<T>(array: T[]): T[] {
   }
 
   return array as T[];
-}
+};
