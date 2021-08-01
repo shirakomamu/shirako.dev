@@ -187,10 +187,7 @@ export default defineComponent({
   }
 
   &:hover:after {
-    opacity: 0.2;
-    @media (prefers-color-scheme: dark) {
-      opacity: 0.02;
-    }
+    @apply opacity-20 dark:opacity-2;
   }
 }
 

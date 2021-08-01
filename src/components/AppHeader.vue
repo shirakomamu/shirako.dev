@@ -8,7 +8,7 @@
           width="32"
           height="32"
         />
-        <span class="font-semibold show-when-wide dark:text-white">{{
+        <span class="font-semibold hidden sm:block dark:text-white">{{
           appName
         }}</span></router-link
       >
@@ -115,6 +115,37 @@
             width="24"
           />
         </a>
+        <button
+          type="button"
+          alt="Toggle dark mode"
+          class="
+            p-0
+            dark:hidden
+            transition
+            opacity-50
+            hover:opacity-100
+            focus:opacity-100
+          "
+          @click="setTheme(true)"
+        >
+          <DarkMode class="inline-block" />
+        </button>
+        <button
+          type="button"
+          alt="Toggle light mode"
+          class="
+            p-0
+            hidden
+            dark:block
+            transition
+            opacity-50
+            hover:opacity-100
+            focus:opacity-100
+          "
+          @click="setTheme(false)"
+        >
+          <LightMode class="inline-block" />
+        </button>
       </div>
     </div>
   </div>
@@ -125,6 +156,8 @@ import { defineComponent } from "vue";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/Email.vue";
 import { useRoute } from "vue-router";
+import DarkMode from "./icons/DarkMode.vue";
+import LightMode from "./icons/LightMode.vue";
 
 interface NavigationLink {
   to: string;
@@ -136,6 +169,8 @@ export default defineComponent({
   components: {
     EmailHider,
     Email,
+    DarkMode,
+    LightMode,
   },
   setup() {
     const appName: string = process.env.VUE_APP_NAME;
@@ -156,34 +191,17 @@ export default defineComponent({
       return route.matched.some(({ path }) => path === to);
     };
 
-    return { links, appName, isRouteMatched };
+    const setTheme = (isDark: boolean) => {
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
+    return { links, appName, isRouteMatched, setTheme };
   },
 });
 </script>
 
-<style lang="less" scoped>
-.link-underline-animate {
-  position: relative;
-  text-decoration: none;
-
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    height: 1px;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-    background: rgba(0, 0, 0, var(--tw-text-opacity));
-    @media (prefers-color-scheme: dark) {
-      background: rgba(243, 244, 246, var(--tw-text-opacity));
-    }
-  }
-  &:hover:after,
-  &:focus:after {
-    width: 100%;
-    left: 0;
-  }
-}
-</style>
+<style lang="less" scoped></style>

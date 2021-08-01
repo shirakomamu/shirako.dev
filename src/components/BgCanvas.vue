@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 pointer-events-none bg-flat">
+  <div class="fixed inset-0 pointer-events-none ps-bg-flat">
     <canvas ref="el" class="h-screen w-screen opacity-20" />
   </div>
 </template>

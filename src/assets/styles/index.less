@@ -24,24 +24,6 @@ body {
   overflow-y: scroll;
 }
 
-.bg-flat {
-  background-color: #fff;
-  @media (prefers-color-scheme: dark) {
-    background-color: #191919;
-  }
-}
-
-.show-when-wide {
-  @media not all and (min-width: 640px) {
-    display: none;
-  }
-}
-.show-when-narrow {
-  @media (min-width: 640px) {
-    display: none;
-  }
-}
-
 body.no-overflow {
   overflow: hidden;
   position: absolute;
@@ -66,7 +48,6 @@ textarea,
 select {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  // transition: box-shadow 0.15s ease, opacity 0.15s ease;
 
   &:focus,
   &:focus-visible {
@@ -74,13 +55,7 @@ select {
       calc(2px + var(--tw-ring-offset-width)) #0089ff;
   }
 
-  border-color: rgb(243, 244, 256);
-  background-color: rgb(255, 255, 255);
-
-  @media (prefers-color-scheme: dark) {
-    border-color: rgb(55, 65, 81);
-    background-color: rgb(25, 25, 25);
-  }
+  @apply input-color;
 
   &.valid {
     box-shadow: var(--tw-ring-inset) 0 0 0
@@ -107,13 +82,9 @@ button {
 a,
 button {
   &:focus-visible {
+    @apply outline-black dark:outline-white;
     outline: 2px dotted black;
     outline-offset: 2px;
-
-    @media (prefers-color-scheme: dark) {
-      outline: 2px dotted white;
-      outline-offset: 2px;
-    }
   }
 }
 
@@ -127,5 +98,27 @@ button {
   }
   &:not([class*="w-"]) {
     width: 1.2em;
+  }
+}
+
+.link-underline-animate {
+  position: relative;
+  text-decoration: none;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 1px;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+    @apply bg-current;
+  }
+  &:hover:after,
+  &:focus:after {
+    width: 100%;
+    left: 0;
   }
 }
