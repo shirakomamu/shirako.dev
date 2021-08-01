@@ -136,9 +136,6 @@ export default defineComponent({
     content: "";
     border-right: 0.1em solid;
     animation: blink-caret 1s step-end infinite;
-    @media (prefers-color-scheme: dark) {
-      animation: blink-caret-dark 1s step-end infinite;
-    }
   }
 }
 
@@ -149,20 +146,9 @@ export default defineComponent({
     border-color: transparent;
   }
   50% {
-    border-color: rgba(0, 0, 0, 0.8);
+    @apply border-white dark:border-black border-opacity-80;
   }
 }
-
-@keyframes blink-caret-dark {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: rgba(255, 255, 255, 0.8);
-  }
-}
-
 .stars {
   width: 100%;
   height: 100%;

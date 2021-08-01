@@ -52,23 +52,23 @@
       </button>
     </div>
     <div ref="pagination" v-if="showPagination">
-      <div class="space-x-1 text-center">
+      <div class="space-x-2 text-center">
         <button
           type="button"
           @click="currentElementNum = index"
           v-for="index in numChildren"
           :key="index"
           class="
+            pagination-button
             inline-block
-            rounded
-            space-x-1
+            rounded-md
             bg-current
-            w-2
-            h-2
+            h-3
             transition
-            px-2
+            px-0
           "
           :class="{
+            active: currentElementNum === index,
             'opacity-20': currentElementNum !== index,
             'opacity-100': currentElementNum === index,
           }"
@@ -123,19 +123,34 @@ export default defineComponent({
     });
 
     watch(currentElementNum, (newNum: number) => {
-      scrollToElement(newNum - 1);
+      scrollToElement({
+        to: newNum - 1,
+        behavior: "smooth",
+      });
     });
 
-    const scrollToElement = (
-      index: number,
+    const scrollToElement = ({
+      to,
+      behavior = "smooth",
+    }: {
+      to: number;
       // eslint-disable-next-line no-undef
-      behavior: ScrollBehavior = "smooth"
-    ) => {
+      behavior?: ScrollBehavior;
+    }) => {
       if (!childElements.value) return;
 
-      const elem = childElements.value.item(index);
+      const elem = childElements.value.item(to);
 
-      elem?.scrollIntoView({ behavior, block: "nearest" });
+      if (!elem || !camera.value || !viewport.value) return;
+
+      // const rect = elem.getBoundingClientRect();
+
+      // using this instead of scrollIntoView because of lack of control over y-axis
+      camera.value.scrollTo({
+        left: camera.value.getBoundingClientRect().width * to,
+        behavior,
+      });
+      // elem.scrollIntoView({ behavior, block: "nearest" });
     };
 
     const numChildren = computed(() => childElements.value?.length || 0);
@@ -159,7 +174,7 @@ export default defineComponent({
 
     onMounted(() => {
       resizeObserver.value = new ResizeObserver(() => {
-        scrollToElement(currentElementNum.value - 1, "auto");
+        scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
       });
       resizeObserver.value.observe(wrapper.value as HTMLDivElement);
     });
@@ -195,5 +210,14 @@ export default defineComponent({
 }
 .controls:hover {
   opacity: 1;
+}
+
+.pagination-button {
+  transition: width 0.2s ease;
+
+  width: 1rem;
+  &.active {
+    width: 2rem;
+  }
 }
 </style>

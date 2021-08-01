@@ -1,5 +1,5 @@
 <template>
-  <div ref="container" class="fixed inset-0 pointer-events-none bg-flat">
+  <div ref="container" class="fixed inset-0 pointer-events-none ps-bg-flat">
     <div class="fixed inset-0 radial" />
     <div ref="s1" class="stars stars-1 a-frame" />
     <div ref="s2" class="stars stars-2 a-frame" />
@@ -158,27 +158,17 @@ export default defineComponent({
 }
 
 .radial {
+  --color-shine: theme("colors.true-gray.100");
+  --color-bg: theme("colors.white");
   background: radial-gradient(
     circle at bottom,
-    rgba(244, 244, 244, 1) 0%,
-    rgba(244, 244, 244, 0) 50%
+    var(--color-shine) 0%,
+    var(--color-bg) 50%
   );
-
-  @media (prefers-color-scheme: dark) {
-    background: radial-gradient(
-      circle at bottom,
-      rgba(34, 34, 34, 1) 0%,
-      rgba(34, 34, 34, 0) 50%
-    );
-  }
 }
 
 .stars {
   --text-color-current: 0, 0, 0;
-
-  @media (prefers-color-scheme: dark) {
-    --text-color-current: 255, 255, 255;
-  }
 
   &.stars-1 {
     filter: drop-shadow(0 0px 1px rgba(var(--text-color-current), 0.8));
@@ -195,6 +185,16 @@ export default defineComponent({
     //   drop-shadow(0 15px 0px rgba(var(--text-color-current), 0.1));
     filter: drop-shadow(0 5px 2px rgba(var(--text-color-current), 0.5));
     // filter: drop-shadow(0 5px 1px rgba(var(--text-color-current), 0.5));
+  }
+}
+
+.dark {
+  .radial {
+    --color-shine: theme("colors.dark.300");
+    --color-bg: theme("colors.dark.800");
+  }
+  .stars {
+    --text-color-current: 255, 255, 255;
   }
 }
 

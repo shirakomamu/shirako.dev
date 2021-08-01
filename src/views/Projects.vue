@@ -29,7 +29,7 @@
         choose restaurants according to what's popular among everyone.
       </p>
 
-      <InlineGallery :show-pagination="true" :show-controls="true">
+      <InlineGallery :show-pagination="true" :show-controls="true" class="my-2">
         <div class="w-full">
           <img
             src="@/assets/images/hrs_promo/initial.png"
@@ -38,7 +38,10 @@
             loading="lazy"
           />
         </div>
-        <div class="w-full p-16">
+        <div class="w-full px-16">
+          <p class="text-center text-xl font-semibold">
+            Organize your favorites into lists.
+          </p>
           <img
             src="@/assets/images/hrs_promo/hrs_promo_1.png"
             alt="Shirako Eats promotional image"
@@ -46,7 +49,10 @@
             loading="lazy"
           />
         </div>
-        <div class="w-full p-16">
+        <div class="w-full px-16">
+          <p class="text-center text-xl font-semibold">
+            Easily find restaurants near you.
+          </p>
           <img
             src="@/assets/images/hrs_promo/hrs_promo_2.png"
             alt="Shirako Eats promotional image"
@@ -54,7 +60,13 @@
             loading="lazy"
           />
         </div>
-        <div class="w-full p-16">
+        <div class="w-full px-16">
+          <p class="text-center text-xl font-semibold">
+            When you want to go out to eat,
+          </p>
+          <p class="text-center text-xl font-semibold mb-8">
+            just pick from your lists.
+          </p>
           <img
             src="@/assets/images/hrs_promo/hrs_promo_3.png"
             alt="Shirako Eats promotional image"
@@ -62,7 +74,10 @@
             loading="lazy"
           />
         </div>
-        <div class="w-full p-16">
+        <div class="w-full px-16">
+          <p class="text-center text-xl font-semibold mb-8">
+            Add your friends' lists, too. Up to 10.
+          </p>
           <img
             src="@/assets/images/hrs_promo/hrs_promo_4.png"
             alt="Shirako Eats promotional image"
@@ -70,13 +85,22 @@
             loading="lazy"
           />
         </div>
-        <div class="w-full p-16">
+        <div class="w-full px-16">
+          <p class="text-center text-xl font-semibold">
+            We'll find the best match for you.
+          </p>
+          <p class="text-center text-xl font-semibold mb-8">
+            We'll make sure it's open, too.*
+          </p>
           <img
             src="@/assets/images/hrs_promo/hrs_promo_5.png"
             alt="Shirako Eats promotional image"
             class="w-full rounded"
             loading="lazy"
           />
+          <p class="text-sm mt-4">
+            * Only at US locations when business hours are available.
+          </p>
         </div>
       </InlineGallery>
 
@@ -85,13 +109,14 @@
         <li>User authentication and authorization</li>
         <li>Hierarchical role-based access control system</li>
         <li>Relational database (PostgreSQL), managed by ORM</li>
+        <li>Client-side relational store, managed by Vuex ORM</li>
         <li>Persistent Redis store</li>
         <li>Responsive design (desktop, mobile, dark mode)</li>
         <li>Installable as PWA</li>
-        <li>Optional API service</li>
-        <li>Auth0 integration (management API)</li>
-        <li>Yelp APIs (business identify, business search)</li>
-        <li>SendGrid APIs (email send)</li>
+        <li>User-accessible API service</li>
+        <li>Auth0 API integration (user management)</li>
+        <li>Yelp API integration (business identify, business search)</li>
+        <li>SendGrid API integration (email send)</li>
       </ul>
     </article>
   </div>

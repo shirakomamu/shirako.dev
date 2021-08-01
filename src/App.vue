@@ -11,7 +11,7 @@
     <AppHeader
       class="
         sticky
-        bg-flat
+        ps-bg-flat
         top-0
         h-12
         z-50
@@ -39,20 +39,13 @@
     </div>
 
     <AppFooter
-      class="
-        bg-flat
-        border-t border-gray-300
-        dark:border-gray-600
-        bg-white
-        dark:bg-gray-800
-        h-12
-      "
+      class="ps-bg-flat border-t border-gray-300 dark:border-gray-600 h-12"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { useMeta } from "vue-meta";
 // import { notify } from "@kyvg/vue3-notification";
 import AppHeader from "@/components/AppHeader.vue";
@@ -134,12 +127,34 @@ export default defineComponent({
       registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
     };
 
+    const setTheme = (isDark: boolean) => {
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
+    const queryList = computed(() =>
+      window.matchMedia("(prefers-color-scheme: dark)")
+    );
+    const supportsDarkMode = computed(
+      () => window.matchMedia("(prefers-color-scheme)").matches
+    );
+
+    onMounted(() => setTheme(supportsDarkMode.value));
+    onMounted(() =>
+      queryList.value.addEventListener("change", (e) => setTheme(e.matches))
+    );
+
     return {
       refreshing,
       registration,
       updateExists,
       updateAvailable,
       refreshApp,
+      queryList,
+      supportsDarkMode,
     };
   },
 });
