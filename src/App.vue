@@ -90,7 +90,7 @@ export default defineComponent({
     useMeta(meta);
 
     // Prevent multiple refreshes
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
+    navigator.serviceWorker?.addEventListener("controllerchange", () => {
       if (refreshing.value) return;
       refreshing.value = true;
       // Here the actual reload of the page occurs
