@@ -119,6 +119,16 @@ export default defineComponent({
 
       for (const elem of childElements.value) {
         elem.classList.add("flex-shrink-0");
+        // elem.classList.add("max-h-70vh");
+        elem.classList.add("w-full");
+        elem.classList.add("h-full");
+        const images = elem.querySelectorAll("img");
+
+        for (const image of images) {
+          image.classList.add("max-h-60vh");
+          image.classList.add("object-scale-down");
+          image.classList.add("w-full");
+        }
       }
     });
 
