@@ -26,8 +26,7 @@
         '--r-h': realHeight,
       }"
     >
-      <!-- https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element -->
-      <div ref="contents" class="pt-1 -mt-1">
+      <div ref="contents">
         <slot name="default" />
       </div>
     </div>
@@ -59,6 +58,7 @@ export default defineComponent({
     const visible = ref<boolean>(props.initialVisibility);
     const contentsContainer = ref<null | HTMLDivElement>(null);
     const contents = ref<null | HTMLDivElement>(null);
+    const firstElementMarginTop = ref<string>("0px");
 
     const toggleVisibility = () => {
       if (!contentsContainer.value) return;
@@ -70,20 +70,40 @@ export default defineComponent({
       }, 200);
     };
     const realHeightInt = ref<number>(0);
-    const realHeight = computed(() => realHeightInt.value + "px");
+    const realHeight = computed(
+      () => `calc(${realHeightInt.value}px + ${firstElementMarginTop.value})`
+    );
 
     const timer = ref<null | number>(0);
+
+    const resizeObserver = ref<null | ResizeObserver>(null);
 
     onMounted(() => {
       setRealHeight();
       timer.value = setInterval(() => {
         setRealHeight();
-      }, 200);
+      }, 500);
+
+      resizeObserver.value = new ResizeObserver(() => {
+        setRealHeight();
+      });
+      resizeObserver.value.observe(document.documentElement);
     });
 
-    onUnmounted(() => (timer.value = null));
+    onUnmounted(() => {
+      timer.value = null;
+      resizeObserver.value?.disconnect();
+    });
 
     const setRealHeight = () => {
+      // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
+      // margin top needs to be accounted for
+      const firstChild = contents.value?.children.item(0);
+      if (firstChild) {
+        const style = window.getComputedStyle(firstChild);
+        firstElementMarginTop.value = style.marginTop || "0px";
+      }
+
       const sh = contents.value?.clientHeight || 0;
       realHeightInt.value = sh;
     };
@@ -96,6 +116,7 @@ export default defineComponent({
       realHeight,
       realHeightInt,
       setRealHeight,
+      firstElementMarginTop,
     };
   },
 });
