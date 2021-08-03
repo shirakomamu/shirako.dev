@@ -51,7 +51,7 @@
         <ArrowForwardIos class="icon-inline text-4xl" />
       </button>
     </div>
-    <div ref="pagination" v-if="showPagination">
+    <div ref="pagination" v-if="showPagination && numChildren > 1">
       <div class="space-x-2 text-center">
         <button
           type="button"
@@ -186,7 +186,7 @@ export default defineComponent({
       resizeObserver.value = new ResizeObserver(() => {
         scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
       });
-      resizeObserver.value.observe(wrapper.value as HTMLDivElement);
+      resizeObserver.value.observe(document.documentElement);
     });
 
     onUnmounted(() => resizeObserver.value?.disconnect());
