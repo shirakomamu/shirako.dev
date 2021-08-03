@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-8 max-w-3xl">
-    <h5 class="text-4xl dark:text-white text-center">Projects</h5>
+    <h5 class="text-4xl dark:text-white">Projects</h5>
 
     <ProjectItem
       icon-url="/icons/192-or-w.png"
