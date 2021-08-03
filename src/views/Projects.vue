@@ -183,9 +183,7 @@
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Installable as PWA</li>
           <li>API service for integration with other corporate tools</li>
-          <li>
-            Google Workspace API integration (user and resource management)
-          </li>
+          <li>Google Workspace API integration (user, resource management)</li>
           <li>Gmail API integration (email send)</li>
           <li>Jira Platform API integration (issue creation and management)</li>
           <li>Internal IT assets platform integration (user assets data)</li>
