@@ -23,9 +23,9 @@ export default defineComponent({
   name: "BgStars",
   setup() {
     const MIN_OPACITY = 40; // percent
-    const MAX_OPACITY = 80; // percent
-    const NUM_SMALL_STARS_PER_10K_SQUARE_PX = 3;
-    const NUM_MEDIUM_STARS_PER_10K_SQUARE_PX = 1;
+    const MAX_OPACITY = 100; // percent
+    const NUM_SMALL_STARS_PER_10K_SQUARE_PX = 1;
+    const NUM_MEDIUM_STARS_PER_10K_SQUARE_PX = 0.5;
     // const NUM_LARGE_STARS_PER_10K_SQUARE_PX = 0.3;
     // const NUM_SHOOTING_STARS_PER_10K_SQUARE_PX = 0.02;
 
