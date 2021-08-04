@@ -11,8 +11,9 @@ module.exports = {
     workboxPluginMode: "GenerateSW",
     workboxOptions: {
       // importWorkboxFrom: "local",
-      skipWaiting: true,
-      clientsClaim: true,
+      cacheId: "shirako.dev",
+      // skipWaiting: true,
+      // clientsClaim: true,
     },
     appleMobileWebAppCapable: true,
     name: process.env.VUE_APP_NAME,
