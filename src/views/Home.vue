@@ -12,9 +12,9 @@
           ><span class="opacity-50">.</span>
         </h4>
         <p class="dark:text-gray-200">
-          I'm a web developer specializing in Vue and Node, and I'm based in
-          California. Although my education is in Aerospace Engineering, I now
-          specialize in developing web apps using modern web technologies.
+          I'm a web developer specializing in Vue and Node based in California.
+          My education was in Aerospace Engineering. I now specialize in
+          developing web apps using modern web technologies.
         </p>
       </article>
       <div class="grid grid-cols-1 col-span-2 md:col-span-1 place-items-center">
