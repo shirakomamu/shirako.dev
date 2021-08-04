@@ -47,7 +47,6 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useMeta } from "vue-meta";
-// import { notify } from "@kyvg/vue3-notification";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import Hero from "@/components/Hero.vue";
@@ -79,18 +78,14 @@ export default defineComponent({
           rel: "canonical",
           href: "https://shirako.dev" + route.path,
         },
-        {
-          rel: "icon",
-          type: "image/png",
-          href: "/icons/32-bl_rc-fc.png",
-        },
       ],
       htmlAttrs: { lang: "en" },
     }));
     useMeta(meta);
 
-    // Prevent multiple refreshes
+    // this is called when sw receives SKIP_WAITING event
     navigator.serviceWorker?.addEventListener("controllerchange", () => {
+      // Prevent multiple refreshes
       if (refreshing.value) return;
       refreshing.value = true;
       // Here the actual reload of the page occurs
@@ -101,31 +96,33 @@ export default defineComponent({
     const registration = ref<null | ServiceWorkerRegistration>(null);
     const updateExists = ref<boolean>(false);
 
-    // Store the SW registration so we can send it a message
-    // We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
-    // To alert the user there is an update they need to refresh for
-
-    const updateAvailable = (event: { detail: ServiceWorkerRegistration }) => {
-      registration.value = event.detail;
-      updateExists.value = true;
-    };
-
-    // Listen for our custom event from the SW registration
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    document.addEventListener("swUpdated", updateAvailable, {
-      once: true,
-    });
-
-    // Called when the user accepts the update
     const refreshApp = () => {
-      updateExists.value = false;
       // Make sure we only send a 'skip waiting' message if the SW is waiting
       if (!registration.value || !registration.value.waiting) return;
 
       // send message to SW to skip the waiting and activate the new SW
       registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
     };
+
+    // Store the SW registration so we can send it a message
+    // We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
+    // To alert the user there is an update they need to refresh for
+    const onUpdateAvailable = async (event: {
+      detail: ServiceWorkerRegistration;
+    }) => {
+      registration.value = event.detail;
+      updateExists.value = true;
+
+      // automatic refresh when update is available
+      refreshApp();
+    };
+
+    // Listen for our custom event from the SW registration
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.addEventListener("swUpdated", onUpdateAvailable, {
+      once: true,
+    });
 
     const setTheme = (isDark: boolean) => {
       if (isDark) {
@@ -142,16 +139,16 @@ export default defineComponent({
       () => window.matchMedia("(prefers-color-scheme)").matches
     );
 
-    onMounted(() => setTheme(supportsDarkMode.value));
-    onMounted(() =>
-      queryList.value.addEventListener("change", (e) => setTheme(e.matches))
-    );
+    onMounted(() => {
+      setTheme(supportsDarkMode.value);
+      queryList.value.addEventListener("change", (e) => setTheme(e.matches));
+    });
 
     return {
       refreshing,
       registration,
       updateExists,
-      updateAvailable,
+      onUpdateAvailable,
       refreshApp,
       queryList,
       supportsDarkMode,
