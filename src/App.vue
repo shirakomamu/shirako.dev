@@ -83,6 +83,10 @@ export default defineComponent({
     }));
     useMeta(meta);
 
+    const refreshing = ref<boolean>(false);
+    const registration = ref<null | ServiceWorkerRegistration>(null);
+    const updateExists = ref<boolean>(false);
+
     // this is called when sw receives SKIP_WAITING event
     navigator.serviceWorker?.addEventListener("controllerchange", () => {
       // Prevent multiple refreshes
@@ -91,10 +95,6 @@ export default defineComponent({
       // Here the actual reload of the page occurs
       window.location.reload();
     });
-
-    const refreshing = ref<boolean>(false);
-    const registration = ref<null | ServiceWorkerRegistration>(null);
-    const updateExists = ref<boolean>(false);
 
     const refreshApp = () => {
       // Make sure we only send a 'skip waiting' message if the SW is waiting
@@ -117,7 +117,6 @@ export default defineComponent({
       refreshApp();
     };
 
-    // Listen for our custom event from the SW registration
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     document.addEventListener("swUpdated", onUpdateAvailable, {
