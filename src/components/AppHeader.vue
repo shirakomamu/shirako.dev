@@ -1,6 +1,6 @@
 <template>
-  <div class="nav flex flex-row items-center px-8">
-    <div class="justify-start items-center">
+  <div class="flex flex-row items-center px-8">
+    <div class="flex-shrink-0 justify-start items-center">
       <router-link to="/" class="flex flex-row gap-4 items-center">
         <img
           alt="shirako.dev logo"
@@ -26,6 +26,7 @@
         :class="{ 'opacity-100': isRouteMatched(link.to) }"
         >{{ link.label }}</router-link
       >
+      |
       <div class="flex flex-row gap-3 items-center">
         <EmailHider
           class="transition opacity-50 hover:opacity-100 focus:opacity-100"
@@ -35,6 +36,7 @@
         <a
           href="https://github.com/shirakomamu"
           class="
+            flex-shrink-0
             dark:hidden
             transition
             opacity-50
@@ -54,6 +56,7 @@
         <a
           href="https://github.com/shirakomamu"
           class="
+            flex-shrink-0
             hidden
             dark:block
             transition
@@ -75,6 +78,7 @@
         <a
           href="https://twitter.com/shirakomamu"
           class="
+            flex-shrink-0
             dark:hidden
             transition
             opacity-50
@@ -94,6 +98,7 @@
         <a
           href="https://twitter.com/shirakomamu"
           class="
+            flex-shrink-0
             hidden
             dark:block
             transition
@@ -115,6 +120,7 @@
           type="button"
           alt="Toggle dark mode"
           class="
+            flex-shrink-0
             p-0
             dark:hidden
             transition
