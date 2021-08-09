@@ -1,6 +1,6 @@
 <template>
-  <div class="nav flex flex-row items-center px-8">
-    <div class="justify-start items-center">
+  <div class="flex flex-row items-center px-8">
+    <div class="flex-shrink-0 justify-start items-center">
       <router-link to="/" class="flex flex-row gap-4 items-center">
         <img
           alt="shirako.dev logo"
@@ -35,7 +35,7 @@
         <a
           href="https://github.com/shirakomamu"
           class="
-            dark:hidden
+            flex-shrink-0
             transition
             opacity-50
             hover:opacity-100
@@ -46,26 +46,14 @@
         >
           <img
             src="/vendor-icons/github-black.svg"
+            class="dark:hidden"
             alt="GitHub"
             height="24"
             width="24"
           />
-        </a>
-        <a
-          href="https://github.com/shirakomamu"
-          class="
-            hidden
-            dark:block
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           <img
             src="/vendor-icons/github-white.svg"
+            class="hidden dark:block"
             alt="GitHub"
             height="24"
             width="24"
@@ -75,7 +63,7 @@
         <a
           href="https://twitter.com/shirakomamu"
           class="
-            dark:hidden
+            flex-shrink-0
             transition
             opacity-50
             hover:opacity-100
@@ -86,26 +74,14 @@
         >
           <img
             src="/vendor-icons/twitter-blue.svg"
+            class="dark:hidden"
             alt="Twitter"
             height="24"
             width="24"
           />
-        </a>
-        <a
-          href="https://twitter.com/shirakomamu"
-          class="
-            hidden
-            dark:block
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           <img
             src="/vendor-icons/twitter-white.svg"
+            class="hidden dark:block"
             alt="Twitter"
             height="24"
             width="24"
@@ -115,6 +91,7 @@
           type="button"
           alt="Toggle dark mode"
           class="
+            flex-shrink-0
             p-0
             dark:hidden
             transition

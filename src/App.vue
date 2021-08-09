@@ -144,7 +144,7 @@ export default defineComponent({
     );
 
     onMounted(() => {
-      setTheme(supportsDarkMode.value);
+      setTheme(true); // supportsDarkMode.value to initialize to theme
       queryList.value.addEventListener("change", (e) => setTheme(e.matches));
     });
 

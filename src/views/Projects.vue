@@ -91,6 +91,7 @@
             rel="noopener noreferrer"
             class="
               text-white
+              transition
               bg-blue-srk/80
               hover:bg-blue-srk/100
               focus:bg-blue-srk/100
@@ -236,7 +237,7 @@
             />
           </div>
         </InlineGallery>
-        <p class="italic">Note: Image of app are reproduced with permission.</p>
+        <p class="italic">Note: Image of app is reproduced with permission.</p>
 
         <p>
           Internal corporate system for Sales to create production orders for
@@ -284,7 +285,7 @@
             />
           </div>
         </InlineGallery>
-        <p class="italic">Note: Image of app are reproduced with permission.</p>
+        <p class="italic">Note: Image of app is reproduced with permission.</p>
 
         <p>
           Internal corporate system for Marketing and Procurement to manage
