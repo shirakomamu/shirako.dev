@@ -26,7 +26,6 @@
         :class="{ 'opacity-100': isRouteMatched(link.to) }"
         >{{ link.label }}</router-link
       >
-      |
       <div class="flex flex-row gap-3 items-center">
         <EmailHider
           class="transition opacity-50 hover:opacity-100 focus:opacity-100"
@@ -37,7 +36,6 @@
           href="https://github.com/shirakomamu"
           class="
             flex-shrink-0
-            dark:hidden
             transition
             opacity-50
             hover:opacity-100
@@ -48,27 +46,14 @@
         >
           <img
             src="/vendor-icons/github-black.svg"
+            class="dark:hidden"
             alt="GitHub"
             height="24"
             width="24"
           />
-        </a>
-        <a
-          href="https://github.com/shirakomamu"
-          class="
-            flex-shrink-0
-            hidden
-            dark:block
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           <img
             src="/vendor-icons/github-white.svg"
+            class="hidden dark:block"
             alt="GitHub"
             height="24"
             width="24"
@@ -79,7 +64,6 @@
           href="https://twitter.com/shirakomamu"
           class="
             flex-shrink-0
-            dark:hidden
             transition
             opacity-50
             hover:opacity-100
@@ -90,27 +74,14 @@
         >
           <img
             src="/vendor-icons/twitter-blue.svg"
+            class="dark:hidden"
             alt="Twitter"
             height="24"
             width="24"
           />
-        </a>
-        <a
-          href="https://twitter.com/shirakomamu"
-          class="
-            flex-shrink-0
-            hidden
-            dark:block
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           <img
             src="/vendor-icons/twitter-white.svg"
+            class="hidden dark:block"
             alt="Twitter"
             height="24"
             width="24"
