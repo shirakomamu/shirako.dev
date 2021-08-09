@@ -1,7 +1,3 @@
-export enum MutationEnums {
-  SET_LOADED = "setTechnologyLoaded",
-}
+export enum MutationEnums {}
 
-export enum ActionEnums {
-  COMMIT_PUSH = "commitPush",
-}
+export enum ActionEnums {}

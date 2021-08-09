@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/:catchAll(.*)",
-    name: "error",
+    name: "Error",
     component: () =>
       import(/* webpackChunkName: "error" */ "@/views/Error.vue"),
     props: true,

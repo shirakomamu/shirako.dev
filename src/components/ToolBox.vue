@@ -11,10 +11,7 @@
       dark:bg-gray-600/50
     "
   >
-    <div
-      class="whitespace-normal h-full w-full flex flex-col gap-4"
-      :class="{ 'justify-center': !description }"
-    >
+    <div class="whitespace-normal h-full w-full flex flex-col gap-4">
       <div class="flex gap-4 items-center">
         <img
           v-if="logoSrc"
@@ -40,30 +37,6 @@
           </p>
         </div>
       </div>
-
-      <p
-        v-if="description"
-        class="
-          text-sm text-gray-600
-          dark:text-gray-400
-          overflow-hidden overflow-ellipsis
-        "
-      >
-        {{ description }}
-      </p>
-
-      <div v-if="disclaimer" class="flex flex-grow items-end">
-        <p
-          class="
-            text-xs text-gray-600
-            dark:text-gray-400
-            overflow-hidden overflow-ellipsis
-            opacity-50
-          "
-        >
-          {{ disclaimer }}
-        </p>
-      </div>
     </div>
   </div>
 </template>
@@ -75,14 +48,6 @@ export default defineComponent({
   name: "ToolBox",
   props: {
     name: {
-      type: String,
-      default: "",
-    },
-    description: {
-      type: String,
-      default: "",
-    },
-    disclaimer: {
       type: String,
       default: "",
     },

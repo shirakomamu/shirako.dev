@@ -2,8 +2,7 @@ import { defineConfig } from "windicss/helpers";
 import scrollbar from "@windicss/plugin-scrollbar";
 
 export default defineConfig({
-  // purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-  darkMode: "class", // false or 'media' or 'class'
+  darkMode: "class", // false, "media", or "class"
   theme: {
     extend: {
       colors: {
@@ -14,14 +13,9 @@ export default defineConfig({
   },
   shortcuts: {
     "ps-bg-flat": "bg-white dark:bg-dark-800",
+    "ps-bg-panel": "bg-gray-200 dark:bg-gray-700",
     "input-color":
       "border-cool-gray-100 bg-white dark:(border-cool-gray-700 bg-dark-800)",
   },
-  // variants: {
-  // extend: {
-  //   opacity: ["disabled"],
-  //   cursor: ["disabled"],
-  // },
-  // },
   plugins: [scrollbar],
 });

@@ -93,35 +93,6 @@ export default defineComponent({
       default: "",
     },
   },
-  // setup() {
-  //   onMounted(() => {
-  //     const elems = document.querySelectorAll<HTMLElement>(".box");
-
-  //     const animationDuration = 1.5; // seconds
-  //     elems.forEach((e) => {
-  //       e.addEventListener("mouseenter", () => {
-  //         e.classList.add("focus");
-  //       });
-  //       e.addEventListener("mouseleave", () => {
-  //         e.classList.remove("focus");
-  //       });
-
-  //       e.addEventListener("mouseover", () => {
-  //         if (e.classList.contains("animated")) {
-  //           return;
-  //         }
-  //         e.classList.add("animated");
-
-  //         const x = setInterval(() => {
-  //           if (!e.classList.contains("focus")) {
-  //             e.classList.remove("animated");
-  //             clearInterval(x);
-  //           }
-  //         }, animationDuration * 1000);
-  //       });
-  //     });
-  //   });
-  // },
 });
 </script>
 
@@ -134,12 +105,6 @@ export default defineComponent({
   overflow: hidden;
   transition-property: background-color opacity;
   transition-duration: 0.4s;
-  // background: linear-gradient(
-  //   90deg,
-  //   rgba(131, 58, 180, 0.1) 0%,
-  //   rgba(253, 29, 29, 0.1) 50%,
-  //   rgba(252, 176, 69, 0.1) 100%
-  // );
 
   &:before {
     content: "";
@@ -157,7 +122,6 @@ export default defineComponent({
       rgba(252, 176, 69, 0.15) 100%
     );
   }
-  // rgba(131, 58, 180, 0.15) 0%,
 
   &:hover:before {
     opacity: 1;

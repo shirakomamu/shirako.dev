@@ -82,24 +82,11 @@
         v-for="(tool, index) of tools"
         :key="index"
         :name="tool.name"
-        :description="tool.description"
         :logo-src="tool.logoSrc"
         :logo-src-when-dark="tool.logoSrcWhenDark"
         :logo-alt="tool.logoAlt"
       />
     </div>
-
-    <!-- <div
-      class="
-        tools-disclaimers
-        text-xs text-gray-600
-        dark:text-gray-400
-        overflow-hidden overflow-ellipsis
-        opacity-50
-      "
-    >
-      <p v-for="(tool, index) of tools" :key="index">{{ tool.disclaimer }}</p>
-    </div> -->
   </div>
 </template>
 
