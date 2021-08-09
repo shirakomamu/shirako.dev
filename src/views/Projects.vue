@@ -91,6 +91,7 @@
             rel="noopener noreferrer"
             class="
               text-white
+              transition
               bg-blue-srk/80
               hover:bg-blue-srk/100
               focus:bg-blue-srk/100
