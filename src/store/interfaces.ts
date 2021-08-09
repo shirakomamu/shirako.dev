@@ -7,8 +7,5 @@ import {
   ActionTypes as GeneralActionTypes,
 } from "./modules/general/types";
 
-/*********************** General MODULE TYPES  ***********************/
-
 export interface StoreGetters extends RootGetterTypes, GeneralGetterTypes {}
-
 export interface StoreActions extends RootActionTypes, GeneralActionTypes {}

@@ -74,12 +74,16 @@ export default defineComponent({
       () => `calc(${realHeightInt.value}px + ${firstElementMarginTop.value})`
     );
 
+    // the timer is used to "watch" the document as a computed property, since vue doesn't track it automatically
+    // the height may change due to elements loading later
     const timer = ref<null | number>(0);
 
+    // instantly resize if document is resized, without waiting for timer because timer has a delay of 500ms
     const resizeObserver = ref<null | ResizeObserver>(null);
 
     onMounted(() => {
       setRealHeight();
+
       timer.value = setInterval(() => {
         setRealHeight();
       }, 500);

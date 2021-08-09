@@ -22,6 +22,8 @@ import { defineComponent, onMounted, onUnmounted, ref } from "vue";
 export default defineComponent({
   name: "BgStars",
   setup() {
+    // the extra elements are commented out to keep performance to a reasonable level
+
     const MIN_OPACITY = 40; // percent
     const MAX_OPACITY = 100; // percent
     const NUM_SMALL_STARS_PER_10K_SQUARE_PX = 1;

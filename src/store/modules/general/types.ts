@@ -5,30 +5,19 @@ import {
   DispatchOptions,
 } from "vuex";
 import { StateTypes as RootStateTypes } from "@/store/modules/root/types";
-import { MutationEnums, ActionEnums } from "./enums";
-import {
-  MergedTechnology,
-  Technology,
-  TechnologySkillBreakpointLabel,
-  Tool,
-} from "./state-types";
+import { Technology, Tool } from "./state-types";
 
 export interface StateTypes {
-  technologiesLoaded: boolean;
   technologies: Technology[];
-  labelBreakpoints: TechnologySkillBreakpointLabel[];
   tools: Tool[];
 }
 
 export interface GetterTypes {
-  technologiesLoaded(state: StateTypes): boolean;
-  technologies(state: StateTypes): MergedTechnology[];
+  technologies(state: StateTypes): Technology[];
   tools(state: StateTypes): Tool[];
 }
 
-export type MutationTypes<S = StateTypes> = {
-  [MutationEnums.SET_LOADED](state: S): void;
-};
+export type MutationTypes<S = StateTypes> = {};
 
 type AugmentedActionContext = Omit<
   ActionContext<StateTypes, RootStateTypes>,
@@ -48,12 +37,7 @@ type AugmentedActionContext = Omit<
   ): Promise<ReturnType<ActionTypes[K]>>;
 };
 
-export interface ActionTypes {
-  [ActionEnums.COMMIT_PUSH](
-    { commit }: AugmentedActionContext,
-    payload: Technology
-  ): void;
-}
+export interface ActionTypes {}
 
 export type StoreModuleTypes<S = StateTypes> = Omit<
   VuexStore<S>,

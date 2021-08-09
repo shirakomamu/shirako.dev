@@ -10,10 +10,7 @@ module.exports = {
   pwa: {
     workboxPluginMode: "GenerateSW",
     workboxOptions: {
-      // importWorkboxFrom: "local",
-      cacheId: "shirako.dev",
-      // skipWaiting: true,
-      // clientsClaim: true,
+      cacheId: "shirako.dev", // namespaced for local testing
     },
     appleMobileWebAppCapable: true,
     name: process.env.VUE_APP_NAME,

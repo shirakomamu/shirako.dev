@@ -1,5 +1,6 @@
 <template>
   <div class="space-y-8 max-w-3xl">
+    <FloatingButton />
     <h5 class="text-4xl dark:text-white">Projects</h5>
 
     <ProjectItem
@@ -158,6 +159,10 @@
             />
           </div>
         </InlineGallery>
+        <p class="italic">
+          Note: Images of app are reproduced with permission.
+        </p>
+
         <p>Internal corporate system for Human Resources-related functions.</p>
         <p>
           The system provides numerous functions, such as employee onboarding,
@@ -231,6 +236,8 @@
             />
           </div>
         </InlineGallery>
+        <p class="italic">Note: Image of app are reproduced with permission.</p>
+
         <p>
           Internal corporate system for Sales to create production orders for
           Manufacturing.
@@ -277,6 +284,8 @@
             />
           </div>
         </InlineGallery>
+        <p class="italic">Note: Image of app are reproduced with permission.</p>
+
         <p>
           Internal corporate system for Marketing and Procurement to manage
           accounts for suppliers, vendors, and customers.
@@ -326,6 +335,10 @@
             />
           </div>
         </InlineGallery>
+        <p class="italic">
+          Note: Images of app are reproduced with permission.
+        </p>
+
         <p>
           Internal corporate portal for quick access to the most commonly-used
           tools and news.
@@ -379,6 +392,10 @@
             />
           </div>
         </InlineGallery>
+        <p class="italic">
+          Note: Images of app are reproduced with permission.
+        </p>
+
         <p>
           Tool for production managers to analyze various manufacturing metrics,
           such as machine production efficiency, production volume, and
@@ -456,10 +473,11 @@
 import InlineGallery from "@/components/InlineGallery.vue";
 import ProjectItem from "@/components/ProjectItem.vue";
 import OpenInNew from "@/components/icons/OpenInNew.vue";
+import FloatingButton from "@/components/FloatingButton.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: { InlineGallery, OpenInNew, ProjectItem },
+  components: { InlineGallery, OpenInNew, ProjectItem, FloatingButton },
   name: "Projects",
 });
 </script>

@@ -7,11 +7,7 @@
           src="/icons/512-bl_rc-fc.png"
           width="32"
           height="32"
-        />
-        <span class="font-semibold hidden sm:block dark:text-white">{{
-          appName
-        }}</span></router-link
-      >
+      /></router-link>
     </div>
     <div class="flex-grow" />
     <div class="flex flex-row gap-4 items-center">

@@ -7,19 +7,8 @@ export interface Technology {
   logoAlt?: string;
 }
 
-export interface TechnologySkillBreakpointLabel {
-  skill: number; // out of 1, minimum
-  label: string;
-}
-
-export interface MergedTechnology extends Technology {
-  label: string;
-}
-
 export interface Tool {
   name: string;
-  description?: string;
-  disclaimer?: string;
   logoSrc?: string;
   logoSrcWhenDark?: string;
   logoAlt?: string;
