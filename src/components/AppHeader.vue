@@ -126,11 +126,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRoute } from "vue-router";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/Email.vue";
-import { useRoute } from "vue-router";
-import DarkMode from "./icons/DarkMode.vue";
-import LightMode from "./icons/LightMode.vue";
+import DarkMode from "@/components/icons/DarkMode.vue";
+import LightMode from "@/components/icons/LightMode.vue";
 
 interface NavigationLink {
   to: string;
@@ -146,7 +146,6 @@ export default defineComponent({
     LightMode,
   },
   setup() {
-    const appName: string = process.env.VUE_APP_NAME;
     const links: NavigationLink[] = [
       {
         to: "/",
@@ -172,7 +171,7 @@ export default defineComponent({
       }
     };
 
-    return { links, appName, isRouteMatched, setTheme };
+    return { links, isRouteMatched, setTheme };
   },
 });
 </script>

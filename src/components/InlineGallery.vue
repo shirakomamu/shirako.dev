@@ -87,8 +87,8 @@ import {
   ref,
   watch,
 } from "vue";
-import ArrowBackIos from "./icons/ArrowBackIos.vue";
-import ArrowForwardIos from "./icons/ArrowForwardIos.vue";
+import ArrowBackIos from "@/components/icons/ArrowBackIos.vue";
+import ArrowForwardIos from "@/components/icons/ArrowForwardIos.vue";
 import modulus from "@/utils/modulus";
 
 export default defineComponent({

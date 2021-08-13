@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ExpandLess from "./icons/ExpandLess.vue";
+import ExpandLess from "@/components/icons/ExpandLess.vue";
 
 export default defineComponent({
   components: { ExpandLess },

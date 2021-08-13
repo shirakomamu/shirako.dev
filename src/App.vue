@@ -50,21 +50,19 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { defineComponent, computed, onMounted, ref } from "vue";
 import { useMeta } from "vue-meta";
+import { useRoute } from "vue-router";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import Hero from "@/components/Hero.vue";
-import Close from "@/components/icons/Close.vue";
-import { useRoute } from "vue-router";
-import BgStars from "./components/BgStars.vue";
+import BgStars from "@/components/BgStars.vue";
 
 export default defineComponent({
   components: {
     AppHeader,
     AppFooter,
     Hero,
-    Close,
     BgStars,
   },
   setup() {

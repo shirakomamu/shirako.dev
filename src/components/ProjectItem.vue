@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Accordion from "./Accordion.vue";
+import Accordion from "@/components/Accordion.vue";
 
 export default defineComponent({
   name: "ProjectItem",
