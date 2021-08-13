@@ -7,6 +7,8 @@ html,
 html {
   height: 100vh;
   padding: 0;
+  @apply scrollbar;
+  @apply scrollbar-thumb-dark-300 scrollbar-track-dark-800;
 }
 body,
 #app,
@@ -15,19 +17,14 @@ body,
   padding: 0;
 }
 
-html {
-  @apply scrollbar;
-  @apply scrollbar-thumb-dark-300 scrollbar-track-dark-800;
-}
-
 body {
   overflow-y: scroll;
-}
 
-body.no-overflow {
-  overflow: hidden;
-  position: absolute;
-  inset: 0;
+  .no-overflow {
+    overflow: hidden;
+    position: absolute;
+    inset: 0;
+  }
 }
 
 // dark mode for @tailwindcss/forms
@@ -83,8 +80,6 @@ a,
 button {
   &:focus-visible {
     @apply outline-black dark:outline-white;
-    outline: 2px dotted black;
-    outline-offset: 2px;
   }
 }
 
