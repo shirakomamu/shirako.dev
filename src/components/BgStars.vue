@@ -190,7 +190,7 @@ export default defineComponent({
   }
 }
 
-.dark {
+@variants dark {
   .radial {
     --color-shine: theme("colors.dark.300");
     --color-bg: theme("colors.dark.800");
