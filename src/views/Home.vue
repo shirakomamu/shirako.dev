@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row">
-      <article class="intro space-y-4 max-w-prose">
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-4">
+      <article class="space-y-4 max-w-prose">
         <h4 class="text-4xl dark:text-white">
           <span class="opacity-50">Hello, I'm </span
           ><ruby>白狐<rt>しらこ</rt>マム</ruby><span class="opacity-50">,</span>
@@ -11,14 +11,57 @@
           ><span class="font-semibold">Mamu</span
           ><span class="opacity-50">.</span>
         </h4>
-        <p class="dark:text-gray-200">
-          I'm a web developer specializing in Vue and Node based in California.
-          My education was in Aerospace Engineering. I now specialize in
-          developing web apps using modern web technologies.
+        <p>
+          I'm a software engineer based in California. My education was in
+          Aerospace Engineering. I specialize in developing web apps using
+          modern technologies such as Vue, Node, and TypeScript.
         </p>
+
+        <p>
+          My main competencies are listed below, but I'm always learning more.
+        </p>
+
+        <Accordion
+          :initial-visibility="readMoreAboutMeState"
+          @toggle="setReadMoreAboutMeState"
+        >
+          <template #title>
+            <div>
+              <p class="text-blue-srk">Read more about me</p>
+            </div>
+          </template>
+          <template #default>
+            <div class="mt-2 space-y-4">
+              <p>
+                Although I have some experience with various languages such as C
+                and C++ in school, I first started programming as a hobby with
+                MATLAB (and occasionally Python) more than 10 years ago.
+              </p>
+
+              <p>
+                Outside of programming, I enjoy listening to music (favorites
+                are BGM from Touhou and Final Fantasy), cooking, and hiking when
+                I have time. I also occasionally draw art digitally in
+                Photoshop.
+              </p>
+
+              <p>
+                I also have a soft spot for cats, so you'll see a few cat
+                illustrations around this site, courtesy of
+                <a
+                  href="http://irasutoya.com"
+                  target="_blank"
+                  ref="noopener noreferrer"
+                  class="ps-text-link"
+                  >Irasutoya</a
+                >.
+              </p>
+            </div>
+          </template>
+        </Accordion>
       </article>
-      <div class="grid grid-cols-1 col-span-2 md:col-span-1 place-items-center">
-        <blockquote class="quote mt-8">
+      <div class="grid grid-cols-1 col-span-2 md:col-span-1 justify-center">
+        <blockquote class="quote mt-8 md:mt-32">
           <p
             class="italic text-center text-gray-600 dark:text-gray-400 text-xl"
           >
@@ -103,12 +146,15 @@ import { defineComponent } from "vue";
 import useStore from "@/use/useStore";
 import SkillBox from "@/components/SkillBox.vue";
 import ToolBox from "@/components/ToolBox.vue";
+import Accordion from "@/components/Accordion.vue";
+import { MutationEnums } from "@/store/modules/general/enums";
 
 export default defineComponent({
   name: "Home",
   components: {
     SkillBox,
     ToolBox,
+    Accordion,
   },
   setup() {
     const quote = {
@@ -122,7 +168,19 @@ export default defineComponent({
     const technologies = store.getters.technologies;
     const tools = store.getters.tools;
 
-    return { technologies, tools, quote };
+    const readMoreAboutMeState = store.getters["isBioRead"];
+    const setReadMoreAboutMeState = (state: boolean) => {
+      console.log(state);
+      store.commit(MutationEnums.SET_BIO_AS_READ, state);
+    };
+
+    return {
+      technologies,
+      tools,
+      quote,
+      readMoreAboutMeState,
+      setReadMoreAboutMeState,
+    };
   },
 });
 </script>
