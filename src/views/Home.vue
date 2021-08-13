@@ -46,33 +46,41 @@
 
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
       <div
-        class="
-          grid grid-cols-1
-          col-span-2
-          xl:col-span-1
-          items-center
-          justify-items-center
-        "
+        class="grid grid-cols-1 col-span-1 items-center justify-items-center"
       >
         <img
           alt="Cat using laptop"
           src="@/assets/images/irasutoya/animal_chara_computer_neko.png"
-          class="mx-auto h-64 m-4"
+          class="
+            h-72
+            mx-auto
+            rounded-full
+            p-4
+            bg-gray-200/50
+            dark:bg-gray-600/50
+          "
         />
       </div>
-      <div>
-        <!-- <h5 class="text-2xl dark:text-white">Technologies I use</h5> -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <SkillBox
-            v-for="(technology, index) of technologies"
-            :key="index"
-            :name="technology.name"
-            :link="technology.link"
-            :logo-src="technology.logoSrc"
-            :logo-src-when-dark="technology.logoSrcWhenDark"
-            :logo-alt="technology.logoAlt"
-          />
-        </div>
+
+      <div
+        class="
+          grid
+          col-span-auto
+          xl:col-span-1
+          grid-cols-2
+          lg:grid-cols-4
+          gap-4
+        "
+      >
+        <SkillBox
+          v-for="(technology, index) of technologies"
+          :key="index"
+          :name="technology.name"
+          :link="technology.link"
+          :logo-src="technology.logoSrc"
+          :logo-src-when-dark="technology.logoSrcWhenDark"
+          :logo-alt="technology.logoAlt"
+        />
       </div>
     </div>
 
