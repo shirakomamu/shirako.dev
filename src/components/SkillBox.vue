@@ -17,7 +17,7 @@
     "
     :class="{ pointer: link }"
   >
-    <div class="block w-full">
+    <div class="container-block w-full">
       <OpenInNew
         v-if="link"
         class="open-in-new-icon icon-inline opacity-50 text-sm"
@@ -46,16 +46,6 @@
       >
         {{ name }}
       </p>
-      <p
-        v-if="label"
-        class="
-          text-center text-xs text-gray-600
-          dark:text-gray-400
-          overflow-hidden overflow-ellipsis
-        "
-      >
-        {{ label }}
-      </p>
     </div>
   </component>
 </template>
@@ -69,10 +59,6 @@ export default defineComponent({
   name: "SkillBox",
   props: {
     name: {
-      type: String,
-      default: "",
-    },
-    label: {
       type: String,
       default: "",
     },
@@ -97,10 +83,8 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.box {
-  &.pointer {
-    cursor: pointer;
-  }
+.box.pointer {
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   transition-property: background-color opacity;
@@ -155,7 +139,7 @@ export default defineComponent({
   }
 }
 
-.block {
+.container-block {
   z-index: 2;
 }
 

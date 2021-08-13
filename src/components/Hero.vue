@@ -1,12 +1,10 @@
 <template>
   <div
-    class="hero h-32 md:h-64 flex flex-col items-center justify-center"
+    class="hero h-32 md:h-48 flex flex-col items-center justify-center"
     role="img"
     :alt="'' + currentContext"
   >
-    <!-- <div class="stars" /> -->
-    <div class="space-x-2 m-2 text-xl md:text-4xl text-center dark:text-white">
-      <!-- <span class="font-light"></span> -->
+    <div class="sm-2 text-2xl md:text-4xl text-center dark:text-white">
       <span class="font-mono typewriter">
         {{ currentContextResult }}
       </span>
