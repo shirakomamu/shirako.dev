@@ -6,11 +6,12 @@
       @click="toggleVisibility"
       :alt="visible ? 'Hide accordion' : 'Show accordion'"
     >
-      <div class="absolute top-0 left-0 h-full w-auto mr-2 text-2xl">
-        <ExpandLess v-if="!visible" class="icon-inline" /><ExpandMore
-          v-else
+      <div class="absolute top-0 left-0 w-auto mr-2 text-2xl max-h-8">
+        <component
           class="icon-inline"
-        />
+          :is="visible ? 'ExpandLess' : 'ExpandMore'"
+        >
+        </component>
       </div>
       <div class="ml-8 inline-block">
         <slot name="title" />
