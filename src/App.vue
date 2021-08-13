@@ -21,18 +21,7 @@
       "
     />
 
-    <div
-      class="pb-8 flex flex-col flex-grow justify-center view-container"
-      :class="{ 'pt-8': $route.path !== '/' }"
-    >
-      <transition-group
-        v-if="$route.path === '/'"
-        name="fade"
-        tag="div"
-        mode="out-in"
-      >
-        <Hero key="hero" class="mb-8" />
-      </transition-group>
+    <div class="py-8 flex flex-col flex-grow justify-center view-container">
       <router-view v-slot="{ Component }" key="router-view"
         ><transition name="fade" mode="out-in">
           <component

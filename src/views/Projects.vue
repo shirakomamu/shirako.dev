@@ -101,17 +101,20 @@
               rounded-lg
             "
           >
-            Go to site <OpenInNew class="icon-inline" />
+            Open site (registration required) <OpenInNew class="icon-inline" />
           </a>
         </div>
 
-        <a
-          href="https://github.com/shirakomamu/shirako-hrs"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="ps-text-link"
-          >Source code available on GitHub</a
-        >
+        <div class="text-center">
+          <a
+            href="https://github.com/shirakomamu/shirako-hrs"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ps-text-link"
+          >
+            View source code on GitHub <OpenInNew class="icon-inline" />
+          </a>
+        </div>
 
         <p>
           Service that allows people to organize their favorite restaurants into
@@ -136,6 +139,7 @@
           <li>Auth0 API integration (user management)</li>
           <li>Yelp API integration (business identify, business search)</li>
           <li>SendGrid API integration (email send)</li>
+          <li>Automated build/deploy from Git source</li>
         </ul>
       </div>
     </ProjectItem>
@@ -193,7 +197,7 @@
           <li>Corporate SSO with Google Workspace as IDP</li>
           <li>Hierarchical role-based access control system</li>
           <li>System logs for accountability</li>
-          <li>Relational database (MySQL)</li>
+          <li>Relational database (MySQL), no ORM (query builder only)</li>
           <li>Client-side relational store, managed by Vuex ORM</li>
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Installable as PWA</li>
@@ -264,7 +268,7 @@
           <li>Corporate SSO with Google Workspace as IDP</li>
           <li>Hierarchical role-based access control system</li>
           <li>System logs for accountability</li>
-          <li>Relational database (MySQL)</li>
+          <li>Relational database (MySQL), no ORM (query builder only)</li>
           <li>Client-side relational store, managed by Vuex ORM</li>
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Installable as PWA</li>
@@ -312,7 +316,7 @@
           <li>Corporate SSO with Google Workspace as IDP</li>
           <li>Hierarchical role-based access control system</li>
           <li>System logs for accountability</li>
-          <li>Relational database (MySQL)</li>
+          <li>Relational database (MySQL), no ORM (query builder only)</li>
           <li>Client-side relational store, managed by Vuex ORM</li>
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Installable as PWA</li>
@@ -370,7 +374,7 @@
           <li>Corporate SSO with Google Workspace as IDP</li>
           <li>Hierarchical role-based access control system</li>
           <li>System logs for accountability</li>
-          <li>Relational database (MySQL)</li>
+          <li>Relational database (MySQL), no ORM (query builder only)</li>
           <li>Client-side relational store, managed by Vuex ORM</li>
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Installable as PWA</li>
@@ -433,7 +437,7 @@
           <li>Corporate SSO with Google Workspace as IDP</li>
           <li>Hierarchical role-based access control system</li>
           <li>System logs for accountability</li>
-          <li>Relational database (MySQL)</li>
+          <li>Relational database (MySQL), no ORM (query builder only)</li>
           <li>Client-side relational store, managed by Vuex ORM</li>
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Installable as PWA</li>
@@ -469,7 +473,7 @@
           <li>Built-in Google Workspace IDP integration</li>
           <li>Hierarchical role-based access control system</li>
           <li>System logs for accountability</li>
-          <li>Relational database (MySQL)</li>
+          <li>Relational database (MySQL), no ORM (query builder only)</li>
           <li>Responsive design (desktop, mobile, dark mode)</li>
           <li>Google Cloud SQL integration through JDBC driver</li>
           <li>Deployed as a web app in Google Apps Script</li>

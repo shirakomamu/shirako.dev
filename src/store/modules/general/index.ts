@@ -128,6 +128,14 @@ const state: StateTypes = {
       logoSrc: "/vendor-icons/redis.svg",
       logoAlt: "Redis logo",
     },
+    {
+      name: "CI/CD pipelines",
+      skill: 0.75,
+    },
+    {
+      name: "Serverless",
+      skill: 0.8,
+    },
   ],
   tools: [
     {
