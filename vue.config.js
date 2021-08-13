@@ -3,7 +3,7 @@ const { gitDescribeSync } = require("git-describe");
 process.env.VUE_APP_GIT_HASH = gitDescribeSync().hash;
 
 /**
- * @type {import('@vue/cli-service').ProjectOptions}
+ * @type {import("@vue/cli-service").ProjectOptions}
  */
 module.exports = {
   productionSourceMap: false,
