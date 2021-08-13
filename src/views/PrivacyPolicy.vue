@@ -23,7 +23,7 @@
       IP address. Please see their privacy policy at
       <a
         href="https://www.cloudflare.com/privacypolicy"
-        class="hover:underline focus:underline text-blue-srk"
+        class="ps-text-link"
         target="_blank"
         rel="noopener noreferrer"
         >https://www.cloudflare.com/privacypolicy</a
