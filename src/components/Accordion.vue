@@ -18,12 +18,11 @@
     </button>
     <div
       ref="contentsContainer"
-      class="accordion-contents overflow-y-hidden"
+      class="accordion-contents relative"
       :class="{
         'accordion-active': visible,
-      }"
-      :style="{
-        '--r-h': realHeight,
+        'accordion-transition-in': transitionType === 'in',
+        'accordion-transition-out': transitionType === 'out',
       }"
     >
       <div ref="contents">
@@ -34,9 +33,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref } from "vue";
-import ExpandLess from "./icons/ExpandLess.vue";
-import ExpandMore from "./icons/ExpandMore.vue";
+import { defineComponent, ref } from "vue";
+import ExpandLess from "@/components/icons/ExpandLess.vue";
+import ExpandMore from "@/components/icons/ExpandMore.vue";
 
 export default defineComponent({
   name: "Accordion",
@@ -58,58 +57,20 @@ export default defineComponent({
     const visible = ref<boolean>(props.initialVisibility);
     const contentsContainer = ref<null | HTMLDivElement>(null);
     const contents = ref<null | HTMLDivElement>(null);
-    const firstElementMarginTop = ref<string>("0px");
+    const transitionType = ref<"in" | "out" | null>(null);
 
     const toggleVisibility = () => {
       if (!contentsContainer.value) return;
-      contentsContainer.value.style.transition = "height 0.2s ease";
-      visible.value = !visible.value;
+      if (transitionType.value) return;
+
+      const newState = !visible.value;
+
+      visible.value = newState;
+      transitionType.value = newState ? "in" : "out";
+
       setTimeout(() => {
-        if (!contentsContainer.value) return;
-        contentsContainer.value.style.transition = "";
-      }, 200);
-    };
-    const realHeightInt = ref<number>(0);
-    const realHeight = computed(
-      () => `calc(${realHeightInt.value}px + ${firstElementMarginTop.value})`
-    );
-
-    // the timer is used to "watch" the document as a computed property, since vue doesn't track it automatically
-    // the height may change due to elements loading later
-    const timer = ref<null | number>(0);
-
-    // instantly resize if document is resized, without waiting for timer because timer has a delay of 500ms
-    const resizeObserver = ref<null | ResizeObserver>(null);
-
-    onMounted(() => {
-      setRealHeight();
-
-      timer.value = setInterval(() => {
-        setRealHeight();
-      }, 500);
-
-      resizeObserver.value = new ResizeObserver(() => {
-        setRealHeight();
-      });
-      resizeObserver.value.observe(document.documentElement);
-    });
-
-    onUnmounted(() => {
-      timer.value = null;
-      resizeObserver.value?.disconnect();
-    });
-
-    const setRealHeight = () => {
-      // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
-      // margin top needs to be accounted for
-      const firstChild = contents.value?.children.item(0);
-      if (firstChild) {
-        const style = window.getComputedStyle(firstChild);
-        firstElementMarginTop.value = style.marginTop || "0px";
-      }
-
-      const sh = contents.value?.clientHeight || 0;
-      realHeightInt.value = sh;
+        transitionType.value = null;
+      }, 50);
     };
 
     return {
@@ -117,10 +78,7 @@ export default defineComponent({
       toggleVisibility,
       contentsContainer,
       contents,
-      realHeight,
-      realHeightInt,
-      setRealHeight,
-      firstElementMarginTop,
+      transitionType,
     };
   },
 });
@@ -128,10 +86,18 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .accordion-contents {
-  height: 0px;
+  display: none;
+  transition: opacity 0.1s ease, top 0.1s ease;
 
   &.accordion-active {
-    height: var(--r-h);
+    display: block;
+    opacity: 1;
+    top: 0;
+
+    &.accordion-transition-in {
+      opacity: 0;
+      top: -25px;
+    }
   }
 }
 </style>
