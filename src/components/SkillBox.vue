@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import OpenInNew from "./icons/OpenInNew.vue";
+import OpenInNew from "@/components/icons/OpenInNew.vue";
 
 export default defineComponent({
   components: { OpenInNew },
