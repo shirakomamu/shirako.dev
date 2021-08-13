@@ -2,7 +2,7 @@
   <div class="accordion-container">
     <button
       type="button"
-      class="accordion-title p-0 w-full text-left relative"
+      class="accordion-title p-0 w-full text-left relative min-h-8"
       @click="toggleVisibility"
       :alt="visible ? 'Hide accordion' : 'Show accordion'"
     >
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import ExpandLess from "@/components/icons/ExpandLess.vue";
 import ExpandMore from "@/components/icons/ExpandMore.vue";
 
@@ -53,11 +53,29 @@ export default defineComponent({
       default: true,
     },
   },
-  setup(props) {
+  emits: {
+    toggle: (payload: unknown) => {
+      return typeof payload === "boolean";
+    },
+  },
+  setup(props, { emit }) {
     const visible = ref<boolean>(props.initialVisibility);
     const contentsContainer = ref<null | HTMLDivElement>(null);
     const contents = ref<null | HTMLDivElement>(null);
     const transitionType = ref<"in" | "out" | null>(null);
+    const firstElementMarginTop = ref<string>("0px");
+
+    const setRealHeight = () => {
+      // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
+      // margin top needs to be accounted for
+      const firstChild = contents.value?.children.item(0);
+      if (firstChild) {
+        const style = window.getComputedStyle(firstChild);
+        firstElementMarginTop.value = style.marginTop || "0px";
+      }
+    };
+
+    onMounted(() => setRealHeight());
 
     const toggleVisibility = () => {
       if (!contentsContainer.value) return;
@@ -67,6 +85,7 @@ export default defineComponent({
 
       visible.value = newState;
       transitionType.value = newState ? "in" : "out";
+      emit("toggle", newState);
 
       setTimeout(() => {
         transitionType.value = null;
@@ -79,6 +98,7 @@ export default defineComponent({
       contentsContainer,
       contents,
       transitionType,
+      firstElementMarginTop,
     };
   },
 });
