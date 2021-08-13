@@ -1,8 +1,10 @@
 import { Module, GetterTree, MutationTree, ActionTree } from "vuex";
 import { StateTypes as RootStateTypes } from "@/store/modules/root/types";
 import { StateTypes, GetterTypes, MutationTypes, ActionTypes } from "./types";
+import { MutationEnums } from "./enums";
 
 const state: StateTypes = {
+  isBioRead: false,
   technologies: [
     {
       name: "HTML5",
@@ -77,13 +79,13 @@ const state: StateTypes = {
       logoSrc: "/vendor-icons/postgresql.svg",
       logoAlt: "PostgreSQL logo",
     },
-    {
-      name: "Docker",
-      skill: 0.55,
-      link: "https://www.docker.com/",
-      logoSrc: "/vendor-icons/docker.svg",
-      logoAlt: "Docker logo",
-    },
+    // {
+    //   name: "Docker",
+    //   skill: 0.55,
+    //   link: "https://www.docker.com/",
+    //   logoSrc: "/vendor-icons/docker.svg",
+    //   logoAlt: "Docker logo",
+    // },
     {
       name: "Google Apps Script",
       skill: 1,
@@ -189,11 +191,16 @@ const state: StateTypes = {
 };
 
 const getters: GetterTree<StateTypes, RootStateTypes> & GetterTypes = {
+  isBioRead: (state) => state.isBioRead,
   technologies: (state) => state.technologies.sort((a, b) => b.skill - a.skill),
   tools: (state) => state.tools,
 };
 
-const mutations: MutationTree<StateTypes> & MutationTypes = {};
+const mutations: MutationTree<StateTypes> & MutationTypes = {
+  [MutationEnums.SET_BIO_AS_READ](state, readState) {
+    state.isBioRead = readState;
+  },
+};
 
 const actions: ActionTree<StateTypes, RootStateTypes> & ActionTypes = {};
 

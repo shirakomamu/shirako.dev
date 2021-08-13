@@ -6,18 +6,23 @@ import {
 } from "vuex";
 import { StateTypes as RootStateTypes } from "@/store/modules/root/types";
 import { Technology, Tool } from "./state-types";
+import { MutationEnums } from "./enums";
 
 export interface StateTypes {
+  isBioRead: boolean;
   technologies: Technology[];
   tools: Tool[];
 }
 
 export interface GetterTypes {
+  isBioRead(state: StateTypes): boolean;
   technologies(state: StateTypes): Technology[];
   tools(state: StateTypes): Tool[];
 }
 
-export type MutationTypes<S = StateTypes> = {};
+export type MutationTypes<S = StateTypes> = {
+  [MutationEnums.SET_BIO_AS_READ](state: S, readState: boolean): void;
+};
 
 type AugmentedActionContext = Omit<
   ActionContext<StateTypes, RootStateTypes>,
