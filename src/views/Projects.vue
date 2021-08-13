@@ -104,6 +104,15 @@
             Go to site <OpenInNew class="icon-inline" />
           </a>
         </div>
+
+        <a
+          href="https://github.com/shirakomamu/shirako-hrs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ps-text-link"
+          >Source code available on GitHub</a
+        >
+
         <p>
           Service that allows people to organize their favorite restaurants into
           lists and helps choose which to go when feeling indecisive.
