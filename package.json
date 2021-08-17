@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --no-unsafe-inline --modern",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "cypress open-ct"
   },
   "dependencies": {
     "core-js": "^3.16.0",
@@ -16,9 +18,12 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
+    "@cypress/vue": "^3.0.3",
+    "@cypress/webpack-dev-server": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "@vue/cli-plugin-babel": "^5.0.0-beta.2",
+    "@vue/cli-plugin-e2e-cypress": "^4.5.13",
     "@vue/cli-plugin-eslint": "^5.0.0-beta.2",
     "@vue/cli-plugin-pwa": "^5.0.0-beta.2",
     "@vue/cli-plugin-router": "^5.0.0-beta.2",
@@ -29,6 +34,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@windicss/plugin-scrollbar": "^1.2.3",
+    "cypress": "^8.3.0",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.15.1",

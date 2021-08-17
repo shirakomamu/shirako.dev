@@ -3,9 +3,7 @@ import { createMetaManager } from "vue-meta";
 import App from "./App.vue";
 import router from "./router";
 import { store } from "./store";
-// import Notifications from "@kyvg/vue3-notification";
 import "./registerServiceWorker";
-// import "tailwindcss/tailwind.css";
 import "windi.css";
 import "@/assets/styles/index.less";
 
@@ -15,6 +13,5 @@ const metaManager = createMetaManager();
 app.use(metaManager);
 app.use(store);
 app.use(router);
-// app.use(Notifications);
 
 app.mount("#app");

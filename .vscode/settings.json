@@ -9,7 +9,9 @@
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
-  "css.lint.unknownAtRules": "ignore",
-  "less.lint.unknownAtRules": "ignore",
-  "scss.lint.unknownAtRules": "ignore"
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "vetur.validation.style": false,
+  "stylelint.enable": true
 }
