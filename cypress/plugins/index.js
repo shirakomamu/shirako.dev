@@ -19,12 +19,14 @@ const webpackConfig = require("@vue/cli-service/webpack.config.js");
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  on("dev-server:start", (options) =>
-    startDevServer({
-      options,
-      webpackConfig,
-    })
-  );
+  if (config.testingType === "component") {
+    on("dev-server:start", (options) =>
+      startDevServer({
+        options,
+        webpackConfig,
+      })
+    );
+  }
 
   return config;
 };
