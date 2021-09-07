@@ -63,8 +63,6 @@ export default defineComponent({
       geometry.deleteAttribute("position");
       geometry.deleteAttribute("color");
       const starCount = getStarCount();
-
-      console.log("Star count", starCount);
       const vertices: THREE.Vector3[] = [];
 
       // const positions: number[] = [];
