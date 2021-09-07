@@ -68,7 +68,6 @@ export default defineComponent({
     const contents = ref<null | HTMLDivElement>(null);
     const transitionType = ref<"in" | "out" | null>(null);
     const firstElementMarginTop = ref<string>("0px");
-
     const setRealHeight = () => {
       // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
       // margin top needs to be accounted for
@@ -78,24 +77,18 @@ export default defineComponent({
         firstElementMarginTop.value = style.marginTop || "0px";
       }
     };
-
     onMounted(() => setRealHeight());
-
     const toggleVisibility = () => {
       if (!contentsContainer.value) return;
       if (transitionType.value) return;
-
       const newState = !visible.value;
-
       visible.value = newState;
       transitionType.value = newState ? "in" : "out";
       emit("toggle", newState);
-
       setTimeout(() => {
         transitionType.value = null;
       }, 50);
     };
-
     return {
       visible,
       toggleVisibility,

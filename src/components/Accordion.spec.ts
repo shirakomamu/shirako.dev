@@ -1,5 +1,6 @@
 import "windi.css";
 import "@/assets/styles/index.less";
+import { h } from "vue";
 import { mount } from "@cypress/vue";
 import Accordion from "./Accordion.vue";
 
@@ -8,8 +9,8 @@ describe("Accordion", () => {
     it("toggles properly", () => {
       mount(Accordion, {
         slots: {
-          title: `<div id="title">Title</div>`,
-          default: `<div id="content">Content</div>`,
+          title: h("div", { id: "title" }, "Title"),
+          default: h("div", { id: "content" }, "Content"),
         },
       });
 
@@ -26,8 +27,8 @@ describe("Accordion", () => {
     it("shows arrow", () => {
       mount(Accordion, {
         slots: {
-          title: `<div id="title">Title</div>`,
-          default: `<div id="content">Content</div>`,
+          title: h("div", { id: "title" }, "Title"),
+          default: h("div", { id: "content" }, "Content"),
         },
       });
 
@@ -39,8 +40,8 @@ describe("Accordion", () => {
     it("toggles properly", () => {
       mount(Accordion, {
         slots: {
-          title: `<div id="title">Title</div>`,
-          default: `<div id="content">Content</div>`,
+          title: h("div", { id: "title" }, "Title"),
+          default: h("div", { id: "content" }, "Content"),
         },
         props: {
           initialVisibility: true,
@@ -62,8 +63,8 @@ describe("Accordion", () => {
     it("toggles properly", () => {
       mount(Accordion, {
         slots: {
-          title: `<div id="title">Title</div>`,
-          default: `<div id="content">Content</div>`,
+          title: h("div", { id: "title" }, "Title"),
+          default: h("div", { id: "content" }, "Content"),
         },
         props: {
           initialVisibility: false,
@@ -85,8 +86,8 @@ describe("Accordion", () => {
     it("shows arrow", () => {
       mount(Accordion, {
         slots: {
-          title: `<div id="title">Title</div>`,
-          default: `<div id="content">Content</div>`,
+          title: h("div", { id: "title" }, "Title"),
+          default: h("div", { id: "content" }, "Content"),
         },
         props: {
           showArrow: true,
@@ -101,8 +102,8 @@ describe("Accordion", () => {
     it("doesn't have arrow", () => {
       mount(Accordion, {
         slots: {
-          title: `<div id="title">Title</div>`,
-          default: `<div id="content">Content</div>`,
+          title: h("div", { id: "title" }, "Title"),
+          default: h("div", { id: "content" }, "Content"),
         },
         props: {
           showArrow: false,
