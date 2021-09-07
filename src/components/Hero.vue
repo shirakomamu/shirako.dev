@@ -34,7 +34,7 @@ export default defineComponent({
     const typewriterContexts = shuffleArray([...techs]);
 
     const contextIndex = ref(0);
-    const timer = ref(0);
+    const timer = ref<ReturnType<typeof setInterval> | null>(null);
     const currentContext = computed(
       () => typewriterContexts[contextIndex.value]
     );
@@ -57,7 +57,7 @@ export default defineComponent({
       }
       typingState.value = 1;
       currentContextResult.value = "";
-      let timer: number = setInterval(() => {
+      let timer: ReturnType<typeof setInterval> = setInterval(() => {
         const contextLength = currentContextResult.value.length;
         if (contextLength === word.length) {
           typingState.value = 0;
@@ -71,7 +71,7 @@ export default defineComponent({
         return;
       }
       typingState.value = -1;
-      let timer: number = setInterval(() => {
+      let timer: ReturnType<typeof setInterval> = setInterval(() => {
         const contextLength = currentContextResult.value.length;
         if (contextLength === 0) {
           typingState.value = 0;
@@ -97,7 +97,7 @@ export default defineComponent({
       }, wordDisplayTime + wordBlankTime);
     });
 
-    onUnmounted(() => (timer.value = 0));
+    onUnmounted(() => (timer.value = null));
 
     return {
       typewriterContexts,
