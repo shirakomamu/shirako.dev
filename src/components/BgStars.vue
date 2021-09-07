@@ -12,7 +12,7 @@ import * as THREE from "three";
 export default defineComponent({
   name: "BgStars",
   setup() {
-    const STAR_DENSITY = 0.1;
+    const STAR_DENSITY = 0.2;
     const CAMERA_FOV = 60;
     const CAMERA_NEAR_LIMIT = 1;
     const CAMERA_FAR_LIMIT = 1000;
@@ -27,8 +27,6 @@ export default defineComponent({
       CAMERA_NEAR_LIMIT,
       CAMERA_FAR_LIMIT
     );
-
-    // camera.rotateX(Math.PI / 2);
 
     camera.lookAt(0, 0, CAMERA_FAR_LIMIT);
 
@@ -50,7 +48,7 @@ export default defineComponent({
 
     const setCamera = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight, true);
     };
 
     const starColor = ref<number>(DARK_STAR_COLOR);
@@ -58,34 +56,26 @@ export default defineComponent({
     const geometry = new THREE.BufferGeometry();
 
     const setSpheres = () => {
-      // const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
       scene.clear();
       geometry.deleteAttribute("position");
       geometry.deleteAttribute("color");
       const starCount = getStarCount();
       const vertices: THREE.Vector3[] = [];
 
-      // const positions: number[] = [];
+      console.log(window.innerWidth, window.innerHeight);
 
       for (let i = 0; i < starCount; i++) {
         const position = new THREE.Vector3(
-          (Math.random() - 0.5) * window.innerWidth,
-          (Math.random() - 0.5) * window.innerWidth,
+          (Math.random() - 0.5) * window.innerWidth * 1.5, // to ensure it covers full width, scale up by 1.1
+          (Math.random() - 0.5) * window.innerHeight * 1.5,
           Math.random() * (STAR_Z_MAX - STAR_Z_MIN) + STAR_Z_MIN
         );
 
         vertices.push(position);
-
-        // positions.push(position.x, position.y, position.z);
       }
 
       geometry.setFromPoints(vertices);
       applyStarColor();
-
-      // geometry.value = geometry.value.setAttribute(
-      //   "position",
-      //   new THREE.BufferAttribute(new Float32Array(positions), 3)
-      // );
 
       const points = new THREE.Points(
         geometry,
@@ -113,7 +103,7 @@ export default defineComponent({
     };
 
     const animateStars = () => {
-      const Y_THRESHOLD = window.innerHeight / 2;
+      const Y_THRESHOLD = window.innerHeight * 0.75;
       const vertices = geometry.attributes.position.array as number[];
 
       for (let i = 1; i < vertices.length; i += 3) {
