@@ -6,14 +6,17 @@
       @click="toggleVisibility"
       :alt="visible ? 'Hide accordion' : 'Show accordion'"
     >
-      <div class="absolute top-0 left-0 w-auto mr-2 text-2xl max-h-8">
+      <div
+        v-if="showArrow"
+        class="absolute top-0 left-0 w-auto text-2xl max-h-8"
+      >
         <component
           class="icon-inline"
           :is="visible ? 'ExpandLess' : 'ExpandMore'"
         >
         </component>
       </div>
-      <div class="ml-8 inline-block">
+      <div class="inline-block" :class="{ 'ml-8': showArrow }">
         <slot name="title" />
       </div>
     </button>
