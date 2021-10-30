@@ -1,6 +1,7 @@
 <template>
   <div class="space-y-8 mt-5vh md:mt-15vh">
     <div
+      v-if="!hasIntersected"
       class="
         arrow-container
         fixed
@@ -12,8 +13,8 @@
         transition
       "
       :class="{
-        'opacity-60': isGuideArrowVisible && !hasIntersected,
-        'opacity-0': !isGuideArrowVisible || hasIntersected,
+        'opacity-60': isGuideArrowVisible,
+        'opacity-0': !isGuideArrowVisible,
       }"
     >
       <ExpandMore class="icon-inline text-8xl" />
@@ -110,12 +111,6 @@ export default defineComponent({
     ExpandMore,
   },
   setup() {
-    const quote = {
-      text: `Everybody has a testing environment.
-      Some people are lucky enough to have a totally separate environment to run production in.`,
-      source: "https://twitter.com/stahnma/status/634849376343429120",
-      author: "@stahnma",
-    };
     const mainText = ref<HTMLDivElement | null>(null);
     const skillBoxes = ref<HTMLDivElement | null>(null);
 
@@ -167,7 +162,6 @@ export default defineComponent({
       skillBoxes,
       technologies,
       tools,
-      quote,
       isGuideArrowVisible,
       hasIntersected,
     };
@@ -176,44 +170,6 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-// .leader {
-//   display: block;
-//   overflow-x: hidden;
-
-//   &:before {
-//     float: right;
-//     text-align: right;
-//     white-space: nowrap;
-//     content: ". . . . . . . . . . . . . . . . . . . . "
-//       ". . . . . . . . . . . . . . . . . . . . "
-//       ". . . . . . . . . . . . . . . . . . . . "
-//       ". . . . . . . . . . . . . . . . . . . . ";
-//   }
-// }
-
-// .quote {
-//   p {
-//     &:before,
-//     &:after {
-//       font-family: serif;
-//       display: inline;
-//       height: 0;
-//       line-height: 0;
-//       position: relative;
-//       font-size: 2em;
-//       top: 0.3em;
-//     }
-//     &:before {
-//       right: 0.2em;
-//       content: open-quote;
-//     }
-//     &:after {
-//       right: -0em;
-//       content: close-quote;
-//     }
-//   }
-// }
-
 .arrow-container {
   bottom: 0;
   animation-name: bounce;
