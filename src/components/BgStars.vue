@@ -20,7 +20,6 @@ export default defineComponent({
     const STAR_Z_MAX = 1000;
     const LIGHT_STAR_COLOR = 0x000000;
     const DARK_STAR_COLOR = 0xffffff;
-
     const camera = new THREE.PerspectiveCamera(
       CAMERA_FOV,
       window.innerWidth / window.innerHeight,
@@ -135,8 +134,6 @@ export default defineComponent({
       applyStarColor();
     };
 
-    // const container = ref<HTMLDivElement | null>(null);
-
     const resizeObserver = ref<null | ResizeObserver>(null);
     const darkModeObserver = ref<null | MutationObserver>(null);
 
@@ -145,7 +142,6 @@ export default defineComponent({
       resizeObserver.value = new ResizeObserver(() => {
         setCamera();
         setSpheres();
-
         if (!isRenderStarted) {
           isRenderStarted = true;
           render();
@@ -164,7 +160,6 @@ export default defineComponent({
 
     onUnmounted(() => {
       resizeObserver.value?.disconnect();
-      // darkModeObserver.value?.disconnect();
     });
 
     return {
@@ -178,7 +173,6 @@ export default defineComponent({
 .fixed {
   z-index: -1;
 }
-
 .radial {
   --color-shine: theme("colors.true-gray.100");
   --color-bg: theme("colors.white");
