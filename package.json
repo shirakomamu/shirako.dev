@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --no-unsafe-inline --modern",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:unit": "cypress open-ct"
   },
   "dependencies": {
     "core-js": "^3.17.2",
