@@ -25,6 +25,7 @@ module.exports = {
         ignores: [],
       },
     ],
+    "vue/multi-word-component-names": "off",
   },
   ignorePatterns: ["cypress/**/*.*"],
 };
