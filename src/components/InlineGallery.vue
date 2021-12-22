@@ -48,7 +48,6 @@
 import { computed, defineProps, onMounted, onUnmounted, ref, watch } from "vue";
 import ArrowBackIos from "@/components/icons/ArrowBackIos.vue";
 import ArrowForwardIos from "@/components/icons/ArrowForwardIos.vue";
-import modulus from "@/utils/modulus";
 
 defineProps({
   showControls: {
@@ -115,18 +114,13 @@ const scrollToElement = ({
 
 const numChildren = computed(() => childElements.value?.length || 0);
 
-const infiniteRolloverChildrenFocus = (target: number) => {
-  return 1 + modulus(target - 1, numChildren.value);
-};
-
 const goToPrevious = () => {
-  currentElementNum.value = infiniteRolloverChildrenFocus(
-    currentElementNum.value - 1
-  );
+  currentElementNum.value = Math.max(currentElementNum.value - 1, 1);
 };
 const goToNext = () => {
-  currentElementNum.value = infiniteRolloverChildrenFocus(
-    currentElementNum.value + 1
+  currentElementNum.value = Math.min(
+    currentElementNum.value + 1,
+    numChildren.value
   );
 };
 
