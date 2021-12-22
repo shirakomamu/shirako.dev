@@ -29,113 +29,79 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, onMounted, ref } from "vue";
+<script setup lang="ts">
+import { computed, onMounted, ref } from "vue";
 import { useMeta } from "vue-meta";
-import { useRoute } from "vue-router";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import Hero from "@/components/Hero.vue";
 import BgStars from "@/components/BgStars.vue";
 
-export default defineComponent({
-  components: {
-    AppHeader,
-    AppFooter,
-    Hero,
-    BgStars,
-  },
-  setup() {
-    const route = useRoute();
-    const meta = computed(() => ({
-      title: "Home | " + process.env.VUE_APP_NAME,
-      meta: [
-        {
-          vmid: "description",
-          name: "description",
-          content: "Portfolio site for Shirako, the web developer.",
-        },
-      ],
-      link: [
-        {
-          rel: "canonical",
-          href: "https://shirako.dev" + route.path,
-        },
-      ],
-      htmlAttrs: { lang: "en" },
-    }));
-    useMeta(meta);
+const meta = computed(() => ({
+  meta: [
+    {
+      vmid: "description",
+      name: "description",
+      content: "Portfolio site for 白狐マム.",
+    },
+  ],
+  htmlAttrs: { lang: "en" },
+}));
+useMeta(meta);
 
-    const refreshing = ref<boolean>(false);
-    const registration = ref<null | ServiceWorkerRegistration>(null);
-    const updateExists = ref<boolean>(false);
+const refreshing = ref<boolean>(false);
+const registration = ref<null | ServiceWorkerRegistration>(null);
+const updateExists = ref<boolean>(false);
 
-    // this is called when sw receives SKIP_WAITING event
-    navigator.serviceWorker?.addEventListener("controllerchange", () => {
-      // Prevent multiple refreshes
-      if (refreshing.value) return;
-      refreshing.value = true;
-      // Here the actual reload of the page occurs
-      window.location.reload();
-    });
+// this is called when sw receives SKIP_WAITING event
+navigator.serviceWorker?.addEventListener("controllerchange", () => {
+  // Prevent multiple refreshes
+  if (refreshing.value) return;
+  refreshing.value = true;
+  window.location.reload();
+});
 
-    const refreshApp = () => {
-      // Make sure we only send a 'skip waiting' message if the SW is waiting
-      if (!registration.value || !registration.value.waiting) return;
+const refreshApp = () => {
+  // Make sure we only send a 'skip waiting' message if the SW is waiting
+  if (!registration.value?.waiting) return;
 
-      // send message to SW to skip the waiting and activate the new SW
-      registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
-    };
+  // send message to SW to skip the waiting and activate the new SW
+  registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
+};
 
-    // Store the SW registration so we can send it a message
-    // We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
-    // To alert the user there is an update they need to refresh for
-    const onUpdateAvailable = async (event: {
-      detail: ServiceWorkerRegistration;
-    }) => {
-      registration.value = event.detail;
-      updateExists.value = true;
+// Store the SW registration so we can send it a message
+// We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
+// To alert the user there is an update they need to refresh for
+const onUpdateAvailable = async (event: {
+  detail: ServiceWorkerRegistration;
+}) => {
+  registration.value = event.detail;
+  updateExists.value = true;
 
-      // automatic refresh when update is available
-      refreshApp();
-    };
+  // automatic refresh when update is available
+  refreshApp();
+};
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    document.addEventListener("swUpdated", onUpdateAvailable, {
-      once: true,
-    });
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+document.addEventListener("swUpdated", onUpdateAvailable, {
+  once: true,
+});
 
-    const setTheme = (isDark: boolean) => {
-      if (isDark) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    };
+const setTheme = (isDark: boolean) => {
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
 
-    const queryList = computed(() =>
-      window.matchMedia("(prefers-color-scheme: dark)")
-    );
-    const supportsDarkMode = computed(
-      () => window.matchMedia("(prefers-color-scheme)").matches
-    );
+const queryList = computed(() =>
+  window.matchMedia("(prefers-color-scheme: dark)")
+);
 
-    onMounted(() => {
-      setTheme(true); // supportsDarkMode.value to initialize to theme
-      queryList.value.addEventListener("change", (e) => setTheme(e.matches));
-    });
-
-    return {
-      refreshing,
-      registration,
-      updateExists,
-      onUpdateAvailable,
-      refreshApp,
-      queryList,
-      supportsDarkMode,
-    };
-  },
+onMounted(() => {
+  setTheme(true);
+  queryList.value.addEventListener("change", (e) => setTheme(e.matches));
 });
 </script>
 

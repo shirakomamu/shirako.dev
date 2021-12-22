@@ -89,8 +89,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useRoute } from "vue-router";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/Email.vue";
@@ -102,43 +101,28 @@ interface NavigationLink {
   label: string;
 }
 
-export default defineComponent({
-  name: "AppHeader",
-  components: {
-    EmailHider,
-    Email,
-    DarkMode,
-    LightMode,
+const links: NavigationLink[] = [
+  {
+    to: "/",
+    label: "Home",
   },
-  setup() {
-    const links: NavigationLink[] = [
-      {
-        to: "/",
-        label: "Home",
-      },
-      {
-        to: "/projects",
-        label: "Projects",
-      },
-    ];
-
-    const route = useRoute();
-
-    const isRouteMatched = (to: string) => {
-      return route.matched.some(({ path }) => path === to);
-    };
-
-    const setTheme = (isDark: boolean) => {
-      if (isDark) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    };
-
-    return { links, isRouteMatched, setTheme };
+  {
+    to: "/projects",
+    label: "Projects",
   },
-});
+];
+
+const route = useRoute();
+
+const isRouteMatched = (to: string) => {
+  return route.matched.some(({ path }) => path === to);
+};
+
+const setTheme = (isDark: boolean) => {
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
 </script>
-
-<style lang="less" scoped></style>

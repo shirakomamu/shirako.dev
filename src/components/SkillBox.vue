@@ -36,34 +36,30 @@
   </component>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 import OpenInNew from "@/components/icons/OpenInNew.vue";
 
-export default defineComponent({
-  components: { OpenInNew },
-  name: "SkillBox",
-  props: {
-    name: {
-      type: String,
-      default: "",
-    },
-    link: {
-      type: String,
-      default: null,
-    },
-    logoSrc: {
-      type: String,
-      default: "",
-    },
-    logoSrcWhenDark: {
-      type: String,
-      default: "",
-    },
-    logoAlt: {
-      type: String,
-      default: "",
-    },
+defineProps({
+  name: {
+    type: String,
+    default: "",
+  },
+  link: {
+    type: String,
+    default: null,
+  },
+  logoSrc: {
+    type: String,
+    default: "",
+  },
+  logoSrcWhenDark: {
+    type: String,
+    default: "",
+  },
+  logoAlt: {
+    type: String,
+    default: "",
   },
 });
 </script>

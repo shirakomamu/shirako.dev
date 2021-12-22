@@ -11,23 +11,10 @@
   </teleport>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import ExpandLess from "@/components/icons/ExpandLess.vue";
 
-export default defineComponent({
-  components: { ExpandLess },
-  name: "FloatingButton",
-  setup() {
-    const scrollToTop = () => {
-      document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    return {
-      scrollToTop,
-    };
-  },
-});
+const scrollToTop = () => {
+  document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+};
 </script>
-
-<style lang="less" scoped></style>

@@ -473,17 +473,22 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { useRoute } from "vue-router";
+import { useMeta } from "vue-meta";
 import InlineGallery from "@/components/InlineGallery.vue";
 import ProjectItem from "@/components/ProjectItem.vue";
 import OpenInNew from "@/components/icons/OpenInNew.vue";
 import FloatingButton from "@/components/FloatingButton.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  components: { InlineGallery, OpenInNew, ProjectItem, FloatingButton },
-  name: "Projects",
+const route = useRoute();
+useMeta({
+  title: "Projects | " + process.env.VUE_APP_NAME,
+  link: [
+    {
+      rel: "canonical",
+      href: "https://shirako.dev" + route.path,
+    },
+  ],
 });
 </script>
-
-<style lang="less" scoped></style>

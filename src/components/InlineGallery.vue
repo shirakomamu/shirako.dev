@@ -44,135 +44,107 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  onUnmounted,
-  ref,
-  watch,
-} from "vue";
+<script setup lang="ts">
+import { computed, defineProps, onMounted, onUnmounted, ref, watch } from "vue";
 import ArrowBackIos from "@/components/icons/ArrowBackIos.vue";
 import ArrowForwardIos from "@/components/icons/ArrowForwardIos.vue";
 import modulus from "@/utils/modulus";
 
-export default defineComponent({
-  components: { ArrowBackIos, ArrowForwardIos },
-  name: "InlineGallery",
-  props: {
-    showControls: {
-      type: Boolean,
-      default: false,
-    },
-    showPagination: {
-      type: Boolean,
-      default: false,
-    },
+defineProps({
+  showControls: {
+    type: Boolean,
+    default: false,
   },
-  setup() {
-    const wrapper = ref<HTMLDivElement | null>(null);
-    const camera = ref<HTMLDivElement | null>(null);
-    const viewport = ref<HTMLDivElement | null>(null);
-    const childElements = ref<HTMLCollection | null>(null);
-
-    const currentElementNum = ref<number>(1);
-
-    onMounted(() => {
-      childElements.value = viewport.value?.children || null;
-
-      if (!childElements.value) return;
-
-      for (const elem of childElements.value) {
-        elem.classList.add("flex-shrink-0");
-        // elem.classList.add("max-h-70vh");
-        elem.classList.add("w-full");
-        elem.classList.add("h-full");
-        const images = elem.querySelectorAll("img");
-
-        for (const image of images) {
-          image.classList.add("max-h-60vh");
-          image.classList.add("object-scale-down");
-          image.classList.add("w-full");
-        }
-      }
-    });
-
-    watch(currentElementNum, (newNum: number) => {
-      scrollToElement({
-        to: newNum - 1,
-        behavior: "smooth",
-      });
-    });
-
-    const scrollToElement = ({
-      to,
-      behavior = "smooth",
-    }: {
-      to: number;
-      // eslint-disable-next-line no-undef
-      behavior?: ScrollBehavior;
-    }) => {
-      if (!childElements.value) return;
-
-      const elem = childElements.value.item(to);
-
-      if (!elem || !camera.value || !viewport.value) return;
-
-      // const rect = elem.getBoundingClientRect();
-
-      // using this instead of scrollIntoView because of lack of control over y-axis
-      camera.value.scrollTo({
-        left: camera.value.getBoundingClientRect().width * to,
-        behavior,
-      });
-      // elem.scrollIntoView({ behavior, block: "nearest" });
-    };
-
-    const numChildren = computed(() => childElements.value?.length || 0);
-
-    const infiniteRolloverChildrenFocus = (target: number) => {
-      return 1 + modulus(target - 1, numChildren.value);
-    };
-
-    const goToPrevious = () => {
-      currentElementNum.value = infiniteRolloverChildrenFocus(
-        currentElementNum.value - 1
-      );
-    };
-    const goToNext = () => {
-      currentElementNum.value = infiniteRolloverChildrenFocus(
-        currentElementNum.value + 1
-      );
-    };
-
-    const resizeObserver = ref<null | ResizeObserver>(null);
-
-    onMounted(() => {
-      resizeObserver.value = new ResizeObserver(() => {
-        scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
-      });
-      resizeObserver.value.observe(document.documentElement);
-    });
-
-    onUnmounted(() => resizeObserver.value?.disconnect());
-
-    return {
-      currentElementNum,
-      wrapper,
-      camera,
-      viewport,
-      childElements,
-      numChildren,
-
-      scrollToElement,
-      goToPrevious,
-      goToNext,
-
-      resizeObserver,
-    };
+  showPagination: {
+    type: Boolean,
+    default: false,
   },
 });
+
+const wrapper = ref<HTMLDivElement | null>(null);
+const camera = ref<HTMLDivElement | null>(null);
+const viewport = ref<HTMLDivElement | null>(null);
+const childElements = ref<HTMLCollection | null>(null);
+
+const currentElementNum = ref<number>(1);
+
+onMounted(() => {
+  childElements.value = viewport.value?.children || null;
+
+  if (!childElements.value) return;
+
+  for (const elem of childElements.value) {
+    elem.classList.add("flex-shrink-0");
+    elem.classList.add("w-full");
+    elem.classList.add("h-full");
+    const images = elem.querySelectorAll("img");
+
+    for (const image of images) {
+      image.classList.add("max-h-60vh");
+      image.classList.add("object-scale-down");
+      image.classList.add("w-full");
+    }
+  }
+});
+
+watch(currentElementNum, (newNum: number) => {
+  scrollToElement({
+    to: newNum - 1,
+    behavior: "smooth",
+  });
+});
+
+const scrollToElement = ({
+  to,
+  behavior = "smooth",
+}: {
+  to: number;
+  // eslint-disable-next-line no-undef
+  behavior?: ScrollBehavior;
+}) => {
+  if (!childElements.value) return;
+
+  const elem = childElements.value.item(to);
+
+  if (!elem || !camera.value || !viewport.value) return;
+
+  // const rect = elem.getBoundingClientRect();
+
+  // using this instead of scrollIntoView because of lack of control over y-axis
+  camera.value.scrollTo({
+    left: camera.value.getBoundingClientRect().width * to,
+    behavior,
+  });
+  // elem.scrollIntoView({ behavior, block: "nearest" });
+};
+
+const numChildren = computed(() => childElements.value?.length || 0);
+
+const infiniteRolloverChildrenFocus = (target: number) => {
+  return 1 + modulus(target - 1, numChildren.value);
+};
+
+const goToPrevious = () => {
+  currentElementNum.value = infiniteRolloverChildrenFocus(
+    currentElementNum.value - 1
+  );
+};
+const goToNext = () => {
+  currentElementNum.value = infiniteRolloverChildrenFocus(
+    currentElementNum.value + 1
+  );
+};
+
+const resizeObserver = ref<null | ResizeObserver>(null);
+
+onMounted(() => {
+  resizeObserver.value = new ResizeObserver(() => {
+    scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
+  });
+  resizeObserver.value.observe(document.documentElement);
+});
+
+onUnmounted(() => resizeObserver.value?.disconnect());
 </script>
 
 <style lang="less" scoped>

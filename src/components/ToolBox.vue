@@ -32,30 +32,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 
-export default defineComponent({
-  name: "ToolBox",
-  props: {
-    name: {
-      type: String,
-      default: "",
-    },
-    logoSrc: {
-      type: String,
-      default: "",
-    },
-    logoSrcWhenDark: {
-      type: String,
-      default: "",
-    },
-    logoAlt: {
-      type: String,
-      default: "",
-    },
+defineProps({
+  name: {
+    type: String,
+    default: "",
+  },
+  logoSrc: {
+    type: String,
+    default: "",
+  },
+  logoSrcWhenDark: {
+    type: String,
+    default: "",
+  },
+  logoAlt: {
+    type: String,
+    default: "",
   },
 });
 </script>
-
-<style lang="less" scoped></style>
