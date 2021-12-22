@@ -89,17 +89,7 @@
             href="https://eats.shirako.dev"
             target="_blank"
             rel="noopener noreferrer"
-            class="
-              text-white
-              transition
-              bg-blue-srk/80
-              hover:bg-blue-srk/100
-              focus:bg-blue-srk/100
-              px-4
-              py-2
-              align-middle
-              rounded-lg
-            "
+            class="text-white transition bg-blue-srk/80 hover:bg-blue-srk/100 focus:bg-blue-srk/100 px-4 py-2 align-middle rounded-lg"
           >
             Open site (registration required) <OpenInNew class="icon-inline" />
           </a>

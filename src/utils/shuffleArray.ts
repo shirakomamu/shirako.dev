@@ -12,5 +12,5 @@ export default <T>(array: T[]): T[] => {
     array[i] = t;
   }
 
-  return array as T[];
+  return array;
 };

@@ -15,14 +15,7 @@
         v-for="(link, index) of links"
         :to="link.to"
         :key="index"
-        class="
-          align-middle
-          dark:text-gray-100
-          text-sm
-          link-underline-animate
-          transition
-          opacity-50
-        "
+        class="align-middle dark:text-gray-100 text-sm link-underline-animate transition opacity-50"
         :class="{ 'opacity-100': isRouteMatched(link.to) }"
         >{{ link.label }}</router-link
       >
@@ -34,13 +27,7 @@
 
         <a
           href="https://github.com/shirakomamu"
-          class="
-            flex-shrink-0
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="flex-shrink-0 transition opacity-50 hover:opacity-100 focus:opacity-100"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -62,13 +49,7 @@
 
         <a
           href="https://twitter.com/shirakomamu"
-          class="
-            flex-shrink-0
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="flex-shrink-0 transition opacity-50 hover:opacity-100 focus:opacity-100"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -90,15 +71,7 @@
         <button
           type="button"
           alt="Toggle dark mode"
-          class="
-            flex-shrink-0
-            p-0
-            dark:hidden
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="flex-shrink-0 p-0 dark:hidden transition opacity-50 hover:opacity-100 focus:opacity-100"
           @click="setTheme(true)"
         >
           <DarkMode class="inline-block" />
@@ -106,15 +79,7 @@
         <button
           type="button"
           alt="Toggle light mode"
-          class="
-            p-0
-            hidden
-            dark:block
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="p-0 hidden dark:block transition opacity-50 hover:opacity-100 focus:opacity-100"
           @click="setTheme(false)"
         >
           <LightMode class="inline-block" />

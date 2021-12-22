@@ -9,18 +9,15 @@
     "test:unit": "cypress open-ct"
   },
   "dependencies": {
-    "core-js": "^3.17.2",
     "register-service-worker": "^1.7.1",
-    "three": "^0.134.0",
+    "three": "^0.135.0",
     "vue": "^3.0.0",
     "vue-meta": "^3.0.0-alpha.6",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@cypress/vue": "^3.0.3",
-    "@cypress/webpack-dev-server": "^1.7.0",
-    "@types/three": "^0.133.1",
+    "@types/three": "^0.135.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "@vue/cli-plugin-babel": "^5.0.0-beta.2",
@@ -34,7 +31,6 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.0.0",
     "@windicss/plugin-scrollbar": "^1.2.3",
-    "cypress": "^8.7.0",
     "eslint": "^8.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.2",

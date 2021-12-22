@@ -2,10 +2,11 @@
   "git.enableCommitSigning": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll": true
   },
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "less.lint.unknownAtRules": "ignore"
 }

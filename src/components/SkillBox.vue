@@ -4,17 +4,7 @@
     v-bind:href="link"
     v-bind:target="link ? '_blank' : null"
     v-bind:rel="link ? 'noopener noreferrer' : null"
-    class="
-      box
-      cursor-default
-      p-4
-      flex flex-col
-      items-center
-      justify-center
-      rounded-lg
-      bg-gray-200/50
-      dark:bg-gray-600/50
-    "
+    class="box cursor-default p-4 flex flex-col items-center justify-center rounded-lg bg-gray-200/50 dark:bg-gray-600/50"
     :class="{ pointer: link }"
   >
     <div class="container-block w-full">
@@ -38,11 +28,7 @@
         class="hidden dark:block mx-auto my-2 skill-icon"
       />
       <p
-        class="
-          text-center text-sm
-          font-semibold
-          overflow-hidden overflow-ellipsis
-        "
+        class="text-center text-sm font-semibold overflow-hidden overflow-ellipsis"
       >
         {{ name }}
       </p>

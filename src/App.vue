@@ -9,16 +9,7 @@
   >
     <BgStars />
     <AppHeader
-      class="
-        sticky
-        ps-bg-flat
-        top-0
-        h-12
-        z-50
-        w-full
-        border-b border-gray-300
-        dark:border-gray-600
-      "
+      class="sticky ps-bg-flat top-0 h-12 z-50 w-full border-b border-gray-300 dark:border-gray-600"
     />
 
     <div class="py-8 flex flex-col flex-grow justify-center view-container">

@@ -2,16 +2,7 @@
   <div class="space-y-8 mt-5vh md:mt-15vh">
     <div
       v-if="!hasIntersected"
-      class="
-        arrow-container
-        fixed
-        left-0
-        w-full
-        grid
-        justify-items-center
-        z-2
-        transition
-      "
+      class="arrow-container fixed left-0 w-full grid justify-items-center z-2 transition"
       :class="{
         'opacity-60': isGuideArrowVisible,
         'opacity-0': !isGuideArrowVisible,

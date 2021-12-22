@@ -1,14 +1,6 @@
 <template>
   <div
-    class="
-      p-4
-      flex flex-col
-      items-center
-      rounded-lg
-      transition
-      bg-gray-200/50
-      dark:bg-gray-600/50
-    "
+    class="p-4 flex flex-col items-center rounded-lg transition bg-gray-200/50 dark:bg-gray-600/50"
   >
     <div class="whitespace-normal h-full w-full flex flex-col gap-4">
       <div class="flex gap-4 items-center">
