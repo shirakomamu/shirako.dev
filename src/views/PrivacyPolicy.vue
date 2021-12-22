@@ -33,18 +33,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useMeta } from "vue-meta";
+import { useRoute } from "vue-router";
 
-export default defineComponent({
-  name: "PrivacyPolicy",
-  setup() {
-    useMeta({
-      title: "Privacy policy | " + process.env.VUE_APP_NAME,
-    });
-  },
+const route = useRoute();
+useMeta({
+  title: "Privacy policy | " + process.env.VUE_APP_NAME,
+  link: [
+    {
+      rel: "canonical",
+      href: "https://shirako.dev" + route.path,
+    },
+  ],
 });
 </script>
-
-<style lang="less" scoped></style>

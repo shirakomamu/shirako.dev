@@ -23,16 +23,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useMeta } from "vue-meta";
 
-export default defineComponent({
-  name: "Error",
-  setup() {
-    useMeta({
-      title: "Error | " + process.env.VUE_APP_NAME,
-    });
-  },
+useMeta({
+  title: "Error | " + process.env.VUE_APP_NAME,
 });
 </script>

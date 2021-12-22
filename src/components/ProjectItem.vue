@@ -23,32 +23,26 @@
   </article>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 import Accordion from "@/components/Accordion.vue";
 
-export default defineComponent({
-  name: "ProjectItem",
-  components: { Accordion },
-  props: {
-    iconUrl: {
-      type: String,
-      default: "",
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: String,
-      default: "",
-    },
-    initiallyExpanded: {
-      type: Boolean,
-      default: false,
-    },
+defineProps({
+  iconUrl: {
+    type: String,
+    default: "",
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: String,
+    default: "",
+  },
+  initiallyExpanded: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
-
-<style lang="less" scoped></style>

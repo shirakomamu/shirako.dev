@@ -18,25 +18,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import EmailHider from "@/components/EmailHider.vue";
 
-export default defineComponent({
-  name: "AppFooter",
-  components: {
-    EmailHider,
-  },
-  setup() {
-    const hash = process.env.VUE_APP_GIT_HASH || "n/a";
-    const emailText = "✉️ say hello";
-
-    return {
-      hash,
-      emailText,
-    };
-  },
-});
+const hash = process.env.VUE_APP_GIT_HASH || "n/a";
+const emailText = "✉️ say hello";
 </script>
-
-<style lang="less" scoped></style>

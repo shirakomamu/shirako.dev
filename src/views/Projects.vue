@@ -89,17 +89,7 @@
             href="https://eats.shirako.dev"
             target="_blank"
             rel="noopener noreferrer"
-            class="
-              text-white
-              transition
-              bg-blue-srk/80
-              hover:bg-blue-srk/100
-              focus:bg-blue-srk/100
-              px-4
-              py-2
-              align-middle
-              rounded-lg
-            "
+            class="text-white transition bg-blue-srk/80 hover:bg-blue-srk/100 focus:bg-blue-srk/100 px-4 py-2 align-middle rounded-lg"
           >
             Open site (registration required) <OpenInNew class="icon-inline" />
           </a>
@@ -483,17 +473,22 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { useRoute } from "vue-router";
+import { useMeta } from "vue-meta";
 import InlineGallery from "@/components/InlineGallery.vue";
 import ProjectItem from "@/components/ProjectItem.vue";
 import OpenInNew from "@/components/icons/OpenInNew.vue";
 import FloatingButton from "@/components/FloatingButton.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  components: { InlineGallery, OpenInNew, ProjectItem, FloatingButton },
-  name: "Projects",
+const route = useRoute();
+useMeta({
+  title: "Projects | " + process.env.VUE_APP_NAME,
+  link: [
+    {
+      rel: "canonical",
+      href: "https://shirako.dev" + route.path,
+    },
+  ],
 });
 </script>
-
-<style lang="less" scoped></style>

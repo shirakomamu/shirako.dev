@@ -15,14 +15,7 @@
         v-for="(link, index) of links"
         :to="link.to"
         :key="index"
-        class="
-          align-middle
-          dark:text-gray-100
-          text-sm
-          link-underline-animate
-          transition
-          opacity-50
-        "
+        class="align-middle dark:text-gray-100 text-sm link-underline-animate transition opacity-50"
         :class="{ 'opacity-100': isRouteMatched(link.to) }"
         >{{ link.label }}</router-link
       >
@@ -34,13 +27,7 @@
 
         <a
           href="https://github.com/shirakomamu"
-          class="
-            flex-shrink-0
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="flex-shrink-0 transition opacity-50 hover:opacity-100 focus:opacity-100"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -62,13 +49,7 @@
 
         <a
           href="https://twitter.com/shirakomamu"
-          class="
-            flex-shrink-0
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="flex-shrink-0 transition opacity-50 hover:opacity-100 focus:opacity-100"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -90,15 +71,7 @@
         <button
           type="button"
           alt="Toggle dark mode"
-          class="
-            flex-shrink-0
-            p-0
-            dark:hidden
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="flex-shrink-0 p-0 dark:hidden transition opacity-50 hover:opacity-100 focus:opacity-100"
           @click="setTheme(true)"
         >
           <DarkMode class="inline-block" />
@@ -106,15 +79,7 @@
         <button
           type="button"
           alt="Toggle light mode"
-          class="
-            p-0
-            hidden
-            dark:block
-            transition
-            opacity-50
-            hover:opacity-100
-            focus:opacity-100
-          "
+          class="p-0 hidden dark:block transition opacity-50 hover:opacity-100 focus:opacity-100"
           @click="setTheme(false)"
         >
           <LightMode class="inline-block" />
@@ -124,8 +89,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useRoute } from "vue-router";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/Email.vue";
@@ -137,43 +101,28 @@ interface NavigationLink {
   label: string;
 }
 
-export default defineComponent({
-  name: "AppHeader",
-  components: {
-    EmailHider,
-    Email,
-    DarkMode,
-    LightMode,
+const links: NavigationLink[] = [
+  {
+    to: "/",
+    label: "Home",
   },
-  setup() {
-    const links: NavigationLink[] = [
-      {
-        to: "/",
-        label: "Home",
-      },
-      {
-        to: "/projects",
-        label: "Projects",
-      },
-    ];
-
-    const route = useRoute();
-
-    const isRouteMatched = (to: string) => {
-      return route.matched.some(({ path }) => path === to);
-    };
-
-    const setTheme = (isDark: boolean) => {
-      if (isDark) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    };
-
-    return { links, isRouteMatched, setTheme };
+  {
+    to: "/projects",
+    label: "Projects",
   },
-});
+];
+
+const route = useRoute();
+
+const isRouteMatched = (to: string) => {
+  return route.matched.some(({ path }) => path === to);
+};
+
+const setTheme = (isDark: boolean) => {
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
 </script>
-
-<style lang="less" scoped></style>

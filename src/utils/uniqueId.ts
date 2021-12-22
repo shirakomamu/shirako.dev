@@ -1,8 +1,7 @@
-// adapted from lodash's uniqueId
 const idCounter: { [key: string]: number } = {};
 const DEFAULT_PREFIX = process.env.VUE_APP_NAME || "shirako.dev";
 
-export default (prefix = DEFAULT_PREFIX): string => {
+export default (prefix: string = DEFAULT_PREFIX): string => {
   if (!idCounter[prefix]) {
     idCounter[prefix] = 0;
   }
