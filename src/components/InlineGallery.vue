@@ -103,19 +103,14 @@ const scrollToElement = ({
   behavior?: ScrollBehavior;
 }) => {
   if (!childElements.value) return;
-
   const elem = childElements.value.item(to);
-
   if (!elem || !camera.value || !viewport.value) return;
-
-  // const rect = elem.getBoundingClientRect();
 
   // using this instead of scrollIntoView because of lack of control over y-axis
   camera.value.scrollTo({
     left: camera.value.getBoundingClientRect().width * to,
     behavior,
   });
-  // elem.scrollIntoView({ behavior, block: "nearest" });
 };
 
 const numChildren = computed(() => childElements.value?.length || 0);
@@ -135,6 +130,36 @@ const goToNext = () => {
   );
 };
 
+const xDown = ref<undefined | number>(undefined);
+const yDown = ref<undefined | number>(undefined);
+
+function handleTouchStart(event: TouchEvent) {
+  const firstTouch = event.touches[0];
+  xDown.value = firstTouch?.clientX;
+  yDown.value = firstTouch?.clientY;
+}
+
+function handleTouchMove(event: TouchEvent) {
+  if (!xDown.value || !yDown.value) {
+    return;
+  }
+
+  const xUp = event.touches[0].clientX;
+  const yUp = event.touches[0].clientY;
+  const xDiff = xDown.value - xUp;
+  const yDiff = yDown.value - yUp;
+  const xDiffAbs = Math.abs(xDiff);
+  const yDiffAbs = Math.abs(yDiff);
+
+  if (xDiffAbs < 50) return;
+  if (xDiffAbs > yDiffAbs) {
+    xDiff > 0 ? goToNext() : goToPrevious();
+  }
+
+  xDown.value = undefined;
+  yDown.value = undefined;
+}
+
 const resizeObserver = ref<null | ResizeObserver>(null);
 
 onMounted(() => {
@@ -142,6 +167,8 @@ onMounted(() => {
     scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
   });
   resizeObserver.value.observe(document.documentElement);
+  viewport.value?.addEventListener("touchstart", handleTouchStart, false);
+  viewport.value?.addEventListener("touchmove", handleTouchMove, false);
 });
 
 onUnmounted(() => resizeObserver.value?.disconnect());

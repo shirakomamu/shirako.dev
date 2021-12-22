@@ -45,7 +45,7 @@ const typeWord = (word: string, delay: number) => {
   }
   typingState.value = 1;
   currentContextResult.value = "";
-  let timer: ReturnType<typeof setInterval> = setInterval(() => {
+  const timer: ReturnType<typeof setInterval> = setInterval(() => {
     const contextLength = currentContextResult.value.length;
     if (contextLength === word.length) {
       typingState.value = 0;
@@ -59,7 +59,7 @@ const eraseWord = (delay: number) => {
     return;
   }
   typingState.value = -1;
-  let timer: ReturnType<typeof setInterval> = setInterval(() => {
+  const timer: ReturnType<typeof setInterval> = setInterval(() => {
     const contextLength = currentContextResult.value.length;
     if (contextLength === 0) {
       typingState.value = 0;

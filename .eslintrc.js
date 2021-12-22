@@ -12,11 +12,13 @@ module.exports = {
     "@vue/prettier/@typescript-eslint",
   ],
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: "latest",
   },
   rules: {
     "no-console": "warn",
     "no-debugger": "warn",
+    "no-var": "error",
+    "prefer-const": "error",
     "vue/component-name-in-template-casing": [
       "error",
       "PascalCase",
