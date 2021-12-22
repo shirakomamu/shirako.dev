@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --no-unsafe-inline --modern",
-    "lint": "vue-cli-service lint",
-    "test:unit": "cypress open-ct"
+    "build": "vue-cli-service build --no-unsafe-inline --modern"
   },
   "dependencies": {
     "register-service-worker": "^1.7.1",
