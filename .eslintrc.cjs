@@ -1,3 +1,5 @@
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
   root: true,
   env: {
@@ -8,8 +10,8 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended",
     "@vue/typescript/recommended",
-    "@vue/prettier",
-    "@vue/prettier/@typescript-eslint",
+    "@vue/eslint-config-typescript",
+    "@vue/eslint-config-prettier",
   ],
   parserOptions: {
     ecmaVersion: "latest",
@@ -29,5 +31,4 @@ module.exports = {
     ],
     "vue/multi-word-component-names": "off",
   },
-  ignorePatterns: ["cypress/**/*.*"],
 };
