@@ -1,3 +1,125 @@
+<script setup lang="ts">
+import { computed, defineProps, onMounted, onUnmounted, ref, watch } from "vue";
+import ArrowBackIos from "@/components/icons/IconArrowBackIos.vue";
+import ArrowForwardIos from "@/components/icons/IconArrowForwardIos.vue";
+
+const SCROLL_DIST_SNAP_PX = 50;
+
+defineProps({
+  showControls: {
+    type: Boolean,
+    default: false,
+  },
+  showPagination: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const wrapper = ref<HTMLDivElement | null>(null);
+const camera = ref<HTMLDivElement | null>(null);
+const viewport = ref<HTMLDivElement | null>(null);
+const childElements = ref<HTMLCollection | null>(null);
+const currentElementNum = ref<number>(1);
+
+onMounted(() => {
+  childElements.value = viewport.value?.children ?? null;
+  if (childElements.value === null) return;
+
+  for (const elem of childElements.value) {
+    elem.classList.add("flex-shrink-0");
+    elem.classList.add("w-full");
+    elem.classList.add("h-full");
+    const images = elem.querySelectorAll("img");
+
+    for (const image of images) {
+      image.classList.add("max-h-60vh");
+      image.classList.add("object-scale-down");
+      image.classList.add("w-full");
+    }
+  }
+});
+
+const scrollToElement = ({
+  to,
+  behavior = "smooth",
+}: {
+  to: number;
+  behavior?: ScrollBehavior;
+}): void => {
+  if (childElements.value === null) return;
+  const elem = childElements.value.item(to);
+  if (elem === null || camera.value === null || viewport.value === null) return;
+
+  // using this instead of scrollIntoView because of lack of control over y-axis
+  camera.value.scrollTo({
+    left: camera.value.getBoundingClientRect().width * to,
+    behavior,
+  });
+};
+
+watch(currentElementNum, (newNum: number) => {
+  scrollToElement({
+    to: newNum - 1,
+    behavior: "smooth",
+  });
+});
+
+const numChildren = computed(() => childElements.value?.length ?? 0);
+
+const goToPrevious = (): void => {
+  currentElementNum.value = Math.max(currentElementNum.value - 1, 1);
+};
+const goToNext = (): void => {
+  currentElementNum.value = Math.min(
+    currentElementNum.value + 1,
+    numChildren.value
+  );
+};
+
+const xDown = ref<undefined | number>(undefined);
+const yDown = ref<undefined | number>(undefined);
+
+function handleTouchStart(event: TouchEvent): void {
+  const firstTouch = event.touches[0];
+  xDown.value = firstTouch?.clientX;
+  yDown.value = firstTouch?.clientY;
+}
+
+function handleTouchMove(event: TouchEvent): void {
+  if (xDown.value === null || yDown.value === null) return;
+  if (xDown.value === undefined || yDown.value === undefined) return;
+
+  const xUp = event.touches[0].clientX;
+  const yUp = event.touches[0].clientY;
+  const xDiff = xDown.value - xUp;
+  const yDiff = yDown.value - yUp;
+  const xDiffAbs = Math.abs(xDiff);
+  const yDiffAbs = Math.abs(yDiff);
+
+  if (xDiffAbs < SCROLL_DIST_SNAP_PX) return;
+  if (xDiffAbs > yDiffAbs) {
+    xDiff > 0 ? goToNext() : goToPrevious();
+  }
+
+  xDown.value = undefined;
+  yDown.value = undefined;
+}
+
+const resizeObserver = ref<null | ResizeObserver>(null);
+
+onMounted(() => {
+  resizeObserver.value = new ResizeObserver(() => {
+    scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
+  });
+  resizeObserver.value.observe(document.documentElement);
+  viewport.value?.addEventListener("touchstart", handleTouchStart, false);
+  viewport.value?.addEventListener("touchmove", handleTouchMove, false);
+});
+
+onUnmounted(() => resizeObserver.value?.disconnect());
+</script>
+
 <template>
   <div ref="wrapper" class="relative">
     <div ref="camera" class="camera overflow-hidden">
@@ -43,130 +165,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed, defineProps, onMounted, onUnmounted, ref, watch } from "vue";
-import ArrowBackIos from "@/components/icons/ArrowBackIos.vue";
-import ArrowForwardIos from "@/components/icons/ArrowForwardIos.vue";
-
-defineProps({
-  showControls: {
-    type: Boolean,
-    default: false,
-  },
-  showPagination: {
-    type: Boolean,
-    default: false,
-  },
-});
-
-const wrapper = ref<HTMLDivElement | null>(null);
-const camera = ref<HTMLDivElement | null>(null);
-const viewport = ref<HTMLDivElement | null>(null);
-const childElements = ref<HTMLCollection | null>(null);
-
-const currentElementNum = ref<number>(1);
-
-onMounted(() => {
-  childElements.value = viewport.value?.children || null;
-
-  if (!childElements.value) return;
-
-  for (const elem of childElements.value) {
-    elem.classList.add("flex-shrink-0");
-    elem.classList.add("w-full");
-    elem.classList.add("h-full");
-    const images = elem.querySelectorAll("img");
-
-    for (const image of images) {
-      image.classList.add("max-h-60vh");
-      image.classList.add("object-scale-down");
-      image.classList.add("w-full");
-    }
-  }
-});
-
-watch(currentElementNum, (newNum: number) => {
-  scrollToElement({
-    to: newNum - 1,
-    behavior: "smooth",
-  });
-});
-
-const scrollToElement = ({
-  to,
-  behavior = "smooth",
-}: {
-  to: number;
-  // eslint-disable-next-line no-undef
-  behavior?: ScrollBehavior;
-}) => {
-  if (!childElements.value) return;
-  const elem = childElements.value.item(to);
-  if (!elem || !camera.value || !viewport.value) return;
-
-  // using this instead of scrollIntoView because of lack of control over y-axis
-  camera.value.scrollTo({
-    left: camera.value.getBoundingClientRect().width * to,
-    behavior,
-  });
-};
-
-const numChildren = computed(() => childElements.value?.length || 0);
-
-const goToPrevious = () => {
-  currentElementNum.value = Math.max(currentElementNum.value - 1, 1);
-};
-const goToNext = () => {
-  currentElementNum.value = Math.min(
-    currentElementNum.value + 1,
-    numChildren.value
-  );
-};
-
-const xDown = ref<undefined | number>(undefined);
-const yDown = ref<undefined | number>(undefined);
-
-function handleTouchStart(event: TouchEvent) {
-  const firstTouch = event.touches[0];
-  xDown.value = firstTouch?.clientX;
-  yDown.value = firstTouch?.clientY;
-}
-
-function handleTouchMove(event: TouchEvent) {
-  if (!xDown.value || !yDown.value) {
-    return;
-  }
-
-  const xUp = event.touches[0].clientX;
-  const yUp = event.touches[0].clientY;
-  const xDiff = xDown.value - xUp;
-  const yDiff = yDown.value - yUp;
-  const xDiffAbs = Math.abs(xDiff);
-  const yDiffAbs = Math.abs(yDiff);
-
-  if (xDiffAbs < 50) return;
-  if (xDiffAbs > yDiffAbs) {
-    xDiff > 0 ? goToNext() : goToPrevious();
-  }
-
-  xDown.value = undefined;
-  yDown.value = undefined;
-}
-
-const resizeObserver = ref<null | ResizeObserver>(null);
-
-onMounted(() => {
-  resizeObserver.value = new ResizeObserver(() => {
-    scrollToElement({ to: currentElementNum.value - 1, behavior: "auto" });
-  });
-  resizeObserver.value.observe(document.documentElement);
-  viewport.value?.addEventListener("touchstart", handleTouchStart, false);
-  viewport.value?.addEventListener("touchmove", handleTouchMove, false);
-});
-
-onUnmounted(() => resizeObserver.value?.disconnect());
-</script>
 
 <style lang="less" scoped>
 .controls {

@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import { computed, onMounted } from "vue";
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import BgStars from "@/components/BgStars.vue";
+
+const setTheme = (isDark: boolean): void => {
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
+
+const queryList = computed(() =>
+  window.matchMedia("(prefers-color-scheme: dark)")
+);
+
+onMounted(() => {
+  setTheme(true);
+  queryList.value.addEventListener("change", (e) => setTheme(e.matches));
+});
+</script>
+
 <template>
   <metainfo>
     <template #title="{ content }">{{ `${content}` }}</template>
@@ -28,82 +52,6 @@
     />
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useMeta } from "vue-meta";
-import AppHeader from "@/components/AppHeader.vue";
-import AppFooter from "@/components/AppFooter.vue";
-import BgStars from "@/components/BgStars.vue";
-
-const meta = computed(() => ({
-  meta: [
-    {
-      vmid: "description",
-      name: "description",
-      content: "Portfolio site for 白狐マム.",
-    },
-  ],
-  htmlAttrs: { lang: "en" },
-}));
-useMeta(meta);
-
-const refreshing = ref<boolean>(false);
-const registration = ref<null | ServiceWorkerRegistration>(null);
-const updateExists = ref<boolean>(false);
-
-// this is called when sw receives SKIP_WAITING event
-navigator.serviceWorker?.addEventListener("controllerchange", () => {
-  // Prevent multiple refreshes
-  if (refreshing.value) return;
-  refreshing.value = true;
-  window.location.reload();
-});
-
-const refreshApp = () => {
-  // Make sure we only send a 'skip waiting' message if the SW is waiting
-  if (!registration.value?.waiting) return;
-
-  // send message to SW to skip the waiting and activate the new SW
-  registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
-};
-
-// Store the SW registration so we can send it a message
-// We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
-// To alert the user there is an update they need to refresh for
-const onUpdateAvailable = async (event: {
-  detail: ServiceWorkerRegistration;
-}) => {
-  registration.value = event.detail;
-  updateExists.value = true;
-
-  // automatic refresh when update is available
-  refreshApp();
-};
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-document.addEventListener("swUpdated", onUpdateAvailable, {
-  once: true,
-});
-
-const setTheme = (isDark: boolean) => {
-  if (isDark) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-};
-
-const queryList = computed(() =>
-  window.matchMedia("(prefers-color-scheme: dark)")
-);
-
-onMounted(() => {
-  setTheme(true);
-  queryList.value.addEventListener("change", (e) => setTheme(e.matches));
-});
-</script>
 
 <style lang="less" scoped>
 .fade-leave-from,

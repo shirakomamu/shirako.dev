@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { useMeta } from "vue-meta";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+useMeta({
+  title: "Privacy policy | shirako.dev",
+  link: [
+    {
+      rel: "canonical",
+      href: "https://shirako.dev" + route.path,
+    },
+  ],
+});
+</script>
+
 <template>
   <div class="space-y-8">
     <h5 class="text-4xl dark:text-white">Privacy policy</h5>
@@ -32,19 +48,3 @@
     </p>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useMeta } from "vue-meta";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-useMeta({
-  title: "Privacy policy | " + process.env.VUE_APP_NAME,
-  link: [
-    {
-      rel: "canonical",
-      href: "https://shirako.dev" + route.path,
-    },
-  ],
-});
-</script>

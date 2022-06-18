@@ -2,15 +2,8 @@ import { defineConfig } from "windicss/helpers";
 import scrollbar from "@windicss/plugin-scrollbar";
 
 export default defineConfig({
-  darkMode: "class", // false, "media", or "class"
-  theme: {
-    extend: {
-      colors: {
-        "blue-srk": "#0089ff",
-        "orange-srk": "#ff7600",
-      },
-    },
-  },
+  darkMode: "class",
+  theme: { extend: { colors: { "blue-srk": "#0089ff" } } },
   shortcuts: {
     "ps-text-link": "text-blue-srk hover:underline focus:underline",
     "ps-bg-flat": "bg-white dark:bg-dark-800",

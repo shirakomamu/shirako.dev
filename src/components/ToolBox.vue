@@ -1,3 +1,24 @@
+<script setup lang="ts">
+defineProps({
+  name: {
+    type: String,
+    default: "",
+  },
+  logoSrc: {
+    type: String,
+    default: "",
+  },
+  logoSrcWhenDark: {
+    type: String,
+    default: "",
+  },
+  logoAlt: {
+    type: String,
+    default: "",
+  },
+});
+</script>
+
 <template>
   <div
     class="p-4 flex flex-col items-center rounded-lg transition bg-gray-200/50 dark:bg-gray-600/50"
@@ -31,26 +52,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from "vue";
-
-defineProps({
-  name: {
-    type: String,
-    default: "",
-  },
-  logoSrc: {
-    type: String,
-    default: "",
-  },
-  logoSrcWhenDark: {
-    type: String,
-    default: "",
-  },
-  logoAlt: {
-    type: String,
-    default: "",
-  },
-});
-</script>

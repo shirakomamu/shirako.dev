@@ -8,16 +8,8 @@
     fill="currentColor"
   >
     <rect fill="none" height="24" width="24" />
-    <g><polygon points="17.77,3.77 16,2 6,12 16,22 17.77,20.23 9.54,12" /></g>
+    <g>
+      <polygon points="6.23,3.77 8,2 18,12 8,22 6.23,20.23 14.46,12" />
+    </g>
   </svg>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "ArrowBackIos",
-});
-</script>
-
-<style lang="less" scoped></style>

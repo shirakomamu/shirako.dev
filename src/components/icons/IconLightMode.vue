@@ -13,13 +13,3 @@
     />
   </svg>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "LightMode",
-});
-</script>
-
-<style lang="less" scoped></style>

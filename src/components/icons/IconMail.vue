@@ -16,11 +16,3 @@
     <polyline points="3 7 12 13 21 7"></polyline>
   </svg>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "Mail",
-});
-</script>

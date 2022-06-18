@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import EmailHider from "@/components/EmailHider.vue";
+
+const hash = "n/a";
+const emailText = "✉️ say hello";
+</script>
+
 <template>
   <div class="nav flex items-center px-8">
     <div class="justify-start flex flex-grow items-center">
@@ -17,10 +24,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import EmailHider from "@/components/EmailHider.vue";
-
-const hash = process.env.VUE_APP_GIT_HASH || "n/a";
-const emailText = "✉️ say hello";
-</script>

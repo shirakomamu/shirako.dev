@@ -1,3 +1,42 @@
+<script setup lang="ts">
+import { useRoute } from "vue-router";
+import EmailHider from "@/components/EmailHider.vue";
+import Email from "@/components/icons/IconEmail.vue";
+import DarkMode from "@/components/icons/IconDarkMode.vue";
+import LightMode from "@/components/icons/IconLightMode.vue";
+import { Route } from "@/immutables/router";
+
+interface NavigationLink {
+  to: { name: Route };
+  label: string;
+}
+
+const links: NavigationLink[] = [
+  {
+    to: { name: Route.HOME },
+    label: "Home",
+  },
+  {
+    to: { name: Route.PROJECTS },
+    label: "Projects",
+  },
+];
+
+const route = useRoute();
+
+const isRouteMatched = (to: { name: Route }): boolean => {
+  return route.matched.some(({ name }) => name === to.name);
+};
+
+const setTheme = (isDark: boolean): void => {
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
+</script>
+
 <template>
   <div class="flex flex-row items-center px-8">
     <div class="flex-shrink-0 justify-start items-center">
@@ -88,41 +127,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useRoute } from "vue-router";
-import EmailHider from "@/components/EmailHider.vue";
-import Email from "@/components/icons/Email.vue";
-import DarkMode from "@/components/icons/DarkMode.vue";
-import LightMode from "@/components/icons/LightMode.vue";
-
-interface NavigationLink {
-  to: string;
-  label: string;
-}
-
-const links: NavigationLink[] = [
-  {
-    to: "/",
-    label: "Home",
-  },
-  {
-    to: "/projects",
-    label: "Projects",
-  },
-];
-
-const route = useRoute();
-
-const isRouteMatched = (to: string) => {
-  return route.matched.some(({ path }) => path === to);
-};
-
-const setTheme = (isDark: boolean) => {
-  if (isDark) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-};
-</script>

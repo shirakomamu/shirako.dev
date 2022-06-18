@@ -1,26 +1,12 @@
-<template>
-  <div
-    class="hero h-32 md:h-48 flex flex-col items-center justify-center"
-    role="img"
-    :alt="'' + currentContext"
-  >
-    <div class="sm-2 text-2xl md:text-4xl text-center dark:text-white">
-      <span class="font-mono typewriter">
-        {{ currentContextResult }}
-      </span>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
-import useStore from "@/use/useStore";
 import shuffleArray from "@/utils/shuffleArray";
+import { useGeneralStore } from "@/stores/general";
 
-const store = useStore();
+const store = useGeneralStore();
 
 // clone so it doesn't change the order of the list
-const techs = store.getters.technologies.map((e) => e.name);
+const techs = store.technologies.map((e) => e.name);
 const typewriterContexts = shuffleArray([...techs]);
 
 const contextIndex = ref(0);
@@ -33,46 +19,48 @@ const wordDisplayTime = 5000;
 const wordBlankTime = 1000;
 const wordTypeDelay = 30;
 
-const doWordCycle = (delay: number) => {
-  typeWord(currentContext.value, wordTypeDelay);
-  setTimeout(() => {
-    eraseWord(wordTypeDelay);
-  }, delay);
-};
-const typeWord = (word: string, delay: number) => {
+const typeWord = (word: string, delay: number): void => {
   if (typingState.value !== 0) {
     return;
   }
   typingState.value = 1;
   currentContextResult.value = "";
-  const timer: ReturnType<typeof setInterval> = setInterval(() => {
+  const localTimer = setInterval(() => {
     const contextLength = currentContextResult.value.length;
     if (contextLength === word.length) {
       typingState.value = 0;
-      clearInterval(timer);
+      clearInterval(localTimer);
     }
     currentContextResult.value = word.slice(0, contextLength + 1);
   }, delay);
 };
-const eraseWord = (delay: number) => {
+
+const eraseWord = (delay: number): void => {
   if (typingState.value !== 0) {
     return;
   }
   typingState.value = -1;
-  const timer: ReturnType<typeof setInterval> = setInterval(() => {
+  const localTimer = setInterval(() => {
     const contextLength = currentContextResult.value.length;
     if (contextLength === 0) {
       typingState.value = 0;
-      clearInterval(timer);
+      clearInterval(localTimer);
     }
     currentContextResult.value = currentContextResult.value.slice(0, -1);
+  }, delay);
+};
+
+const doWordCycle = (delay: number): void => {
+  typeWord(currentContext.value, wordTypeDelay);
+  setTimeout(() => {
+    eraseWord(wordTypeDelay);
   }, delay);
 };
 
 onMounted(() => {
   doWordCycle(wordDisplayTime);
 
-  if (timer.value) {
+  if (timer.value !== null) {
     return;
   }
 
@@ -86,6 +74,20 @@ onMounted(() => {
 
 onUnmounted(() => (timer.value = null));
 </script>
+
+<template>
+  <div
+    class="hero h-32 md:h-48 flex flex-col items-center justify-center"
+    role="img"
+    :alt="'' + currentContext"
+  >
+    <div class="sm-2 text-2xl md:text-4xl text-center dark:text-white">
+      <span class="font-mono typewriter">
+        {{ currentContextResult }}
+      </span>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="less">
 .hero {

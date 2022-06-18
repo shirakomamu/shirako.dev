@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import Accordion from "@/components/Accordion.vue";
+
+defineProps({
+  iconUrl: {
+    type: String,
+    default: "",
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: String,
+    default: "",
+  },
+  initiallyExpanded: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
+
 <template>
   <article class="grid grid-cols-1 gap-4">
     <Accordion :initial-visibility="initiallyExpanded">
@@ -22,27 +45,3 @@
     </Accordion>
   </article>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from "vue";
-import Accordion from "@/components/Accordion.vue";
-
-defineProps({
-  iconUrl: {
-    type: String,
-    default: "",
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: String,
-    default: "",
-  },
-  initiallyExpanded: {
-    type: Boolean,
-    default: false,
-  },
-});
-</script>

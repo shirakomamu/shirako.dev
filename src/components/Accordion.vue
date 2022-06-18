@@ -1,3 +1,56 @@
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+import ExpandLess from "@/components/icons/IconExpandLess.vue";
+import ExpandMore from "@/components/icons/IconExpandMore.vue";
+
+const TRANSITION_DURATION_MS = 50;
+
+const props = defineProps({
+  initialVisibility: {
+    type: Boolean,
+    default: false,
+  },
+  showArrow: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+const emit = defineEmits({
+  toggle(payload: unknown) {
+    return typeof payload === "boolean";
+  },
+});
+
+const visible = ref<boolean>(props.initialVisibility);
+const contentsContainer = ref<null | HTMLDivElement>(null);
+const contents = ref<null | HTMLDivElement>(null);
+const transitionType = ref<"in" | "out" | null>(null);
+const firstElementMarginTop = ref<string>("0px");
+const setRealHeight = (): void => {
+  // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
+  // margin top needs to be accounted for
+  const firstChild = contents.value?.children.item(0);
+  if (firstChild !== undefined && firstChild !== null) {
+    const style = window.getComputedStyle(firstChild);
+    firstElementMarginTop.value = style.marginTop ?? "0px";
+  }
+};
+
+onMounted(() => setRealHeight());
+
+const toggleVisibility = (): void => {
+  if (contentsContainer.value === null) return;
+  const newState = !visible.value;
+  visible.value = newState;
+  transitionType.value = newState ? "in" : "out";
+  emit("toggle", newState);
+  setTimeout(() => {
+    transitionType.value = null;
+  }, TRANSITION_DURATION_MS);
+};
+</script>
+
 <template>
   <div class="accordion-container">
     <button
@@ -32,58 +85,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps, defineEmits, onMounted, ref } from "vue";
-import ExpandLess from "@/components/icons/ExpandLess.vue";
-import ExpandMore from "@/components/icons/ExpandMore.vue";
-
-const props = defineProps({
-  initialVisibility: {
-    type: Boolean,
-    default: false,
-  },
-  showArrow: {
-    type: Boolean,
-    default: true,
-  },
-});
-
-const emit = defineEmits({
-  toggle(payload: unknown) {
-    return typeof payload === "boolean";
-  },
-});
-
-const visible = ref<boolean>(props.initialVisibility);
-const contentsContainer = ref<null | HTMLDivElement>(null);
-const contents = ref<null | HTMLDivElement>(null);
-const transitionType = ref<"in" | "out" | null>(null);
-const firstElementMarginTop = ref<string>("0px");
-const setRealHeight = () => {
-  // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
-  // margin top needs to be accounted for
-  const firstChild = contents.value?.children.item(0);
-  if (firstChild) {
-    const style = window.getComputedStyle(firstChild);
-    firstElementMarginTop.value = style.marginTop || "0px";
-  }
-};
-
-onMounted(() => setRealHeight());
-
-const toggleVisibility = () => {
-  if (!contentsContainer.value) return;
-  if (transitionType.value) return;
-  const newState = !visible.value;
-  visible.value = newState;
-  transitionType.value = newState ? "in" : "out";
-  emit("toggle", newState);
-  setTimeout(() => {
-    transitionType.value = null;
-  }, 50);
-};
-</script>
 
 <style lang="less" scoped>
 .accordion-contents {

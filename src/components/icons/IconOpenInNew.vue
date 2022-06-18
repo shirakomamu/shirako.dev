@@ -12,11 +12,3 @@
     <path d="M0 0h24v24H0z" fill="none" />
   </svg>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "OpenInNew",
-});
-</script>
