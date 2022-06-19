@@ -15,23 +15,25 @@ const PX_DY_PER_REFRESH = 0.2;
 const RAND_HALF = 0.5;
 const COVER_SCALE_FACTOR = 1.5;
 const WINDOW_HEIGHT_YSCALE = 0.75;
+
+const threeContainer = ref<null | HTMLDivElement>(null);
+const starColor = ref<number>(DARK_STAR_COLOR);
+
 const camera = new THREE.PerspectiveCamera(
   CAMERA_FOV,
   window.innerWidth / window.innerHeight,
   CAMERA_NEAR_LIMIT,
   CAMERA_FAR_LIMIT
 );
+const geometry = new THREE.BufferGeometry();
+const scene = new THREE.Scene();
+const renderer = new THREE.WebGLRenderer({ alpha: true });
 
 camera.lookAt(0, 0, CAMERA_FAR_LIMIT);
 
 const getStarCount = (): number => {
   return Math.floor(window.innerWidth * window.innerHeight * STAR_DENSITY);
 };
-
-const threeContainer = ref<null | HTMLDivElement>(null);
-
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer({ alpha: true });
 
 const setElement = (): void => {
   if (threeContainer.value === null) return;
@@ -43,13 +45,10 @@ const setCamera = (): void => {
   renderer.setSize(window.innerWidth, window.innerHeight, true);
 };
 
-const starColor = ref<number>(DARK_STAR_COLOR);
-
-const geometry = new THREE.BufferGeometry();
-
 const applyStarColor = (): void => {
-  if (geometry.attributes.position === undefined) return;
-  const numVertices = geometry.attributes.position.count;
+  const position = geometry.getAttribute("position");
+  if (position === undefined) return;
+  const numVertices = position.count;
 
   geometry.setAttribute(
     "color",
@@ -64,8 +63,6 @@ const applyStarColor = (): void => {
 
 const setSpheres = (): void => {
   scene.clear();
-  geometry.deleteAttribute("position");
-  geometry.deleteAttribute("color");
   const starCount = getStarCount();
   const vertices: THREE.Vector3[] = [];
 
@@ -97,19 +94,20 @@ const setSpheres = (): void => {
 };
 
 const animateStars = (): void => {
-  if (geometry.attributes.position === undefined) return;
+  const position = geometry.getAttribute("position");
+  if (position === undefined) return;
   const Y_THRESHOLD = window.innerHeight * WINDOW_HEIGHT_YSCALE;
-  const vertices = geometry.attributes.position.array;
 
-  for (let i = 1; i < vertices.length; i += STAR_ATTRIBUTE_NUM) {
-    if (vertices[i] > Y_THRESHOLD) {
-      vertices[i] = -Y_THRESHOLD;
+  for (let i = 1; i < position.count; i++) {
+    const vertex = position.getY(i);
+    if (vertex > Y_THRESHOLD) {
+      position.setY(i, -Y_THRESHOLD);
       continue;
     }
-    vertices[i] = vertices[i] + PX_DY_PER_REFRESH;
+    position.setY(i, vertex + PX_DY_PER_REFRESH);
   }
 
-  geometry.attributes.position.needsUpdate = true;
+  position.needsUpdate = true;
 };
 
 const render = (): void => {
@@ -153,9 +151,7 @@ onMounted(() => {
   });
 });
 
-onUnmounted(() => {
-  resizeObserver.value?.disconnect();
-});
+onUnmounted(() => resizeObserver.value?.disconnect());
 </script>
 
 <template>
