@@ -26,23 +26,25 @@ const GUIDE_ARROW_DELAY = 5000; // ms, time to wait before arrow initially appea
 const isGuideArrowVisible = ref<boolean>(false);
 const hasIntersected = computed(() => store.isBioRead);
 
-const onObserved = (entries: IntersectionObserverEntry[]): void => {
-  // if user has scrolled down, detected by skill boxes being visible, then set the flag
-  const skillBoxesEvent = entries.find((e) => e.target === skillBoxes.value);
-  if (skillBoxesEvent?.isIntersecting === true) {
-    store.markBioAsRed(true);
-    // observer.unobserve(skillBoxes.value as HTMLDivElement);
-  }
+const observer = new IntersectionObserver(
+  (entries: IntersectionObserverEntry[]): void => {
+    // if user has scrolled down, detected by skill boxes being visible, then set the flag
+    const skillBoxesEvent = entries.find((e) => e.target === skillBoxes.value);
+    if (skillBoxesEvent?.isIntersecting === true) {
+      store.markBioAsRed(true);
+      observer.unobserve(skillBoxes.value as HTMLDivElement);
+    }
 
-  // main arrow logic
-  const mainTextEvent = entries.find((e) => e.target === mainText.value);
-  if (mainTextEvent === undefined || mainTextEvent.time < GUIDE_ARROW_DELAY) {
-    return;
-  }
+    // main arrow logic
+    const mainTextEvent = entries.find((e) => e.target === mainText.value);
+    if (mainTextEvent === undefined || mainTextEvent.time < GUIDE_ARROW_DELAY) {
+      return;
+    }
 
-  isGuideArrowVisible.value = mainTextEvent.isIntersecting;
-};
-const observer = new IntersectionObserver(onObserved, { threshold: 0.9 });
+    isGuideArrowVisible.value = mainTextEvent.isIntersecting;
+  },
+  { threshold: 0.9 }
+);
 
 onMounted(() => {
   observer.observe(mainText.value as HTMLDivElement);
