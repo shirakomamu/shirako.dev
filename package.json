@@ -28,7 +28,6 @@
     "@windicss/plugin-scrollbar": "^1.2.3",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^9.1.1",
-    "git-describe": "^4.0.4",
     "less": "^4.1.2",
     "prettier": "^2.5.1",
     "ts-essentials": "^9.1.2",

@@ -2,7 +2,7 @@
 import { useMeta } from "vue-meta";
 
 useMeta({
-  title: "Error | shirako.dev",
+  title: `Error | ${import.meta.env.VITE_APP_NAME}`,
 });
 </script>
 

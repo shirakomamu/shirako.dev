@@ -9,7 +9,7 @@ import { useGeneralStore } from "@/stores/general";
 
 const route = useRoute();
 useMeta({
-  title: "Home | shirako.dev",
+  title: `Home | ${import.meta.env.VITE_APP_NAME}`,
   link: [
     {
       rel: "canonical",

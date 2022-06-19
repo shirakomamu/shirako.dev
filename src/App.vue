@@ -3,6 +3,9 @@ import { computed, onMounted } from "vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import BgStars from "@/components/BgStars.vue";
+import { useMeta } from "vue-meta";
+
+useMeta({ description: import.meta.env.VITE_APP_DESCRIPTION });
 
 const setTheme = (isDark: boolean): void => {
   if (isDark) {
@@ -23,10 +26,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <metainfo>
-    <template #title="{ content }">{{ `${content}` }}</template>
-    <template #description="{ content }">{{ `${content}` }}</template>
-  </metainfo>
+  <metainfo />
 
   <div
     class="layout-container h-full text-black dark:text-gray-200 flex flex-col"

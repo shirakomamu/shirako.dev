@@ -2,14 +2,16 @@
 import { useRoute } from "vue-router";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/IconEmail.vue";
-import DarkMode from "@/components/icons/IconDarkMode.vue";
-import LightMode from "@/components/icons/IconLightMode.vue";
 import { Route } from "@/immutables/router";
 
 interface NavigationLink {
   to: { name: Route };
   label: string;
 }
+
+const route = useRoute();
+
+const appName = import.meta.env.VITE_APP_NAME;
 
 const links: NavigationLink[] = [
   {
@@ -22,18 +24,8 @@ const links: NavigationLink[] = [
   },
 ];
 
-const route = useRoute();
-
 const isRouteMatched = (to: { name: Route }): boolean => {
   return route.matched.some(({ name }) => name === to.name);
-};
-
-const setTheme = (isDark: boolean): void => {
-  if (isDark) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
 };
 </script>
 
@@ -42,7 +34,7 @@ const setTheme = (isDark: boolean): void => {
     <div class="flex-shrink-0 justify-start items-center">
       <router-link to="/" class="flex flex-row gap-4 items-center">
         <img
-          alt="shirako.dev logo"
+          :alt="`${appName} logo`"
           src="/icons/512-bl_rc-fc.png"
           width="32"
           height="32"
@@ -107,22 +99,6 @@ const setTheme = (isDark: boolean): void => {
             width="24"
           />
         </a>
-        <button
-          type="button"
-          alt="Toggle dark mode"
-          class="flex-shrink-0 p-0 dark:hidden transition opacity-50 hover:opacity-100 focus:opacity-100"
-          @click="setTheme(true)"
-        >
-          <DarkMode class="inline-block" />
-        </button>
-        <button
-          type="button"
-          alt="Toggle light mode"
-          class="p-0 hidden dark:block transition opacity-50 hover:opacity-100 focus:opacity-100"
-          @click="setTheme(false)"
-        >
-          <LightMode class="inline-block" />
-        </button>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 useMeta({
-  title: "Privacy policy | shirako.dev",
+  title: `Privacy policy | ${import.meta.env.VITE_APP_NAME}`,
   link: [
     {
       rel: "canonical",

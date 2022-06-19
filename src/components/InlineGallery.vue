@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import ArrowBackIos from "@/components/icons/IconArrowBackIos.vue";
 import ArrowForwardIos from "@/components/icons/IconArrowForwardIos.vue";
 
