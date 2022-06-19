@@ -37,14 +37,14 @@ onMounted(() => {
     />
 
     <div class="py-8 flex flex-col flex-grow justify-center view-container">
-      <router-view v-slot="{ Component }" key="router-view"
-        ><transition name="fade" mode="out-in">
+      <RouterView v-slot="{ Component }">
+        <Transition name="fade">
           <component
             :is="Component"
             class="flex-1 w-full mx-auto px-8 max-w-screen-2xl"
           />
-        </transition>
-      </router-view>
+        </Transition>
+      </RouterView>
     </div>
 
     <AppFooter
