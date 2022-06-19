@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { useMeta } from "vue-meta";
+
+useMeta({
+  title: `Error | ${import.meta.env.VITE_APP_NAME}`,
+});
+</script>
+
 <template>
   <div class="space-y-8">
     <img
@@ -22,11 +30,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useMeta } from "vue-meta";
-
-useMeta({
-  title: "Error | " + process.env.VUE_APP_NAME,
-});
-</script>

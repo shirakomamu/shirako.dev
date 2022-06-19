@@ -1,39 +1,41 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
+import Projects from "@/views/Projects.vue";
+import PrivacyPolicy from "@/views/PrivacyPolicy.vue";
+import Error from "@/views/Error.vue";
+import { Route } from "@/immutables/router";
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/projects",
-    name: "Projects",
-    component: () =>
-      import(/* webpackChunkName: "projects" */ "@/views/Projects.vue"),
-  },
-  {
-    path: "/privacy",
-    name: "PrivacyPolicy",
-    component: () =>
-      import(/* webpackChunkName: "privacy" */ "@/views/PrivacyPolicy.vue"),
-  },
-  {
-    path: "/:catchAll(.*)",
-    name: "Error",
-    component: () =>
-      import(/* webpackChunkName: "error" */ "@/views/Error.vue"),
-    props: true,
-  },
-];
+function getAsync<T>(component: T): () => Promise<T> {
+  return async () => component;
+}
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior() {
     return { top: 0, behavior: "smooth" };
   },
+  routes: [
+    {
+      path: "/",
+      name: Route.HOME,
+      component: Home,
+    },
+    {
+      path: "/projects",
+      name: Route.PROJECTS,
+      component: getAsync(Projects),
+    },
+    {
+      path: "/privacy",
+      name: Route.PRIVACY,
+      component: getAsync(PrivacyPolicy),
+    },
+    {
+      path: "/:all(.*)",
+      name: Route.ERROR,
+      component: getAsync(Error),
+    },
+  ],
 });
 
 export default router;

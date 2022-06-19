@@ -1,17 +1,5 @@
-<template>
-  <a
-    @mouseover="showEmail"
-    @focus="showEmail"
-    @mouseout="hideEmail"
-    @blur="hideEmail"
-    :href="emailMailto"
-  >
-    <slot />
-  </a>
-</template>
-
 <script setup lang="ts">
-import { computed, defineProps, ref } from "vue";
+import { computed, ref } from "vue";
 
 defineProps({
   text: {
@@ -36,6 +24,18 @@ const emailMailto = computed(() => {
   return isEmailShown.value ? emailLink : "";
 });
 
-const showEmail = () => (isEmailShown.value = true);
-const hideEmail = () => (isEmailShown.value = false);
+const showEmail = (): void => void (isEmailShown.value = true);
+const hideEmail = (): void => void (isEmailShown.value = false);
 </script>
+
+<template>
+  <a
+    @mouseover="showEmail"
+    @focus="showEmail"
+    @mouseout="hideEmail"
+    @blur="hideEmail"
+    :href="emailMailto"
+  >
+    <slot />
+  </a>
+</template>

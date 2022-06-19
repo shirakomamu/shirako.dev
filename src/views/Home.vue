@@ -1,3 +1,64 @@
+<script setup lang="ts">
+import { computed, onMounted, ref } from "vue";
+import { useMeta } from "vue-meta";
+import { useRoute } from "vue-router";
+import SkillBox from "@/components/SkillBox.vue";
+import ToolBox from "@/components/ToolBox.vue";
+import ExpandMore from "@/components/icons/IconExpandMore.vue";
+import { useGeneralStore } from "@/stores/general";
+
+const route = useRoute();
+useMeta({
+  title: `Home | ${import.meta.env.VITE_APP_NAME}`,
+  link: [
+    {
+      rel: "canonical",
+      href: "https://shirako.dev" + route.path,
+    },
+  ],
+});
+const store = useGeneralStore();
+
+const mainText = ref<HTMLDivElement | null>(null);
+const skillBoxes = ref<HTMLDivElement | null>(null);
+
+const GUIDE_ARROW_DELAY = 5000; // ms, time to wait before arrow initially appears
+const isGuideArrowVisible = ref<boolean>(false);
+const hasIntersected = computed(() => store.isBioRead);
+
+const observer = new IntersectionObserver(
+  (entries: IntersectionObserverEntry[]): void => {
+    // if user has scrolled down, detected by skill boxes being visible, then set the flag
+    const skillBoxesEvent = entries.find((e) => e.target === skillBoxes.value);
+    if (skillBoxesEvent?.isIntersecting === true) {
+      store.markBioAsRed(true);
+      observer.unobserve(skillBoxes.value as HTMLDivElement);
+    }
+
+    // main arrow logic
+    const mainTextEvent = entries.find((e) => e.target === mainText.value);
+    if (mainTextEvent === undefined || mainTextEvent.time < GUIDE_ARROW_DELAY) {
+      return;
+    }
+
+    isGuideArrowVisible.value = mainTextEvent.isIntersecting;
+  },
+  { threshold: 0.9 }
+);
+
+onMounted(() => {
+  observer.observe(mainText.value as HTMLDivElement);
+  observer.observe(skillBoxes.value as HTMLDivElement);
+
+  // activate the guide arrow only if the user hasn't scrolled down
+  setTimeout(() => {
+    if (!hasIntersected.value) {
+      isGuideArrowVisible.value = true;
+    }
+  }, GUIDE_ARROW_DELAY);
+});
+</script>
+
 <template>
   <div class="space-y-8 mt-5vh md:mt-15vh">
     <div
@@ -58,7 +119,7 @@
         </h5>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <SkillBox
-            v-for="(technology, index) of technologies"
+            v-for="(technology, index) of store.technologies"
             :key="index"
             :name="technology.name"
             :link="technology.link"
@@ -73,7 +134,7 @@
         <h5 class="text-2xl dark:text-white">Tools of choice</h5>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <ToolBox
-            v-for="(tool, index) of tools"
+            v-for="(tool, index) of store.tools"
             :key="index"
             :name="tool.name"
             :logo-src="tool.logoSrc"
@@ -85,71 +146,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useMeta } from "vue-meta";
-import { useRoute } from "vue-router";
-import useStore from "@/use/useStore";
-import SkillBox from "@/components/SkillBox.vue";
-import ToolBox from "@/components/ToolBox.vue";
-import ExpandMore from "@/components/icons/ExpandMore.vue";
-import { MutationEnums } from "@/store/modules/general/enums";
-
-const route = useRoute();
-useMeta({
-  title: "Home | " + process.env.VUE_APP_NAME,
-  link: [
-    {
-      rel: "canonical",
-      href: "https://shirako.dev" + route.path,
-    },
-  ],
-});
-
-const mainText = ref<HTMLDivElement | null>(null);
-const skillBoxes = ref<HTMLDivElement | null>(null);
-
-const store = useStore();
-const { technologies, tools } = store.getters;
-
-const GUIDE_ARROW_DELAY = 5000; // ms, time to wait before arrow initially appears
-const isGuideArrowVisible = ref<boolean>(false);
-const hasIntersected = computed(() => store.getters.isBioRead);
-const setIntersected = (value: boolean) => {
-  store.commit(MutationEnums.SET_BIO_AS_READ, value);
-};
-
-const onObserved = (entries: IntersectionObserverEntry[]) => {
-  // if user has scrolled down, detected by skill boxes being visible, then set the flag
-  const skillBoxesEvent = entries.find((e) => e.target === skillBoxes.value);
-  if (skillBoxesEvent && skillBoxesEvent.isIntersecting) {
-    setIntersected(true);
-    observer.unobserve(skillBoxes.value as HTMLDivElement);
-  }
-
-  // main arrow logic
-  const mainTextEvent = entries.find((e) => e.target === mainText.value);
-  if (!mainTextEvent || mainTextEvent.time < GUIDE_ARROW_DELAY) return;
-
-  isGuideArrowVisible.value = mainTextEvent.isIntersecting;
-};
-const observer = new IntersectionObserver(onObserved, {
-  threshold: 0.9,
-});
-
-onMounted(() => {
-  observer.observe(mainText.value as HTMLDivElement);
-  observer.observe(skillBoxes.value as HTMLDivElement);
-
-  // activate the guide arrow only if the user hasn't scrolled down
-  setTimeout(() => {
-    if (!hasIntersected.value) {
-      isGuideArrowVisible.value = true;
-    }
-  }, GUIDE_ARROW_DELAY);
-});
-</script>
 
 <style lang="less" scoped>
 .arrow-container {

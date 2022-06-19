@@ -1,93 +1,13 @@
-<template>
-  <metainfo>
-    <template #title="{ content }">{{ `${content}` }}</template>
-    <template #description="{ content }">{{ `${content}` }}</template>
-  </metainfo>
-
-  <div
-    class="layout-container h-full text-black dark:text-gray-200 flex flex-col"
-  >
-    <BgStars />
-    <AppHeader
-      class="sticky ps-bg-flat top-0 h-12 z-50 w-full border-b border-gray-300 dark:border-gray-600"
-    />
-
-    <div class="py-8 flex flex-col flex-grow justify-center view-container">
-      <router-view v-slot="{ Component }" key="router-view"
-        ><transition name="fade" mode="out-in">
-          <component
-            :is="Component"
-            class="flex-1 w-full mx-auto px-8 max-w-screen-2xl"
-          />
-        </transition>
-      </router-view>
-    </div>
-
-    <AppFooter
-      class="ps-bg-flat border-t border-gray-300 dark:border-gray-600 h-12"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useMeta } from "vue-meta";
+import { computed, onMounted } from "vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import BgStars from "@/components/BgStars.vue";
+import { useMeta } from "vue-meta";
 
-const meta = computed(() => ({
-  meta: [
-    {
-      vmid: "description",
-      name: "description",
-      content: "Portfolio site for 白狐マム.",
-    },
-  ],
-  htmlAttrs: { lang: "en" },
-}));
-useMeta(meta);
+useMeta({ description: import.meta.env.VITE_APP_DESCRIPTION });
 
-const refreshing = ref<boolean>(false);
-const registration = ref<null | ServiceWorkerRegistration>(null);
-const updateExists = ref<boolean>(false);
-
-// this is called when sw receives SKIP_WAITING event
-navigator.serviceWorker?.addEventListener("controllerchange", () => {
-  // Prevent multiple refreshes
-  if (refreshing.value) return;
-  refreshing.value = true;
-  window.location.reload();
-});
-
-const refreshApp = () => {
-  // Make sure we only send a 'skip waiting' message if the SW is waiting
-  if (!registration.value?.waiting) return;
-
-  // send message to SW to skip the waiting and activate the new SW
-  registration.value.waiting.postMessage({ type: "SKIP_WAITING" });
-};
-
-// Store the SW registration so we can send it a message
-// We use `updateExists` to control whatever alert, toast, dialog, etc we want to use
-// To alert the user there is an update they need to refresh for
-const onUpdateAvailable = async (event: {
-  detail: ServiceWorkerRegistration;
-}) => {
-  registration.value = event.detail;
-  updateExists.value = true;
-
-  // automatic refresh when update is available
-  refreshApp();
-};
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-document.addEventListener("swUpdated", onUpdateAvailable, {
-  once: true,
-});
-
-const setTheme = (isDark: boolean) => {
+const setTheme = (isDark: boolean): void => {
   if (isDark) {
     document.documentElement.classList.add("dark");
   } else {
@@ -104,6 +24,34 @@ onMounted(() => {
   queryList.value.addEventListener("change", (e) => setTheme(e.matches));
 });
 </script>
+
+<template>
+  <metainfo />
+
+  <div
+    class="layout-container h-full text-black dark:text-gray-200 flex flex-col"
+  >
+    <BgStars />
+    <AppHeader
+      class="sticky ps-bg-flat top-0 h-12 z-50 w-full border-b border-gray-300 dark:border-gray-600"
+    />
+
+    <div class="py-8 flex flex-col flex-grow justify-center view-container">
+      <RouterView v-slot="{ Component }">
+        <Transition name="fade">
+          <component
+            :is="Component"
+            class="flex-1 w-full mx-auto px-8 max-w-screen-2xl"
+          />
+        </Transition>
+      </RouterView>
+    </div>
+
+    <AppFooter
+      class="ps-bg-flat border-t border-gray-300 dark:border-gray-600 h-12"
+    />
+  </div>
+</template>
 
 <style lang="less" scoped>
 .fade-leave-from,

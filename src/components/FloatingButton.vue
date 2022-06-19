@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import ExpandLess from "@/components/icons/IconExpandLess.vue";
+
+const scrollToTop = (): void => {
+  document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+};
+</script>
+
 <template>
   <teleport to=".view-container">
     <button
@@ -10,11 +18,3 @@
     </button>
   </teleport>
 </template>
-
-<script setup lang="ts">
-import ExpandLess from "@/components/icons/ExpandLess.vue";
-
-const scrollToTop = () => {
-  document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-};
-</script>

@@ -1,15 +1,18 @@
-const idCounter: { [key: string]: number } = {};
-const DEFAULT_PREFIX = process.env.VUE_APP_NAME || "shirako.dev";
+const ID_COUNTER = new Map<string | symbol, number>();
+const DEFAULT_PREFIX = Symbol("default");
 
-export default (prefix: string = DEFAULT_PREFIX): string => {
-  if (!idCounter[prefix]) {
-    idCounter[prefix] = 0;
+export default (prefix?: string): string => {
+  const usePrefix = prefix ?? DEFAULT_PREFIX;
+  const currentCount = ID_COUNTER.get(usePrefix) ?? 0;
+  const nextCount = currentCount + 1;
+  ID_COUNTER.set(usePrefix, nextCount);
+
+  let uniqueId;
+  if (prefix === undefined) {
+    uniqueId = nextCount.toString();
+  } else {
+    uniqueId = `${prefix}-${nextCount.toString()}`;
   }
 
-  const id = ++idCounter[prefix];
-  if (prefix === DEFAULT_PREFIX) {
-    return `${id}`;
-  }
-
-  return `${prefix}-${id}`;
+  return uniqueId;
 };

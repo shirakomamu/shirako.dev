@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import OpenInNew from "@/components/icons/IconOpenInNew.vue";
+
+defineProps({
+  name: {
+    type: String,
+    default: "",
+  },
+  link: {
+    type: String,
+    default: null,
+  },
+  logoSrc: {
+    type: String,
+    default: "",
+  },
+  logoSrcWhenDark: {
+    type: String,
+    default: "",
+  },
+  logoAlt: {
+    type: String,
+    default: "",
+  },
+});
+</script>
+
 <template>
   <component
     :is="link ? 'a' : 'div'"
@@ -35,34 +62,6 @@
     </div>
   </component>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from "vue";
-import OpenInNew from "@/components/icons/OpenInNew.vue";
-
-defineProps({
-  name: {
-    type: String,
-    default: "",
-  },
-  link: {
-    type: String,
-    default: null,
-  },
-  logoSrc: {
-    type: String,
-    default: "",
-  },
-  logoSrcWhenDark: {
-    type: String,
-    default: "",
-  },
-  logoAlt: {
-    type: String,
-    default: "",
-  },
-});
-</script>
 
 <style lang="less" scoped>
 .box.pointer {
