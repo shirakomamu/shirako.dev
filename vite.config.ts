@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
       name: env.VITE_APP_NAME,
       short_name: env.VITE_APP_NAME,
       description: env.VITE_APP_DESCRIPTION,
-      theme_color: "#008aff",
+      theme_color: "#0089ff",
       icons: [
         {
           src: "icons/32-bl_rc-fc.png",
