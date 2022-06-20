@@ -60,7 +60,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="space-y-8 mt-5vh md:mt-15vh">
+  <div class="space-y-8 grid justify-center">
     <div
       v-if="!hasIntersected"
       class="arrow-container fixed left-0 w-full grid justify-items-center z-2 transition"
@@ -72,46 +72,47 @@ onMounted(() => {
       <ExpandMore class="icon-inline text-8xl" />
     </div>
 
-    <div class="grid grid-cols-1 grid-flow-row gap-4 justify-items-center">
-      <article class="space-y-4 max-w-prose min-h-90vh md:min-h-75vh">
-        <h4 ref="mainText" class="text-4xl dark:text-white">
-          <span class="opacity-50">Hello, I'm </span
-          ><ruby>白狐<rt>しらこ</rt>マム</ruby><span class="opacity-50">,</span>
-        </h4>
-        <h4 class="text-2xl">
-          <span class="opacity-50">but you can call me </span
-          ><span class="font-semibold">Mamu</span
-          ><span class="opacity-50">.</span>
-        </h4>
-        <p>
-          I'm a software engineer based in California. My education was in
-          Aerospace Engineering. I specialize in developing web apps using
-          modern technologies such as Vue, Node, and TypeScript.
-        </p>
+    <div class="grid grid-cols-1 grid-flow-row gap-4 max-w-prose">
+      <div class="intro grid items-center pb-28">
+        <article class="space-y-4">
+          <h4 ref="mainText" class="text-3xl dark:text-white text-center">
+            <span class="opacity-50">Hi, I am </span
+            ><ruby>白狐<rt>しらこ</rt>マム</ruby>
+            <span class="text-lg">
+              <span class="opacity-50"> (</span>Mamu Shirako<span
+                class="opacity-50"
+                >)</span
+              ><span class="opacity-50">.</span></span
+            >
+          </h4>
 
-        <p>
-          I first started programming as a hobby with MATLAB (and occasionally
-          Python) more than 10 years ago.
-        </p>
+          <p>
+            I'm a software engineer based in California. My education was in
+            Aerospace Engineering. I specialize in developing web apps using
+            modern technologies such as Vue, Node, and TypeScript.
+          </p>
 
-        <p>
-          Outside of programming, I enjoy listening to music (favorites are from
-          Touhou and Final Fantasy), cooking, and hiking when I have time. I
-          also occasionally make digital art in Photoshop.
-        </p>
+          <p>I first started programming as a hobby more than 10 years ago.</p>
 
-        <p>
-          I also have a soft spot for cats, so you may sometimes come across cat
-          illustrations, courtesy of
-          <a
-            href="http://irasutoya.com"
-            target="_blank"
-            ref="noopener noreferrer"
-            class="ps-text-link"
-            >Irasutoya</a
-          >.
-        </p>
-      </article>
+          <p>
+            I enjoy listening to music (favorites are from Touhou, NieR, and
+            Final Fantasy), cooking, and hiking when I have time. I also
+            occasionally make digital art in Photoshop.
+          </p>
+
+          <p>
+            I also have a soft spot for cats, so you may sometimes come across
+            cat illustrations, courtesy of
+            <a
+              href="https://irasutoya.com"
+              target="_blank"
+              ref="noopener noreferrer"
+              class="ps-text-link"
+              >Irasutoya</a
+            >.
+          </p>
+        </article>
+      </div>
 
       <div class="space-y-8 w-full max-w-prose mt-8">
         <h5 ref="skillBoxes" class="text-2xl dark:text-white">
@@ -168,5 +169,9 @@ onMounted(() => {
   75% {
     transform: translateY(-0.5rem);
   }
+}
+
+.intro {
+  min-height: 100vh - 5rem;
 }
 </style>
