@@ -10,7 +10,6 @@ interface NavigationLink {
 }
 
 const route = useRoute();
-
 const appName = import.meta.env.VITE_APP_NAME;
 
 const links: NavigationLink[] = [

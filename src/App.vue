@@ -31,24 +31,20 @@ onMounted(() => {
 <template>
   <metainfo />
 
-  <div
-    class="layout-container h-full text-black dark:text-gray-200 flex flex-col"
-  >
+  <div class="flex flex-col min-h-screen h-full relative">
     <BgStars />
+
     <AppHeader
       class="sticky ps-bg-flat top-0 h-12 z-50 w-full border-b border-gray-300 dark:border-gray-600"
     />
 
-    <div class="py-8 flex flex-col flex-grow justify-center view-container">
+    <main class="flex-1 flex flex-col view-container">
       <RouterView v-slot="{ Component }">
         <Transition name="fade">
-          <component
-            :is="Component"
-            class="flex-1 w-full mx-auto px-8 max-w-screen-2xl"
-          />
+          <component :is="Component" />
         </Transition>
       </RouterView>
-    </div>
+    </main>
 
     <AppFooter
       class="ps-bg-flat border-t border-gray-300 dark:border-gray-600 h-12"

@@ -1,22 +1,10 @@
 <script setup lang="ts">
-defineProps({
-  name: {
-    type: String,
-    default: "",
-  },
-  logoSrc: {
-    type: String,
-    default: "",
-  },
-  logoSrcWhenDark: {
-    type: String,
-    default: "",
-  },
-  logoAlt: {
-    type: String,
-    default: "",
-  },
-});
+const props = defineProps<{
+  name: string;
+  logoSrc?: string;
+  logoSrcWhenDark?: string;
+  logoAlt?: string;
+}>();
 </script>
 
 <template>
@@ -26,26 +14,26 @@ defineProps({
     <div class="whitespace-normal h-full w-full flex flex-col gap-4">
       <div class="flex gap-4 items-center">
         <img
-          v-if="logoSrc"
-          :src="logoSrc"
-          :alt="logoAlt"
+          v-if="props.logoSrc"
+          :src="props.logoSrc"
+          :alt="props.logoAlt"
           height="32"
           width="32"
           :class="{
-            'dark:hidden': logoSrcWhenDark,
+            'dark:hidden': props.logoSrcWhenDark,
           }"
         />
         <img
-          v-if="logoSrcWhenDark"
-          :src="logoSrcWhenDark"
-          :alt="logoAlt"
+          v-if="props.logoSrcWhenDark"
+          :src="props.logoSrcWhenDark"
+          :alt="props.logoAlt"
           class="hidden dark:block"
           height="32"
           width="32"
         />
         <div>
           <p class="font-semibold overflow-hidden overflow-ellipsis">
-            {{ name }}
+            {{ props.name }}
           </p>
         </div>
       </div>

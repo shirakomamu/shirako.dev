@@ -2,29 +2,28 @@
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import ArrowBackIos from "@/components/icons/IconArrowBackIos.vue";
 import ArrowForwardIos from "@/components/icons/IconArrowForwardIos.vue";
+import { isDefined } from "@vueuse/core";
 
 const SCROLL_DIST_SNAP_PX = 50;
 
-defineProps({
-  showControls: {
-    type: Boolean,
-    default: false,
-  },
-  showPagination: {
-    type: Boolean,
-    default: false,
-  },
-});
+const props = defineProps<{
+  showControls: boolean;
+  showPagination: boolean;
+}>();
 
-const wrapper = ref<HTMLDivElement | null>(null);
-const camera = ref<HTMLDivElement | null>(null);
-const viewport = ref<HTMLDivElement | null>(null);
-const childElements = ref<HTMLCollection | null>(null);
-const currentElementNum = ref<number>(1);
+const wrapper = ref<HTMLDivElement>();
+const camera = ref<HTMLDivElement>();
+const viewport = ref<HTMLDivElement>();
+const childElements = ref<HTMLCollection>();
+const currentElementNum = ref(1);
+const xDown = ref<number | null>(null);
+const yDown = ref<number | null>(null);
+const resizeObserver = ref<ResizeObserver>();
+const numChildren = computed(() => childElements.value?.length ?? 0);
 
 onMounted(() => {
-  childElements.value = viewport.value?.children ?? null;
-  if (childElements.value === null) return;
+  if (!isDefined(viewport)) return;
+  childElements.value = viewport.value.children;
 
   for (const elem of childElements.value) {
     elem.classList.add("flex-shrink-0");
@@ -47,9 +46,9 @@ const scrollToElement = ({
   to: number;
   behavior?: ScrollBehavior;
 }): void => {
-  if (childElements.value === null) return;
+  if (!isDefined(childElements)) return;
   const elem = childElements.value.item(to);
-  if (elem === null || camera.value === null || viewport.value === null) return;
+  if (elem === null || !isDefined(camera) || !isDefined(viewport)) return;
 
   // using this instead of scrollIntoView because of lack of control over y-axis
   camera.value.scrollTo({
@@ -58,14 +57,12 @@ const scrollToElement = ({
   });
 };
 
-watch(currentElementNum, (newNum: number) => {
+watch(currentElementNum, (newNum) => {
   scrollToElement({
     to: newNum - 1,
     behavior: "smooth",
   });
 });
-
-const numChildren = computed(() => childElements.value?.length ?? 0);
 
 const goToPrevious = (): void => {
   currentElementNum.value = Math.max(currentElementNum.value - 1, 1);
@@ -77,9 +74,6 @@ const goToNext = (): void => {
   );
 };
 
-const xDown = ref<undefined | number>(undefined);
-const yDown = ref<undefined | number>(undefined);
-
 function handleTouchStart(event: TouchEvent): void {
   const firstTouch = event.touches[0];
   xDown.value = firstTouch?.clientX;
@@ -88,7 +82,6 @@ function handleTouchStart(event: TouchEvent): void {
 
 function handleTouchMove(event: TouchEvent): void {
   if (xDown.value === null || yDown.value === null) return;
-  if (xDown.value === undefined || yDown.value === undefined) return;
 
   const xUp = event.touches[0].clientX;
   const yUp = event.touches[0].clientY;
@@ -99,14 +92,16 @@ function handleTouchMove(event: TouchEvent): void {
 
   if (xDiffAbs < SCROLL_DIST_SNAP_PX) return;
   if (xDiffAbs > yDiffAbs) {
-    xDiff > 0 ? goToNext() : goToPrevious();
+    if (xDiff > 0) {
+      goToNext();
+    } else {
+      goToPrevious();
+    }
   }
 
-  xDown.value = undefined;
-  yDown.value = undefined;
+  xDown.value = null;
+  yDown.value = null;
 }
-
-const resizeObserver = ref<null | ResizeObserver>(null);
 
 onMounted(() => {
   resizeObserver.value = new ResizeObserver(() => {
@@ -127,7 +122,8 @@ onUnmounted(() => resizeObserver.value?.disconnect());
         <slot />
       </div>
     </div>
-    <div ref="controls" v-if="showControls" class="controls transition">
+
+    <div ref="controls" v-if="props.showControls" class="controls transition">
       <button
         class="absolute top-1/2 left-0 p-0 ml-0 sm:ml-2 transition opacity-50 hover:opacity-100 focus:opacity-100 disabled:(invisible cursor-default)"
         type="button"
@@ -147,7 +143,8 @@ onUnmounted(() => resizeObserver.value?.disconnect());
         <ArrowForwardIos class="icon-inline text-4xl" />
       </button>
     </div>
-    <div ref="pagination" v-if="showPagination && numChildren > 1">
+
+    <div ref="pagination" v-if="props.showPagination && numChildren > 1">
       <div class="space-x-2 text-center">
         <button
           type="button"

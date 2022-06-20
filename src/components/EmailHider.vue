@@ -1,17 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-defineProps({
-  text: {
-    type: String,
-    default: "say hello",
-  },
-  showEmailAsText: {
-    type: Boolean,
-    default: true,
-  },
-});
-
 const isEmailShown = ref(false);
 
 const name = "hello";

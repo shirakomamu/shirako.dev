@@ -6,6 +6,7 @@ import SkillBox from "@/components/SkillBox.vue";
 import ToolBox from "@/components/ToolBox.vue";
 import ExpandMore from "@/components/icons/IconExpandMore.vue";
 import { useGeneralStore } from "@/stores/general";
+import { isDefined } from "@vueuse/core";
 
 const route = useRoute();
 useMeta({
@@ -19,10 +20,11 @@ useMeta({
 });
 const store = useGeneralStore();
 
-const mainText = ref<HTMLDivElement | null>(null);
-const skillBoxes = ref<HTMLDivElement | null>(null);
+const mainText = ref<HTMLDivElement>();
+const skillBoxes = ref<HTMLDivElement>();
 
-const GUIDE_ARROW_DELAY = 5000; // ms, time to wait before arrow initially appears
+const GUIDE_ARROW_DELAY_MS = 5000;
+const OBSERVER_THRESHOLD = 0.9;
 const isGuideArrowVisible = ref<boolean>(false);
 const hasIntersected = computed(() => store.isBioRead);
 
@@ -37,30 +39,32 @@ const observer = new IntersectionObserver(
 
     // main arrow logic
     const mainTextEvent = entries.find((e) => e.target === mainText.value);
-    if (mainTextEvent === undefined || mainTextEvent.time < GUIDE_ARROW_DELAY) {
+    if (
+      mainTextEvent === undefined ||
+      mainTextEvent.time < GUIDE_ARROW_DELAY_MS
+    ) {
       return;
     }
 
     isGuideArrowVisible.value = mainTextEvent.isIntersecting;
   },
-  { threshold: 0.9 }
+  { threshold: OBSERVER_THRESHOLD }
 );
 
 onMounted(() => {
-  observer.observe(mainText.value as HTMLDivElement);
-  observer.observe(skillBoxes.value as HTMLDivElement);
+  if (!isDefined(mainText) || !isDefined(skillBoxes)) return;
 
-  // activate the guide arrow only if the user hasn't scrolled down
+  observer.observe(mainText.value);
+  observer.observe(skillBoxes.value);
+
   setTimeout(() => {
-    if (!hasIntersected.value) {
-      isGuideArrowVisible.value = true;
-    }
-  }, GUIDE_ARROW_DELAY);
+    if (!hasIntersected.value) isGuideArrowVisible.value = true;
+  }, GUIDE_ARROW_DELAY_MS);
 });
 </script>
 
 <template>
-  <div class="space-y-8 grid justify-center">
+  <div class="flex-1 grid space-y-8 justify-center p-8">
     <div
       v-if="!hasIntersected"
       class="arrow-container fixed left-0 w-full grid justify-items-center z-2 transition"
@@ -172,6 +176,6 @@ onMounted(() => {
 }
 
 .intro {
-  min-height: 100vh - 5rem;
+  min-height: 100vh - 6rem;
 }
 </style>

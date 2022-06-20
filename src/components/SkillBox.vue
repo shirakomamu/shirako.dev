@@ -1,63 +1,48 @@
 <script setup lang="ts">
 import OpenInNew from "@/components/icons/IconOpenInNew.vue";
 
-defineProps({
-  name: {
-    type: String,
-    default: "",
-  },
-  link: {
-    type: String,
-    default: null,
-  },
-  logoSrc: {
-    type: String,
-    default: "",
-  },
-  logoSrcWhenDark: {
-    type: String,
-    default: "",
-  },
-  logoAlt: {
-    type: String,
-    default: "",
-  },
-});
+const props = defineProps<{
+  name: string;
+  link?: string;
+  logoSrc?: string;
+  logoSrcWhenDark?: string;
+  logoAlt?: string;
+}>();
 </script>
 
 <template>
   <component
-    :is="link ? 'a' : 'div'"
-    v-bind:href="link"
-    v-bind:target="link ? '_blank' : null"
-    v-bind:rel="link ? 'noopener noreferrer' : null"
+    :is="props.link ? 'a' : 'div'"
+    v-bind:href="props.link"
+    v-bind:target="props.link ? '_blank' : null"
+    v-bind:rel="props.link ? 'noopener noreferrer' : null"
     class="box cursor-default p-4 flex flex-col items-center justify-center rounded-lg bg-gray-200/50 dark:bg-gray-600/50"
-    :class="{ pointer: link }"
+    :class="{ pointer: props.link }"
   >
     <div class="container-block w-full">
       <OpenInNew
-        v-if="link"
+        v-if="props.link"
         class="open-in-new-icon icon-inline opacity-50 text-sm"
       />
       <img
-        v-if="logoSrc"
-        :src="logoSrc"
-        :alt="logoAlt"
+        v-if="props.logoSrc"
+        :src="props.logoSrc"
+        :alt="props.logoAlt"
         class="mx-auto my-2 skill-icon"
         :class="{
-          'dark:hidden': logoSrcWhenDark,
+          'dark:hidden': props.logoSrcWhenDark,
         }"
       />
       <img
-        v-if="logoSrcWhenDark"
-        :src="logoSrcWhenDark"
-        :alt="logoAlt"
+        v-if="props.logoSrcWhenDark"
+        :src="props.logoSrcWhenDark"
+        :alt="props.logoAlt"
         class="hidden dark:block mx-auto my-2 skill-icon"
       />
       <p
         class="text-center text-sm font-semibold overflow-hidden overflow-ellipsis"
       >
-        {{ name }}
+        {{ props.name }}
       </p>
     </div>
   </component>
@@ -132,8 +117,10 @@ defineProps({
 
 .open-in-new-icon {
   position: absolute;
-  right: 0.25rem;
+  right: 0.5rem;
   top: 0.5rem;
+  height: 1rem;
+  width: 1rem;
 }
 
 .skill-icon {
