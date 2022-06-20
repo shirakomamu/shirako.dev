@@ -1,72 +1,21 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
 html,
-#app {
-  background-color: transparent;
-}
-
-// to prevent offcanvas from jumping
-html {
-  height: 100vh;
-  padding: 0;
-  @apply scrollbar;
-  @apply scrollbar-thumb-dark-300 scrollbar-track-dark-800;
-}
 body,
-#app,
-.layout-container {
-  min-height: 100vh;
-  padding: 0;
+#app {
+  @apply min-h-screen;
+  @apply bg-transparent;
 }
 
-body {
-  overflow-y: scroll;
-
-  .no-overflow {
-    overflow: hidden;
-    position: absolute;
-    inset: 0;
-  }
-}
-
-// dark mode for @tailwindcss/forms
-[type="text"],
-[type="email"],
-[type="url"],
-[type="password"],
-[type="number"],
-[type="date"],
-[type="datetime-local"],
-[type="month"],
-[type="search"],
-[type="tel"],
-[type="time"],
-[type="week"],
-[multiple],
-textarea,
-select {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-
-  &:focus,
-  &:focus-visible {
-    box-shadow: var(--tw-ring-inset) 0 0 0
-      calc(2px + var(--tw-ring-offset-width)) #0089ff;
-  }
-
-  @apply ps-bg-input;
-
-  &.valid {
-    box-shadow: var(--tw-ring-inset) 0 0 0
-      calc(1px + var(--tw-ring-offset-width)) #10b981;
-  }
-
-  &.invalid {
-    box-shadow: var(--tw-ring-inset) 0 0 0
-      calc(1px + var(--tw-ring-offset-width)) #f37510;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
+html {
+  @apply scrollbar scrollbar-thumb-dark-50 scrollbar-track-dark-500;
 }
 
 button {
@@ -111,6 +60,7 @@ button {
     width: 0;
     @apply bg-current;
   }
+
   &:hover:after,
   &:focus:after {
     width: 100%;
