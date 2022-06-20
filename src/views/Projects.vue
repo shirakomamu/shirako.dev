@@ -79,8 +79,22 @@ useMeta({
           Easily upload images and adjust which search engine is used. All data
           is stored locally on-device.
         </p>
+        <p>
+          The entire app is navigable with just the keyboard and from any page,
+          your bookmarks are only one easy shortcut away.
+        </p>
+        <p>
+          * Bonus: Works great with
+          <a
+            href="https://addons.mozilla.org/ja/firefox/addon/multi-account-containers/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ps-text-link"
+            >Firefox containers <OpenInNew class="icon-inline" /></a
+          >. Each container can store its own shortcuts and wallpaper settings.
+        </p>
 
-        <h6 class="font-semibold">Key technologies:</h6>
+        <h6 class="font-semibold mt-8">Key technologies:</h6>
         <ul class="list-inside list-disc">
           <li>TypeScript, Less, and Vue 3 with Vite</li>
           <li>ESLint, Prettier, for automatic linting</li>
@@ -200,7 +214,7 @@ useMeta({
           among everyone, using a weighted randomization algorithm.
         </p>
 
-        <h6 class="font-semibold">Key technologies:</h6>
+        <h6 class="font-semibold mt-8">Key technologies:</h6>
         <ul class="list-inside list-disc">
           <li>User authentication and authorization</li>
           <li>Hierarchical role-based access control system</li>
