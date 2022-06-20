@@ -19,7 +19,7 @@ useMeta({
 </script>
 
 <template>
-  <div class="space-y-8 max-w-3xl">
+  <div class="flex-1 grid space-y-8 p-8 max-w-3xl self-center">
     <FloatingButton />
     <h5 class="text-4xl dark:text-white">Projects</h5>
 

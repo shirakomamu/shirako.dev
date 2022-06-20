@@ -3,7 +3,6 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  position: relative;
   font-weight: normal;
 }
 
@@ -12,10 +11,15 @@ body,
 #app {
   @apply min-h-screen;
   @apply bg-transparent;
+  @apply text-neutral-800 dark:text-gray-200;
 }
 
 html {
   @apply scrollbar scrollbar-thumb-dark-50 scrollbar-track-dark-500;
+}
+
+body {
+  overflow-y: scroll;
 }
 
 button {

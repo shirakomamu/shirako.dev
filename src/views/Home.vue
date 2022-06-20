@@ -64,7 +64,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="space-y-8 grid justify-center">
+  <div class="flex-1 grid space-y-8 justify-center p-8">
     <div
       v-if="!hasIntersected"
       class="arrow-container fixed left-0 w-full grid justify-items-center z-2 transition"
@@ -176,6 +176,6 @@ onMounted(() => {
 }
 
 .intro {
-  min-height: 100vh - 5rem;
+  min-height: 100vh - 6rem;
 }
 </style>

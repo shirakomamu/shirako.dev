@@ -117,8 +117,8 @@ const props = defineProps<{
 
 .open-in-new-icon {
   position: absolute;
-  right: 0.25rem;
-  top: 0.5rem;
+  right: -0.5rem;
+  top: -0.5rem;
 }
 
 .skill-icon {
