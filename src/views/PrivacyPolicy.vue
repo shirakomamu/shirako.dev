@@ -15,7 +15,7 @@ useMeta({
 </script>
 
 <template>
-  <div class="flex-1 max-w-prose self-center p-8">
+  <div class="flex-1 w-full max-w-prose self-center p-8">
     <div class="space-y-8">
       <h5 class="text-4xl dark:text-white">Privacy policy</h5>
       <p>
