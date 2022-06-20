@@ -79,8 +79,9 @@ onMounted(() => {
             <span class="opacity-50">Hi, I am </span
             ><ruby>白狐<rt>しらこ</rt>マム</ruby>
             <span class="text-lg">
-              <span class="opacity-50"> (</span>
-              <strong>Mamu</strong><span class="opacity-50">)</span
+              <span class="opacity-50"> (</span>Mamu Shirako<span
+                class="opacity-50"
+                >)</span
               ><span class="opacity-50">.</span></span
             >
           </h4>
@@ -94,16 +95,16 @@ onMounted(() => {
           <p>I first started programming as a hobby more than 10 years ago.</p>
 
           <p>
-            I enjoy listening to music (favorites are from Touhou and Final
-            Fantasy), cooking, and hiking when I have time. I also occasionally
-            make digital art in Photoshop.
+            I enjoy listening to music (favorites are from Touhou, NieR, and
+            Final Fantasy), cooking, and hiking when I have time. I also
+            occasionally make digital art in Photoshop.
           </p>
 
           <p>
             I also have a soft spot for cats, so you may sometimes come across
             cat illustrations, courtesy of
             <a
-              href="http://irasutoya.com"
+              href="https://irasutoya.com"
               target="_blank"
               ref="noopener noreferrer"
               class="ps-text-link"
