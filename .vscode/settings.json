@@ -9,5 +9,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
   "less.lint.unknownAtRules": "ignore",
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[xml]": {
+    "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
+  }
 }
