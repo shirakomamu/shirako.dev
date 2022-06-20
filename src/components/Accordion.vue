@@ -2,31 +2,25 @@
 import { onMounted, ref } from "vue";
 import ExpandLess from "@/components/icons/IconExpandLess.vue";
 import ExpandMore from "@/components/icons/IconExpandMore.vue";
+import { isDefined } from "@vueuse/core";
 
 const TRANSITION_DURATION_MS = 50;
 
-const props = defineProps({
-  initialVisibility: {
-    type: Boolean,
-    default: false,
-  },
-  showArrow: {
-    type: Boolean,
-    default: true,
-  },
-});
+const props = defineProps<{
+  initialVisibility: boolean;
+  showArrow: boolean;
+}>();
 
-const emit = defineEmits({
-  toggle(payload: unknown) {
-    return typeof payload === "boolean";
-  },
-});
+const emit = defineEmits<{
+  (event: "toggle", value: boolean): boolean;
+}>();
 
-const visible = ref<boolean>(props.initialVisibility);
-const contentsContainer = ref<null | HTMLDivElement>(null);
-const contents = ref<null | HTMLDivElement>(null);
+const visible = ref(props.initialVisibility);
+const contentsContainer = ref<HTMLDivElement>();
+const contents = ref<HTMLDivElement>();
 const transitionType = ref<"in" | "out" | null>(null);
-const firstElementMarginTop = ref<string>("0px");
+const firstElementMarginTop = ref("0px");
+
 const setRealHeight = (): void => {
   // https://stackoverflow.com/questions/1762539/margin-on-child-element-moves-parent-element
   // margin top needs to be accounted for
@@ -40,10 +34,12 @@ const setRealHeight = (): void => {
 onMounted(() => setRealHeight());
 
 const toggleVisibility = (): void => {
-  if (contentsContainer.value === null) return;
+  if (!isDefined(contentsContainer)) return;
   const newState = !visible.value;
+
   visible.value = newState;
   transitionType.value = newState ? "in" : "out";
+
   emit("toggle", newState);
   setTimeout(() => {
     transitionType.value = null;

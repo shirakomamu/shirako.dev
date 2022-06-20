@@ -7,7 +7,7 @@ useMeta({
 </script>
 
 <template>
-  <div class="space-y-8">
+  <div class="space-y-8 max-w-prose">
     <img
       alt="Cat on keyboard"
       src="@/assets/images/irasutoya/shigoto_zaitaku_cat_man.png"

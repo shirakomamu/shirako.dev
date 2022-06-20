@@ -8,8 +8,6 @@
     fill="currentColor"
   >
     <rect fill="none" height="24" width="24" />
-    <g>
-      <polygon points="6.23,3.77 8,2 18,12 8,22 6.23,20.23 14.46,12" />
-    </g>
+    <g><polygon points="6.23,3.77 8,2 18,12 8,22 6.23,20.23 14.46,12" /></g>
   </svg>
 </template>

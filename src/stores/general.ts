@@ -174,11 +174,7 @@ const tools: Tool[] = [
 
 export const useGeneralStore = defineStore({
   id: "general",
-  state: () => ({
-    isBioRead: false,
-    technologies,
-    tools,
-  }),
+  state: () => ({ isBioRead: false, technologies, tools }),
   actions: {
     markBioAsRed(readState: boolean): void {
       this.isBioRead = readState;

@@ -1,41 +1,29 @@
 <script setup lang="ts">
 import Accordion from "@/components/Accordion.vue";
 
-defineProps({
-  iconUrl: {
-    type: String,
-    default: "",
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: String,
-    default: "",
-  },
-  initiallyExpanded: {
-    type: Boolean,
-    default: false,
-  },
-});
+const props = defineProps<{
+  iconUrl?: string;
+  title: string;
+  date?: string;
+  initiallyExpanded: boolean;
+}>();
 </script>
 
 <template>
   <article class="grid grid-cols-1 gap-4">
-    <Accordion :initial-visibility="initiallyExpanded">
+    <Accordion :show-arrow="true" :initial-visibility="props.initiallyExpanded">
       <template #title>
         <div class="text-2xl font-semibold">
           <img
-            v-if="iconUrl"
-            :src="iconUrl"
+            v-if="props.iconUrl"
+            :src="props.iconUrl"
             width="32"
             height="32"
-            :alt="`${title} logo`"
+            :alt="`${props.title} logo`"
             class="icon-inline mr-2 rounded-lg"
-          />{{ title }}
-          <p v-if="date" class="opacity-50 italic text-lg font-medium">
-            {{ date }}
+          />{{ props.title }}
+          <p v-if="props.date" class="opacity-50 italic text-lg font-medium">
+            {{ props.date }}
           </p>
         </div>
       </template>
