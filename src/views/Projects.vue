@@ -24,14 +24,88 @@ useMeta({
     <h5 class="text-4xl dark:text-white">Projects</h5>
 
     <ProjectItem
-      icon-url="/icons/192-or-w.png"
-      title="Shirako Eats"
-      date="2021/07"
+      icon-url="/icons/sukonbu.png"
+      title="Sukonbu"
+      date="2022/06"
       :initially-expanded="true"
     >
       <div class="grid grid-cols-1 gap-2">
         <InlineGallery
-          class="my-2"
+          class="my-2 text-center sm:text-lg font-semibold"
+          :show-pagination="true"
+          :show-controls="true"
+        >
+          <div>
+            <img
+              src="@/assets/images/sukonbu_promo/home.png"
+              alt="sukonbu promotional image"
+              loading="lazy"
+            />
+          </div>
+          <div class="px-8">
+            <p>Upload your favorite wallpapers, and</p>
+            <p>share your settings across devices.</p>
+            <img
+              src="@/assets/images/sukonbu_promo/settings.png"
+              class="mt-4"
+              alt="sukonbu promotional image"
+              loading="lazy"
+            />
+          </div>
+          <div class="px-8">
+            <p>Import settings at any time with just a URL.</p>
+            <img
+              src="@/assets/images/sukonbu_promo/import.png"
+              class="mt-4"
+              alt="sukonbu promotional image"
+              loading="lazy"
+            />
+          </div>
+        </InlineGallery>
+
+        <div class="text-center my-2">
+          <a
+            href="https://sukonbu.shirako.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white transition bg-blue-srk/80 hover:bg-blue-srk/100 focus:bg-blue-srk/100 px-4 py-2 align-middle rounded-lg"
+          >
+            Open site <OpenInNew class="icon-inline" />
+          </a>
+        </div>
+
+        <p>Homepage replacement for both desktop and mobile.</p>
+        <p>
+          Easily upload images and adjust which search engine is used. All data
+          is stored locally on-device.
+        </p>
+
+        <h6 class="font-semibold">Key technologies:</h6>
+        <ul class="list-inside list-disc">
+          <li>TypeScript, Less, and Vue 3 with Vite</li>
+          <li>ESLint, Prettier, for automatic linting</li>
+          <li>Vitest for basic unit coverage, no component testing</li>
+          <li>Automatic localization support (ja, en)</li>
+          <li>Local storage for KV storage</li>
+          <li>Indexed DB for image blob storage</li>
+          <li>App-wide keyboard shortcut support</li>
+          <li>Schema validation with Zod</li>
+          <li>Responsive design (desktop, mobile, dark mode)</li>
+          <li>Installable as PWA</li>
+          <li>Automated build/deploy from GitHub</li>
+        </ul>
+      </div>
+    </ProjectItem>
+
+    <ProjectItem
+      icon-url="/icons/192-or-w.png"
+      title="Shirako Eats"
+      date="2021/07"
+      :initially-expanded="false"
+    >
+      <div class="grid grid-cols-1 gap-2">
+        <InlineGallery
+          class="my-2 text-center sm:text-lg font-semibold"
           :show-pagination="true"
           :show-controls="true"
         >
@@ -39,66 +113,56 @@ useMeta({
             <img
               src="@/assets/images/hrs_promo/initial.png"
               alt="Shirako Eats promotional image"
-              class=""
               loading="lazy"
             />
           </div>
           <div class="px-8">
-            <p class="text-center text:lg sm:text-xl font-semibold">
-              Organize your favorites into lists.
-            </p>
+            <p>Organize your favorites into lists.</p>
             <img
               src="@/assets/images/hrs_promo/hrs_promo_1.png"
+              class="mt-4"
               alt="Shirako Eats promotional image"
               loading="lazy"
             />
           </div>
           <div class="px-8">
-            <p class="text-center text:lg sm:text-xl font-semibold">
-              Easily find restaurants near you.
-            </p>
+            <p>Easily find restaurants near you.</p>
             <img
               src="@/assets/images/hrs_promo/hrs_promo_2.png"
+              class="mt-4"
               alt="Shirako Eats promotional image"
               loading="lazy"
             />
           </div>
           <div class="px-8">
-            <p class="text-center text:lg sm:text-xl font-semibold">
-              When you want to go out to eat,
-            </p>
-            <p class="text-center text:lg sm:text-xl font-semibold mb-8">
-              just pick from your lists.
-            </p>
+            <p>When you want to go out to eat,</p>
+            <p>just pick from your lists.</p>
             <img
               src="@/assets/images/hrs_promo/hrs_promo_3.png"
+              class="mt-4"
               alt="Shirako Eats promotional image"
               loading="lazy"
             />
           </div>
           <div class="px-8">
-            <p class="text-center text:lg sm:text-xl font-semibold mb-8">
-              Add your friends' lists, too. Up to 10.
-            </p>
+            <p>Add your friends' lists, too. Up to 10.</p>
             <img
               src="@/assets/images/hrs_promo/hrs_promo_4.png"
+              class="mt-4"
               alt="Shirako Eats promotional image"
               loading="lazy"
             />
           </div>
           <div class="px-8">
-            <p class="text-center text:lg sm:text-xl font-semibold">
-              We'll find the best match for you.
-            </p>
-            <p class="text-center text:lg sm:text-xl font-semibold mb-8">
-              We'll make sure it's open, too.*
-            </p>
+            <p>We'll find the best match for you.</p>
+            <p>We'll make sure it's open, too.*</p>
             <img
               src="@/assets/images/hrs_promo/hrs_promo_5.png"
+              class="my-4"
               alt="Shirako Eats promotional image"
               loading="lazy"
             />
-            <p class="text-xs sm:text-sm mt-4">
+            <p class="text-sm">
               * Only at US locations when business hours are available.
             </p>
           </div>
@@ -149,7 +213,7 @@ useMeta({
           <li>Auth0 API integration (user management)</li>
           <li>Yelp API integration (business identify, business search)</li>
           <li>SendGrid API integration (email send)</li>
-          <li>Automated build/deploy from Git source</li>
+          <li>Automated build/deploy from GitHub</li>
         </ul>
       </div>
     </ProjectItem>
