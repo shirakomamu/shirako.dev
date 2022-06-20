@@ -5,7 +5,10 @@ import AppFooter from "@/components/AppFooter.vue";
 import BgStars from "@/components/BgStars.vue";
 import { useMeta } from "vue-meta";
 
-useMeta({ description: import.meta.env.VITE_APP_DESCRIPTION });
+useMeta({
+  htmlAttrs: { lang: "en" },
+  description: import.meta.env.VITE_APP_DESCRIPTION,
+});
 
 const setTheme = (isDark: boolean): void => {
   if (isDark) {
