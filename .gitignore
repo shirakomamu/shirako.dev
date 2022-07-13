@@ -1,4 +1,9 @@
-.DS_Store
+dist
+*.local
+
 node_modules
-/dist
 npm-debug.log*
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.DS_Store
