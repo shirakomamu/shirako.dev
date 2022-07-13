@@ -83,7 +83,7 @@ onMounted(() => {
             <span class="opacity-50">Hi, I am </span
             ><ruby>白狐<rt>しらこ</rt>マム</ruby>
             <span class="text-lg">
-              <span class="opacity-50"> (</span>Mamu Shirako<span
+              <span class="opacity-50"> (</span>Shirako Mamu<span
                 class="opacity-50"
                 >)</span
               ><span class="opacity-50">.</span></span
