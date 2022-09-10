@@ -18,7 +18,7 @@ interface Tool {
 const technologies: Technology[] = [
   {
     name: "HTML5",
-    link: "https://html.com/html5/#What_is_HTML5",
+    link: "http://www.w3.org/TR/html5/",
     logoSrc: "/vendor-icons/html5.svg",
     logoAlt: "HTML5 logo",
   },
