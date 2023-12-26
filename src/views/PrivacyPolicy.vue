@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useHeadSafe } from "@unhead/vue";
 import { useRoute } from "vue-router";
-import { head } from "@/main";
+import { APP_NAME } from "@/env.js";
+import { head } from "@/main.js";
 
 const route = useRoute();
 useHeadSafe(
   {
-    title: `Privacy policy | ${import.meta.env.VITE_APP_NAME}`,
+    title: `Privacy policy | ${APP_NAME}`,
     link: [{ rel: "canonical", href: "https://shirako.dev" + route.path }],
   },
   { head },

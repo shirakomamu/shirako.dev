@@ -4,14 +4,13 @@ import { computed, onMounted } from "vue";
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import BgStars from "@/components/BgStars.vue";
-import { head } from "./main";
+import { APP_DESCRIPTION } from "@/env.js";
+import { head } from "./main.js";
 
 useHeadSafe(
   {
     htmlAttrs: { lang: "en" },
-    meta: [
-      { name: "description", content: import.meta.env.VITE_APP_DESCRIPTION },
-    ],
+    meta: [{ name: "description", content: APP_DESCRIPTION }],
   },
   { head },
 );
@@ -35,8 +34,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <metainfo />
-
   <div class="flex flex-col min-h-screen h-full relative">
     <BgStars />
 

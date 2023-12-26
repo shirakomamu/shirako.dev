@@ -1,186 +1,65 @@
 <script setup lang="ts">
 import { useHeadSafe } from "@unhead/vue";
-import { isDefined } from "@vueuse/core";
-import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import SkillBox from "@/components/SkillBox.vue";
-import ToolBox from "@/components/ToolBox.vue";
-import ExpandMore from "@/components/icons/IconExpandMore.vue";
-import { head } from "@/main";
-import { useGeneralStore } from "@/stores/general";
+import { APP_NAME } from "@/env.js";
+import { head } from "@/main.js";
 
 const route = useRoute();
 useHeadSafe(
   {
-    title: `Home | ${import.meta.env.VITE_APP_NAME}`,
+    title: `Home | ${APP_NAME}`,
     link: [{ rel: "canonical", href: "https://example.com" + route.path }],
   },
   { head },
 );
-const store = useGeneralStore();
-
-const mainText = ref<HTMLDivElement>();
-const skillBoxes = ref<HTMLDivElement>();
-
-const GUIDE_ARROW_DELAY_MS = 5000;
-const OBSERVER_THRESHOLD = 0.9;
-const isGuideArrowVisible = ref<boolean>(false);
-const hasIntersected = computed(() => store.isBioRead);
-
-const observer = new IntersectionObserver(
-  (entries: IntersectionObserverEntry[]): void => {
-    // if user has scrolled down, detected by skill boxes being visible, then set the flag
-    const skillBoxesEvent = entries.find((e) => e.target === skillBoxes.value);
-    if (skillBoxesEvent?.isIntersecting === true) {
-      store.markBioAsRed(true);
-      observer.unobserve(skillBoxes.value as HTMLDivElement);
-    }
-
-    // main arrow logic
-    const mainTextEvent = entries.find((e) => e.target === mainText.value);
-    if (
-      mainTextEvent === undefined ||
-      mainTextEvent.time < GUIDE_ARROW_DELAY_MS
-    ) {
-      return;
-    }
-
-    isGuideArrowVisible.value = mainTextEvent.isIntersecting;
-  },
-  { threshold: OBSERVER_THRESHOLD },
-);
-
-onMounted(() => {
-  if (!isDefined(mainText) || !isDefined(skillBoxes)) return;
-
-  observer.observe(mainText.value);
-  observer.observe(skillBoxes.value);
-
-  setTimeout(() => {
-    if (!hasIntersected.value) isGuideArrowVisible.value = true;
-  }, GUIDE_ARROW_DELAY_MS);
-});
 </script>
 
 <template>
   <div class="flex-1 grid space-y-8 justify-center p-8">
-    <div
-      v-if="!hasIntersected"
-      class="arrow-container fixed left-0 w-full grid justify-items-center z-2 transition"
-      :class="{
-        'opacity-60': isGuideArrowVisible,
-        'opacity-0': !isGuideArrowVisible,
-      }"
-    >
-      <ExpandMore class="icon-inline text-8xl" />
-    </div>
+    <div class="grid items-center max-w-prose">
+      <article class="space-y-4">
+        <h4 class="text-3xl dark:text-white">初めまして。</h4>
 
-    <div class="grid grid-cols-1 grid-flow-row gap-4 max-w-prose">
-      <div class="intro grid items-center pb-28">
-        <article class="space-y-4">
-          <h4 ref="mainText" class="text-3xl dark:text-white text-center">
-            <span class="opacity-50">Hi, I am</span>
-            <ruby>
-              白狐
-              <rt>しらこ</rt>
-              マム
-            </ruby>
-            <span class="text-lg">
-              <span class="opacity-50">(</span>
-              Shirako Mamu
-              <span class="opacity-50">)</span>
-              <span class="opacity-50">.</span>
-            </span>
-          </h4>
+        <p>
+          I am a software engineer based in California. My education was in
+          Aerospace Engineering.
+        </p>
 
-          <p>
-            I'm a software engineer based in California. My education was in
-            Aerospace Engineering. I specialize in developing web apps using
-            modern technologies such as Vue, Node, and TypeScript.
-          </p>
+        <p>
+          Though I first started programming as a hobby more than 10 years ago,
+          I now specialize in developing web apps using modern technologies such
+          as Vue, Node, and TypeScript.
+        </p>
 
-          <p>I first started programming as a hobby more than 10 years ago.</p>
+        <p>
+          I enjoy listening to music (favorites are from Touhou, NieR, and Final
+          Fantasy), cooking, and hiking when I have time. I also occasionally
+          make digital art in Photoshop.
+        </p>
 
-          <p>
-            I enjoy listening to music (favorites are from Touhou, NieR, and
-            Final Fantasy), cooking, and hiking when I have time. I also
-            occasionally make digital art in Photoshop.
-          </p>
+        <p>
+          I also have a soft spot for cats, so you may sometimes come across cat
+          illustrations, courtesy of
+          <a
+            ref="noopener noreferrer"
+            href="https://irasutoya.com"
+            target="_blank"
+            class="ps-text-link"
+          >
+            Irasutoya</a
+          >.
+        </p>
 
-          <p>
-            I also have a soft spot for cats, so you may sometimes come across
-            cat illustrations, courtesy of
-            <a
-              ref="noopener noreferrer"
-              href="https://irasutoya.com"
-              target="_blank"
-              class="ps-text-link"
-            >
-              Irasutoya
-            </a>
-            .
-          </p>
-        </article>
-      </div>
-
-      <div class="space-y-8 w-full max-w-prose mt-8">
-        <h5 ref="skillBoxes" class="text-2xl dark:text-white">
-          Core competencies
-        </h5>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <SkillBox
-            v-for="(technology, index) of store.technologies"
-            :key="index"
-            :name="technology.name"
-            :link="technology.link"
-            :logo-src="technology.logoSrc"
-            :logo-src-when-dark="technology.logoSrcWhenDark"
-            :logo-alt="technology.logoAlt"
-          />
-        </div>
-      </div>
-
-      <div class="space-y-8 w-full max-w-prose mt-8">
-        <h5 class="text-2xl dark:text-white">Tools of choice</h5>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <ToolBox
-            v-for="(tool, index) of store.tools"
-            :key="index"
-            :name="tool.name"
-            :logo-src="tool.logoSrc"
-            :logo-src-when-dark="tool.logoSrcWhenDark"
-            :logo-alt="tool.logoAlt"
-          />
-        </div>
-      </div>
+        <p class="text-right text-sm">
+          <ruby>
+            白狐
+            <rt>しらこ</rt>
+            マム
+          </ruby>
+          <br />
+          <span class="opacity-50">(Shirako Mamu)</span>
+        </p>
+      </article>
     </div>
   </div>
 </template>
-
-<style lang="less" scoped>
-.arrow-container {
-  bottom: 0;
-  animation-name: bounce;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes bounce {
-  0%,
-  25%,
-  62.5%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-1rem);
-  }
-  75% {
-    transform: translateY(-0.5rem);
-  }
-}
-
-.intro {
-  min-height: 100vh - 6rem;
-}
-</style>

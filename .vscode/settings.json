@@ -11,8 +11,5 @@
   "less.lint.unknownAtRules": "ignore",
   // If take-over mode is not enabled, then use the workspace TS version.
   // See https://github.com/johnsoncodehk/volar/discussions/471 for details.
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

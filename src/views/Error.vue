@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { useTitle } from "@vueuse/core";
+import { useHeadSafe } from "@unhead/vue";
+import { APP_NAME } from "@/env.js";
+import { head } from "@/main.js";
 
-useTitle(`Error | ${import.meta.env.VITE_APP_NAME}`);
+useHeadSafe({ title: `Error | ${APP_NAME}` }, { head });
 </script>
 
 <template>

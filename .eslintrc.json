@@ -7,9 +7,6 @@
     "@vue/eslint-config-typescript/recommended",
     "@vue/eslint-config-prettier"
   ],
-  "env": {
-    "vue/setup-compiler-macros": true
-  },
   "parser": "vue-eslint-parser",
   "parserOptions": {
     "project": ["./tsconfig.json", "./src/tsconfig.json"],
@@ -19,6 +16,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "prettier/prettier": "off",
     "eqeqeq": "error",
     "no-await-in-loop": "error",
     "no-console": "warn",

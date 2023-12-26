@@ -2,7 +2,8 @@
 import { useRoute } from "vue-router";
 import EmailHider from "@/components/EmailHider.vue";
 import Email from "@/components/icons/IconEmail.vue";
-import { Route } from "@/immutables/router";
+import { APP_NAME } from "@/env.js";
+import { Route } from "@/immutables/router.js";
 
 interface NavigationLink {
   to: { name: Route };
@@ -10,7 +11,6 @@ interface NavigationLink {
 }
 
 const route = useRoute();
-const appName = import.meta.env.VITE_APP_NAME;
 
 const links: NavigationLink[] = [
   {
@@ -33,7 +33,7 @@ const isRouteMatched = (to: { name: Route }): boolean => {
     <div class="flex-shrink-0 justify-start items-center">
       <router-link to="/" class="flex flex-row gap-4 items-center">
         <img
-          :alt="`${appName} logo`"
+          :alt="`${APP_NAME} logo`"
           src="/icons/512-bl_rc-fc.png"
           width="32"
           height="32"
@@ -105,3 +105,30 @@ const isRouteMatched = (to: { name: Route }): boolean => {
     </div>
   </div>
 </template>
+
+<style lang="less" scoped>
+.link-underline-animate {
+  position: relative;
+  text-decoration: none;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 1px;
+    transition:
+      width 0.3s ease 0s,
+      left 0.3s ease 0s;
+    width: 0;
+    @apply bg-current;
+  }
+
+  &:hover:after,
+  &:focus:after {
+    width: 100%;
+    left: 0;
+  }
+}
+</style>

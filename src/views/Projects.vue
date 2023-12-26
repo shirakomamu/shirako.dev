@@ -5,12 +5,13 @@ import FloatingButton from "@/components/FloatingButton.vue";
 import InlineGallery from "@/components/InlineGallery.vue";
 import ProjectItem from "@/components/ProjectItem.vue";
 import OpenInNew from "@/components/icons/IconOpenInNew.vue";
-import { head } from "@/main";
+import { APP_NAME } from "@/env.js";
+import { head } from "@/main.js";
 
 const route = useRoute();
 useHeadSafe(
   {
-    title: `Projects | ${import.meta.env.VITE_APP_NAME}`,
+    title: `Projects | ${APP_NAME}`,
     link: [{ rel: "canonical", href: "https://shirako.dev" + route.path }],
   },
   { head },

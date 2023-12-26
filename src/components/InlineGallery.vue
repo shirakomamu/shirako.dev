@@ -14,7 +14,7 @@ const props = defineProps<{
 const wrapper = ref<HTMLDivElement>();
 const camera = ref<HTMLDivElement>();
 const viewport = ref<HTMLDivElement>();
-const childElements = ref<Element[]>();
+const childElements = ref<HTMLCollection>();
 const currentElementNum = ref(1);
 const xDown = ref<number | null>(null);
 const yDown = ref<number | null>(null);
@@ -23,14 +23,14 @@ const numChildren = computed(() => childElements.value?.length ?? 0);
 
 onMounted(() => {
   if (!isDefined(viewport)) return;
-  const elements = Array.from(viewport.value.children);
+  const elements = viewport.value.children;
   childElements.value = elements;
 
   for (const elem of elements) {
     elem.classList.add("flex-shrink-0");
     elem.classList.add("w-full");
     elem.classList.add("h-full");
-    const images = Array.from(elem.querySelectorAll("img"));
+    const images = elem.querySelectorAll("img");
 
     for (const image of images) {
       image.classList.add("max-h-60vh");
@@ -167,20 +167,22 @@ onUnmounted(() => resizeObserver.value?.disconnect());
 <style lang="less" scoped>
 .controls {
   opacity: 0;
+
+  &:hover {
+    opacity: 1;
+  }
 }
+
 .camera:hover {
   & + .controls {
     opacity: 1;
   }
 }
-.controls:hover {
-  opacity: 1;
-}
 
 .pagination-button {
   transition: width 0.2s ease;
-
   width: 1rem;
+
   &.active {
     width: 2rem;
   }
