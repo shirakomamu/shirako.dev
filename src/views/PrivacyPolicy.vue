@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useMeta } from "vue-meta";
+import { useHeadSafe } from "@unhead/vue";
 import { useRoute } from "vue-router";
+import { APP_NAME } from "@/env.js";
+import { head } from "@/main.js";
 
 const route = useRoute();
-useMeta({
-  title: `Privacy policy | ${import.meta.env.VITE_APP_NAME}`,
-  link: [
-    {
-      rel: "canonical",
-      href: "https://shirako.dev" + route.path,
-    },
-  ],
-});
+useHeadSafe(
+  {
+    title: `Privacy policy | ${APP_NAME}`,
+    link: [{ rel: "canonical", href: "https://shirako.dev" + route.path }],
+  },
+  { head },
+);
 </script>
 
 <template>
@@ -43,8 +43,9 @@ useMeta({
           class="ps-text-link"
           target="_blank"
           rel="noopener noreferrer"
-          >https://www.cloudflare.com/privacypolicy</a
         >
+          https://www.cloudflare.com/privacypolicy
+        </a>
         for more information.
       </p>
     </div>

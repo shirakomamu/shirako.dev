@@ -2,15 +2,14 @@
   "git.enableCommitSigning": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "less.lint.unknownAtRules": "ignore",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "[xml]": {
-    "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
-  }
+  // If take-over mode is not enabled, then use the workspace TS version.
+  // See https://github.com/johnsoncodehk/volar/discussions/471 for details.
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

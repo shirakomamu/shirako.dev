@@ -21,7 +21,8 @@ const props = defineProps<{
             height="32"
             :alt="`${props.title} logo`"
             class="icon-inline mr-2 rounded-lg"
-          />{{ props.title }}
+          />
+          {{ props.title }}
           <p v-if="props.date" class="opacity-50 italic text-lg font-medium">
             {{ props.date }}
           </p>

@@ -1,0 +1,8 @@
+{
+  "extends": ["@vue/tsconfig/tsconfig.dom.json", "../tsconfig.base.json"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "compilerOptions": {
+    "types": ["vite/client", "vite-plugin-pwa/client"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  }
+}

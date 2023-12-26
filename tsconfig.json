@@ -1,23 +1,7 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["src/**/*.ts", "src/**/*.vue", "types/*.d.ts"],
+  "extends": "./tsconfig.base.json",
+  "include": ["./windi.config.ts", "./vite.config.ts"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "strictNullChecks": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] },
-    "importHelpers": false,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "composite": false,
-    "types": ["vite/client", "vite-plugin-pwa/client"]
-  },
-  "references": [{ "path": "./tsconfig.vite.json" }]
+    "types": ["./shims.d.ts"]
+  }
 }

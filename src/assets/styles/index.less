@@ -18,10 +18,6 @@ html {
   @apply scrollbar scrollbar-thumb-dark-50 scrollbar-track-dark-500;
 }
 
-body {
-  overflow-y: scroll;
-}
-
 button {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -46,28 +42,5 @@ button {
   }
   &:not([class*="w-"]) {
     width: 1.2em;
-  }
-}
-
-.link-underline-animate {
-  position: relative;
-  text-decoration: none;
-
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    height: 1px;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-    @apply bg-current;
-  }
-
-  &:hover:after,
-  &:focus:after {
-    width: 100%;
-    left: 0;
   }
 }

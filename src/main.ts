@@ -1,20 +1,18 @@
-import { createApp } from "vue";
-import { createMetaManager } from "vue-meta";
+import { createHead } from "@unhead/vue";
 import { registerSW } from "virtual:pwa-register";
-
+import "virtual:windi.css";
+import { createApp } from "vue";
+import "@/assets/styles/index.less";
 import App from "./App.vue";
 import router from "./router";
 import pinia from "./stores";
 
-import "@/assets/styles/index.less";
-import "virtual:windi.css";
-
 const app = createApp(App);
-const metaManager = createMetaManager();
+export const head = createHead();
 
+app.use(head);
 app.use(pinia);
 app.use(router);
-app.use(metaManager);
 
 app.mount("#app");
 registerSW();

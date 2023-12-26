@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { isDefined } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 import ExpandLess from "@/components/icons/IconExpandLess.vue";
 import ExpandMore from "@/components/icons/IconExpandMore.vue";
-import { isDefined } from "@vueuse/core";
 
 const TRANSITION_DURATION_MS = 50;
 
@@ -52,15 +52,17 @@ const toggleVisibility = (): void => {
     <button
       type="button"
       class="accordion-title p-0 w-full text-left relative min-h-8"
-      @click="toggleVisibility"
       :alt="visible ? 'Hide accordion' : 'Show accordion'"
+      @click="toggleVisibility"
     >
       <div
         v-if="showArrow"
         class="absolute top-0 left-0 w-auto text-2xl max-h-8"
       >
-        <component class="icon-inline" :is="visible ? ExpandMore : ExpandLess">
-        </component>
+        <component
+          :is="visible ? ExpandMore : ExpandLess"
+          class="icon-inline"
+        ></component>
       </div>
       <div class="inline-block" :class="{ 'ml-8': showArrow }">
         <slot name="title" />
@@ -85,7 +87,9 @@ const toggleVisibility = (): void => {
 <style lang="less" scoped>
 .accordion-contents {
   display: none;
-  transition: opacity 0.1s ease, top 0.1s ease;
+  transition:
+    opacity 0.1s ease,
+    top 0.1s ease;
 
   &.accordion-active {
     display: block;

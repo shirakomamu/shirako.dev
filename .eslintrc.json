@@ -1,28 +1,22 @@
 {
   "root": true,
   "extends": [
-    "plugin:vue/vue3-essential",
     "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:vue/vue3-recommended",
     "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "@vue/eslint-config-prettier"
   ],
-  "env": {
-    "vue/setup-compiler-macros": true
-  },
   "parser": "vue-eslint-parser",
   "parserOptions": {
-    "project": [
-      "./tsconfig.json",
-      "./tsconfig.vite.json",
-      "./tsconfig.plugins.json"
-    ],
+    "project": ["./tsconfig.json", "./src/tsconfig.json"],
     "parser": "@typescript-eslint/parser",
     "ecmaVersion": "latest",
-    "extraFileExtensions": [".vue", ".cjs"]
+    "extraFileExtensions": [".vue"]
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "prettier/prettier": "off",
     "eqeqeq": "error",
     "no-await-in-loop": "error",
     "no-console": "warn",
@@ -38,8 +32,6 @@
     "no-nested-ternary": "error",
     "no-return-assign": "error",
     "no-return-await": "error",
-    "no-shadow": "off",
-    "no-unused-vars": "off",
     "no-use-before-define": "error",
     "object-shorthand": "error",
     "require-atomic-updates": "error",
@@ -63,7 +55,14 @@
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-shadow": "error",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "@typescript-eslint/prefer-nullish-coalescing": "error",
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/promise-function-async": "error",
@@ -86,7 +85,7 @@
       {
         "arrayDestructuring": false,
         "arrowParameter": false,
-        "memberVariableDeclaration": true,
+        "memberVariableDeclaration": false,
         "objectDestructuring": false,
         "parameter": false,
         "propertyDeclaration": true,
@@ -101,12 +100,6 @@
       "files": ["*.ts", "*.vue"],
       "rules": {
         "no-undef": "off"
-      }
-    },
-    {
-      "files": ["*.vue"],
-      "rules": {
-        "@typescript-eslint/no-unused-vars": "off"
       }
     },
     {

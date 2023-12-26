@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/Home.vue";
-import Projects from "@/views/Projects.vue";
-import PrivacyPolicy from "@/views/PrivacyPolicy.vue";
+import { Route } from "@/immutables/router.js";
 import Error from "@/views/Error.vue";
-import { Route } from "@/immutables/router";
+import Home from "@/views/Home.vue";
+import PrivacyPolicy from "@/views/PrivacyPolicy.vue";
+import Projects from "@/views/Projects.vue";
 
 function getAsync<T>(component: T): () => Promise<T> {
   return async () => component;
@@ -11,9 +11,7 @@ function getAsync<T>(component: T): () => Promise<T> {
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  scrollBehavior() {
-    return { top: 0, behavior: "smooth" };
-  },
+  scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
   routes: [
     {
       path: "/",
