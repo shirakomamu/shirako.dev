@@ -20,6 +20,9 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Run prettier
         run: npx prettier . --check
 
@@ -29,4 +32,3 @@ jobs:
       - name: Run tests
         run: |
           npx vue-tsc --noEmit
-          npx vitest run
