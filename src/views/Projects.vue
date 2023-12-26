@@ -1,21 +1,20 @@
 <script setup lang="ts">
+import { useHeadSafe } from "@unhead/vue";
 import { useRoute } from "vue-router";
-import { useMeta } from "vue-meta";
+import FloatingButton from "@/components/FloatingButton.vue";
 import InlineGallery from "@/components/InlineGallery.vue";
 import ProjectItem from "@/components/ProjectItem.vue";
 import OpenInNew from "@/components/icons/IconOpenInNew.vue";
-import FloatingButton from "@/components/FloatingButton.vue";
+import { head } from "@/main";
 
 const route = useRoute();
-useMeta({
-  title: `Projects | ${import.meta.env.VITE_APP_NAME}`,
-  link: [
-    {
-      rel: "canonical",
-      href: "https://shirako.dev" + route.path,
-    },
-  ],
-});
+useHeadSafe(
+  {
+    title: `Projects | ${import.meta.env.VITE_APP_NAME}`,
+    link: [{ rel: "canonical", href: "https://shirako.dev" + route.path }],
+  },
+  { head },
+);
 </script>
 
 <template>
@@ -71,7 +70,8 @@ useMeta({
               rel="noopener noreferrer"
               class="text-white transition bg-blue-srk/80 hover:bg-blue-srk/100 focus:bg-blue-srk/100 px-4 py-2 align-middle rounded-lg inline-block"
             >
-              Open site <OpenInNew class="icon-inline" />
+              Open site
+              <OpenInNew class="icon-inline" />
             </a>
           </div>
 
@@ -91,9 +91,11 @@ useMeta({
               target="_blank"
               rel="noopener noreferrer"
               class="ps-text-link"
-              >Firefox containers <OpenInNew class="icon-inline" /></a
-            >. Each container can store its own shortcuts and wallpaper
-            settings.
+            >
+              Firefox containers
+              <OpenInNew class="icon-inline" />
+            </a>
+            . Each container can store its own shortcuts and wallpaper settings.
           </p>
 
           <h6 class="font-semibold mt-8">Key technologies:</h6>
@@ -191,7 +193,8 @@ useMeta({
               rel="noopener noreferrer"
               class="ps-text-link"
             >
-              View source code on GitHub <OpenInNew class="icon-inline" />
+              View source code on GitHub
+              <OpenInNew class="icon-inline" />
             </a>
           </div>
 

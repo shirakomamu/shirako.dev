@@ -1,9 +1,9 @@
-import { fileURLToPath, URL } from "url";
-import { defineConfig, loadEnv } from "vite";
-import { customAlphabet } from "nanoid";
-import windiCss from "vite-plugin-windicss";
-import { VitePWA } from "vite-plugin-pwa";
 import vue from "@vitejs/plugin-vue";
+import { customAlphabet } from "nanoid";
+import { URL, fileURLToPath } from "url";
+import { defineConfig, loadEnv } from "vite";
+import { VitePWA } from "vite-plugin-pwa";
+import windiCss from "vite-plugin-windicss";
 
 const HASH_LENGTH = 8;
 const nanoid = customAlphabet("0123456789abcdef", HASH_LENGTH);
@@ -45,6 +45,7 @@ export default defineConfig(({ mode }) => {
   });
 
   return {
+    // @ts-expect-error: <This falsely asks for windiCss().default>
     plugins: [windiCss(), vitePWAPlugin, vue()],
     resolve: {
       alias: {

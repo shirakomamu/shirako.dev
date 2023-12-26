@@ -13,9 +13,9 @@ const props = defineProps<{
 <template>
   <component
     :is="props.link ? 'a' : 'div'"
-    v-bind:href="props.link"
-    v-bind:target="props.link ? '_blank' : null"
-    v-bind:rel="props.link ? 'noopener noreferrer' : null"
+    :href="props.link"
+    :target="props.link ? '_blank' : null"
+    :rel="props.link ? 'noopener noreferrer' : null"
     class="box cursor-default p-4 flex flex-col items-center justify-center rounded-lg bg-gray-200/50 dark:bg-gray-600/50"
     :class="{ pointer: props.link }"
   >

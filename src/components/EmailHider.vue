@@ -19,11 +19,11 @@ const hideEmail = (): void => void (isEmailShown.value = false);
 
 <template>
   <a
+    :href="emailMailto"
     @mouseover="showEmail"
     @focus="showEmail"
     @mouseout="hideEmail"
     @blur="hideEmail"
-    :href="emailMailto"
   >
     <slot />
   </a>

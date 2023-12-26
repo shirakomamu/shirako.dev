@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/Home.vue";
-import Projects from "@/views/Projects.vue";
-import PrivacyPolicy from "@/views/PrivacyPolicy.vue";
-import Error from "@/views/Error.vue";
 import { Route } from "@/immutables/router";
+import Error from "@/views/Error.vue";
+import Home from "@/views/Home.vue";
+import PrivacyPolicy from "@/views/PrivacyPolicy.vue";
+import Projects from "@/views/Projects.vue";
 
 function getAsync<T>(component: T): () => Promise<T> {
   return async () => component;

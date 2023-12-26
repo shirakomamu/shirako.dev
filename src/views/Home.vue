@@ -1,23 +1,22 @@
 <script setup lang="ts">
+import { useHeadSafe } from "@unhead/vue";
+import { isDefined } from "@vueuse/core";
 import { computed, onMounted, ref } from "vue";
-import { useMeta } from "vue-meta";
 import { useRoute } from "vue-router";
 import SkillBox from "@/components/SkillBox.vue";
 import ToolBox from "@/components/ToolBox.vue";
 import ExpandMore from "@/components/icons/IconExpandMore.vue";
+import { head } from "@/main";
 import { useGeneralStore } from "@/stores/general";
-import { isDefined } from "@vueuse/core";
 
 const route = useRoute();
-useMeta({
-  title: `Home | ${import.meta.env.VITE_APP_NAME}`,
-  link: [
-    {
-      rel: "canonical",
-      href: "https://shirako.dev" + route.path,
-    },
-  ],
-});
+useHeadSafe(
+  {
+    title: `Home | ${import.meta.env.VITE_APP_NAME}`,
+    link: [{ rel: "canonical", href: "https://example.com" + route.path }],
+  },
+  { head },
+);
 const store = useGeneralStore();
 
 const mainText = ref<HTMLDivElement>();
@@ -48,7 +47,7 @@ const observer = new IntersectionObserver(
 
     isGuideArrowVisible.value = mainTextEvent.isIntersecting;
   },
-  { threshold: OBSERVER_THRESHOLD }
+  { threshold: OBSERVER_THRESHOLD },
 );
 
 onMounted(() => {
@@ -80,14 +79,18 @@ onMounted(() => {
       <div class="intro grid items-center pb-28">
         <article class="space-y-4">
           <h4 ref="mainText" class="text-3xl dark:text-white text-center">
-            <span class="opacity-50">Hi, I am </span
-            ><ruby>白狐<rt>しらこ</rt>マム</ruby>
+            <span class="opacity-50">Hi, I am</span>
+            <ruby>
+              白狐
+              <rt>しらこ</rt>
+              マム
+            </ruby>
             <span class="text-lg">
-              <span class="opacity-50"> (</span>Shirako Mamu<span
-                class="opacity-50"
-                >)</span
-              ><span class="opacity-50">.</span></span
-            >
+              <span class="opacity-50">(</span>
+              Shirako Mamu
+              <span class="opacity-50">)</span>
+              <span class="opacity-50">.</span>
+            </span>
           </h4>
 
           <p>
@@ -108,12 +111,14 @@ onMounted(() => {
             I also have a soft spot for cats, so you may sometimes come across
             cat illustrations, courtesy of
             <a
+              ref="noopener noreferrer"
               href="https://irasutoya.com"
               target="_blank"
-              ref="noopener noreferrer"
               class="ps-text-link"
-              >Irasutoya</a
-            >.
+            >
+              Irasutoya
+            </a>
+            .
           </p>
         </article>
       </div>

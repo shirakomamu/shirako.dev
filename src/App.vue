@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { useHeadSafe } from "@unhead/vue";
 import { computed, onMounted } from "vue";
-import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import AppHeader from "@/components/AppHeader.vue";
 import BgStars from "@/components/BgStars.vue";
-import { useMeta } from "vue-meta";
+import { head } from "./main";
 
-useMeta({
-  htmlAttrs: { lang: "en" },
-  description: import.meta.env.VITE_APP_DESCRIPTION,
-});
+useHeadSafe(
+  {
+    htmlAttrs: { lang: "en" },
+    meta: [
+      { name: "description", content: import.meta.env.VITE_APP_DESCRIPTION },
+    ],
+  },
+  { head },
+);
 
 const setTheme = (isDark: boolean): void => {
   if (isDark) {
@@ -19,7 +25,7 @@ const setTheme = (isDark: boolean): void => {
 };
 
 const queryList = computed(() =>
-  window.matchMedia("(prefers-color-scheme: dark)")
+  window.matchMedia("(prefers-color-scheme: dark)"),
 );
 
 onMounted(() => {

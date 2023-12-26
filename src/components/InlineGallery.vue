@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { isDefined } from "@vueuse/core";
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import ArrowBackIos from "@/components/icons/IconArrowBackIos.vue";
 import ArrowForwardIos from "@/components/icons/IconArrowForwardIos.vue";
-import { isDefined } from "@vueuse/core";
 
 const SCROLL_DIST_SNAP_PX = 50;
 
@@ -14,7 +14,7 @@ const props = defineProps<{
 const wrapper = ref<HTMLDivElement>();
 const camera = ref<HTMLDivElement>();
 const viewport = ref<HTMLDivElement>();
-const childElements = ref<HTMLCollection>();
+const childElements = ref<Element[]>();
 const currentElementNum = ref(1);
 const xDown = ref<number | null>(null);
 const yDown = ref<number | null>(null);
@@ -23,13 +23,14 @@ const numChildren = computed(() => childElements.value?.length ?? 0);
 
 onMounted(() => {
   if (!isDefined(viewport)) return;
-  childElements.value = viewport.value.children;
+  const elements = Array.from(viewport.value.children);
+  childElements.value = elements;
 
-  for (const elem of childElements.value) {
+  for (const elem of elements) {
     elem.classList.add("flex-shrink-0");
     elem.classList.add("w-full");
     elem.classList.add("h-full");
-    const images = elem.querySelectorAll("img");
+    const images = Array.from(elem.querySelectorAll("img"));
 
     for (const image of images) {
       image.classList.add("max-h-60vh");
@@ -47,7 +48,7 @@ const scrollToElement = ({
   behavior?: ScrollBehavior;
 }): void => {
   if (!isDefined(childElements)) return;
-  const elem = childElements.value.item(to);
+  const elem = childElements.value[to];
   if (elem === null || !isDefined(camera) || !isDefined(viewport)) return;
 
   // using this instead of scrollIntoView because of lack of control over y-axis
@@ -70,7 +71,7 @@ const goToPrevious = (): void => {
 const goToNext = (): void => {
   currentElementNum.value = Math.min(
     currentElementNum.value + 1,
-    numChildren.value
+    numChildren.value,
   );
 };
 
@@ -123,13 +124,13 @@ onUnmounted(() => resizeObserver.value?.disconnect());
       </div>
     </div>
 
-    <div ref="controls" v-if="props.showControls" class="controls transition">
+    <div v-if="props.showControls" ref="controls" class="controls transition">
       <button
         class="absolute top-1/2 left-0 p-0 ml-0 sm:ml-2 transition opacity-50 hover:opacity-100 focus:opacity-100 disabled:(invisible cursor-default)"
         type="button"
         alt="View previous"
-        @click="goToPrevious"
         :disabled="currentElementNum <= 1"
+        @click="goToPrevious"
       >
         <ArrowBackIos class="icon-inline text-4xl" />
       </button>
@@ -137,26 +138,26 @@ onUnmounted(() => resizeObserver.value?.disconnect());
         class="absolute top-1/2 right-0 p-0 mr-0 sm:mr-2 transition opacity-50 hover:opacity-100 focus:opacity-100 disabled:(invisible cursor-default)"
         type="button"
         alt="View next"
-        @click="goToNext"
         :disabled="currentElementNum >= numChildren"
+        @click="goToNext"
       >
         <ArrowForwardIos class="icon-inline text-4xl" />
       </button>
     </div>
 
-    <div ref="pagination" v-if="props.showPagination && numChildren > 1">
+    <div v-if="props.showPagination && numChildren > 1" ref="pagination">
       <div class="space-x-2 text-center">
         <button
-          type="button"
-          @click="currentElementNum = index"
           v-for="index in numChildren"
           :key="index"
+          type="button"
           class="pagination-button inline-block rounded-md bg-current h-3 transition px-0"
           :class="{
             active: currentElementNum === index,
             'opacity-20': currentElementNum !== index,
             'opacity-100': currentElementNum === index,
           }"
+          @click="currentElementNum = index"
         />
       </div>
     </div>

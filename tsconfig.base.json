@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": { "@/*": ["./src/*"] }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "extends": ["../tsconfig.base.json", "@vue/tsconfig/tsconfig.dom.json"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "compilerOptions": {
+    "types": ["vite/client", "vite-plugin-pwa/client"],
+    "lib": ["es2022", "dom"]
+  }
+}

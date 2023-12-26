@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useMeta } from "vue-meta";
+import { useTitle } from "@vueuse/core";
 
-useMeta({
-  title: `Error | ${import.meta.env.VITE_APP_NAME}`,
-});
+useTitle(`Error | ${import.meta.env.VITE_APP_NAME}`);
 </script>
 
 <template>
@@ -17,14 +15,16 @@ useMeta({
       <article class="space-y-4">
         <h4 class="text-4xl dark:text-white">404 - Page not found</h4>
         <p>
-          The page at <code>{{ $route.path }}</code> could not be found.
+          The page at
+          <code>{{ $route.path }}</code>
+          could not be found.
         </p>
       </article>
       <div>
         <button
           type="button"
-          @click="$router.push('/')"
           class="font-semibold dark:text-white hover:underline focus:underline"
+          @click="$router.push('/')"
         >
           Go back to home page
         </button>

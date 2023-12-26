@@ -37,23 +37,26 @@ const isRouteMatched = (to: { name: Route }): boolean => {
           src="/icons/512-bl_rc-fc.png"
           width="32"
           height="32"
-      /></router-link>
+        />
+      </router-link>
     </div>
     <div class="flex-grow" />
     <div class="flex flex-row gap-4 items-center">
       <router-link
         v-for="(link, index) of links"
-        :to="link.to"
         :key="index"
+        :to="link.to"
         class="align-middle dark:text-gray-100 text-sm link-underline-animate transition opacity-50"
         :class="{ 'opacity-100': isRouteMatched(link.to) }"
-        >{{ link.label }}</router-link
       >
+        {{ link.label }}
+      </router-link>
       <div class="flex flex-row gap-3 items-center">
         <EmailHider
           class="transition opacity-50 hover:opacity-100 focus:opacity-100"
-          ><Email width="24" height="24"
-        /></EmailHider>
+        >
+          <Email width="24" height="24" />
+        </EmailHider>
 
         <a
           href="https://github.com/shirakomamu"

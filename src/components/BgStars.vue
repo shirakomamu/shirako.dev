@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
 import * as THREE from "three";
+import { onMounted, onUnmounted, ref } from "vue";
 
 const STAR_DENSITY = 0.0002;
 const CAMERA_FOV = 60;
@@ -23,7 +23,7 @@ const camera = new THREE.PerspectiveCamera(
   CAMERA_FOV,
   window.innerWidth / window.innerHeight,
   CAMERA_NEAR_LIMIT,
-  CAMERA_FAR_LIMIT
+  CAMERA_FAR_LIMIT,
 );
 const geometry = new THREE.BufferGeometry();
 const scene = new THREE.Scene();
@@ -54,10 +54,10 @@ const applyStarColor = (): void => {
     "color",
     new THREE.BufferAttribute(
       new Float32Array(numVertices * STAR_ATTRIBUTE_NUM).map(
-        () => starColor.value
+        () => starColor.value,
       ),
-      STAR_ATTRIBUTE_NUM
-    )
+      STAR_ATTRIBUTE_NUM,
+    ),
   );
 };
 
@@ -71,7 +71,7 @@ const setSpheres = (): void => {
     const position = new THREE.Vector3(
       (Math.random() - RAND_HALF) * window.innerWidth * COVER_SCALE_FACTOR,
       (Math.random() - RAND_HALF) * window.innerHeight * COVER_SCALE_FACTOR,
-      Math.random() * (STAR_Z_MAX - STAR_Z_MIN) + STAR_Z_MIN
+      Math.random() * (STAR_Z_MAX - STAR_Z_MIN) + STAR_Z_MIN,
     );
 
     vertices.push(position);
@@ -87,7 +87,7 @@ const setSpheres = (): void => {
       transparent: true,
       vertexColors: true,
       opacity: 0.7,
-    })
+    }),
   );
 
   scene.add(points);
